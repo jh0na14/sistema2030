@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 <!doctype html>
 <html lang="{{ config('app.locale') }}">
     <head>

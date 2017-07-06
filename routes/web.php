@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('ejemplo');
 });
+Route::get('/socios','sociosController@show');
+Route::get('/socios/{tipoSocio}','sociosController@showactivoMayor');
+//Route::get('/socios/1','sociosController@show2');
+
