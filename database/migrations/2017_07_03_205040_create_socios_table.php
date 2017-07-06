@@ -21,9 +21,10 @@ class CreateSociosTable extends Migration
             $table->string('dui', 10);
             $table->text('direccion');
             $table->string('telefono',9);
+            $table->string('email');
             $table->string('apodo',35);
             $table->enum('tipoSocio',array('Socio Activo','Activo Mayor'));
-            $table->enum('cargo',array('Presidente','Secretario','Tesorero'));
+            $table->enum('cargo',array('Presidente','Secretario','Tesorero','Sin Cargo'));
             $table->timestamps();
 
         });

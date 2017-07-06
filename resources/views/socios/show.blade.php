@@ -40,6 +40,7 @@
 			<a class="nav-link active" href="/pagos/pagoAnho">{{$tipoSocio}}</a>
 		<li>
 	</ul>
+<button type="button" class="btn btn-outline-info btn-sm "data-toggle="modal" data-target="#myModal" >ADD</button>
 
   <div style="clear:both; padding-bottom:15px;">
   </div>
@@ -67,7 +68,6 @@
 	        <tr>
 	            <th colspan="5" style="text-align:center; font-weight:bold; letter-spacing:5px;"><label id="tipoSocio">{{strtoupper($tipoSocio)}}</label> DE CLUB ACTIVO 20-30</th>
 	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
-<button type="button" class="btn btn-outline-info btn-sm "data-toggle="modal" data-target="#myModal" >ADD</button>
 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
   Launch demo modal
 </button>	
@@ -155,11 +155,12 @@
   </div>
 </div>	
 {{-- /////////////////////FIN--}}
-	{{--@if(count($socios))
+	{{--@if(count($socios))@endif--}}
   <div class="mt-2 mx-auto">
   {{ $socios->links('
   pagination::bootstrap-4') }}
-  </div>--}}
+  </div>
+  
 
 	{{----}}</div>
 	
