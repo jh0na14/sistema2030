@@ -1,8 +1,14 @@
 <?php
+//namespace App\Providers;
+//use Illuminate\Support\ServiceProvider;
+//use Illuminate\Support\Facades\Response;
 
 namespace App\Http\Controllers;
 use App\socio;
+use Illuminate\Support\Facades\Response;
+
 use Illuminate\Http\Request;
+//use Illuminate\Foundation\Http\FormRequest;
 
 class sociosController extends Controller
 {
@@ -53,5 +59,53 @@ class sociosController extends Controller
     		
     		]);
     	
+    }
+
+    public function create(Request $request){
+    	//dd($request->all());
+    	$message= socio::create([
+    		'nombre'=> $request->input('nombre'),
+    		'apellido'=> $request->input('apellido'),
+    		'fechaNac'=> $request->input('fechaNac'),
+    		'dui'=> $request->input('dui'),
+    		'direccion'=> $request->input('direccion'),
+    		'telefono'=> $request->input('telefono'),
+    		'email'=> $request->input('email'),
+    		'apodo'=> $request->input('apodo'),
+    		'tipoSocio'=> $request->input('tipoSocio'),
+    		'cargo'=> $request->input('cargo'),
+    		
+    		]);
+		//$response = socio::create($request->all());	
+   		 
+    	//dd($message);
+    	 //$response = socio::create($request->all());	
+   		 //dd($response);
+    	return Response::json($message);
+    	//return response(json($message));
+    	
+    	return redirect('/socios');
+
+    }
+    public function update(Request $request,$socio_id){
+    	//dd($request->all());
+    	$message= socio::create([
+    		'nombre'=> $request->input('nombre'),
+    		'apellido'=> $request->input('apellido'),
+    		'fechaNac'=> $request->input('fechaNac'),
+    		'dui'=> $request->input('dui'),
+    		'direccion'=> $request->input('direccion'),
+    		'telefono'=> $request->input('telefono'),
+    		'email'=> $request->input('email'),
+    		'apodo'=> $request->input('apodo'),
+    		'tipoSocio'=> $request->input('tipoSocio'),
+    		'cargo'=> $request->input('cargo'),
+    		
+    		]);
+		return Response::json($message);
+    	//return response(json($message));
+    	
+    	return redirect('/socios');
+
     }
 }
