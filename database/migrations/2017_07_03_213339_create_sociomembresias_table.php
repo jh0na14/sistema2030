@@ -18,7 +18,7 @@ class CreateSociomembresiasTable extends Migration
             $table->integer('idmembresias')->unsigned();
             $table->foreign('idmembresias')->references('idmembresias')->on('membresias');
             $table->integer('idsocios')->unsigned();
-            $table->foreign('idsocios')->references('idsocios')->on('socios');
+            $table->foreign('idsocios')->references('id')->on('socios');
             $table->date('fechaPago');
            $table->timestamps();
         });

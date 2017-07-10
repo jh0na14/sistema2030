@@ -22,7 +22,7 @@ class CreateTverdugosTable extends Migration
             $table->double('saldo',15,2);
             
             $table->integer('idsocios')->unsigned();
-            $table->foreign('idsocios')->references('idsocios')->on('socios');
+            $table->foreign('idsocios')->references('id')->on('socios');
             
             $table->integer('idverdugos')->unsigned()->nullable()->default(null);
             $table->foreign('idverdugos')->references('idverdugos')->on('verdugos');

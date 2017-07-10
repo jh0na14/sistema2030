@@ -22,7 +22,7 @@ class CreateTrecaudacionsTable extends Migration
             $table->double('saldo',15,2);
             
             $table->integer('idsocios')->unsigned();
-            $table->foreign('idsocios')->references('idsocios')->on('socios');
+            $table->foreign('idsocios')->references('id')->on('socios');
             
             $table->integer('idrecaudacions')->unsigned()->nullable()->default(null);
             $table->foreign('idrecaudacions')->references('idrecaudacions')->on('recaudacions');

@@ -14,7 +14,7 @@ class CreateSociosTable extends Migration
     public function up()
     {
         Schema::create('socios', function (Blueprint $table) {
-            $table->increments('idsocios');    
+            $table->increments('id');    
             $table->string('nombre',30);
             $table->string('apellido', 30);
             $table->date('fechaNac');

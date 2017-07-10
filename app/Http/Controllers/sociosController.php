@@ -78,34 +78,45 @@ class sociosController extends Controller
     		]);
 		//$response = socio::create($request->all());	
    		 
-    	//dd($message);
+    	 //dd($message);
     	 //$response = socio::create($request->all());	
    		 //dd($response);
     	return Response::json($message);
     	//return response(json($message));
     	
-    	return redirect('/socios');
+    	return redirect('/socios')->with('mensaje','Registro Guardado');;
 
     }
     public function update(Request $request,$socio_id){
     	//dd($request->all());
-    	$message= socio::create([
-    		'nombre'=> $request->input('nombre'),
-    		'apellido'=> $request->input('apellido'),
-    		'fechaNac'=> $request->input('fechaNac'),
-    		'dui'=> $request->input('dui'),
-    		'direccion'=> $request->input('direccion'),
-    		'telefono'=> $request->input('telefono'),
-    		'email'=> $request->input('email'),
-    		'apodo'=> $request->input('apodo'),
-    		'tipoSocio'=> $request->input('tipoSocio'),
-    		'cargo'=> $request->input('cargo'),
-    		
-    		]);
-		return Response::json($message);
-    	//return response(json($message));
+    	$socios = socio::find($socio_id);//all()->where('id',"=",$socio_id);
+    	 $socios->fill($request->all());
+    	$socios->save();
+    	//dd($socios);
+	//$array=array();
+    //dd($socio);
+	//foreach($socio as $socios)
+	//{
+	/*	$socios->nombre=$request->nombre;
+		$socios->apellido=$request->apellido;
+		$socios->fechaNac=$request->fechaNac;
+    	$socios->dui=$request->dui;
+   		$socios->direccion=$request->direccion;
+   		$socios->telefono=$request->telefono;
+   		$socios->email=$request->email;
+   		$socios->apodo=$request->apodo;
+   		$socios->tipoSocio=$request->tipoSocio;
+   		$socios->cargo=$request->cargo;
+   		
+		
+
+	//}*/
+		//dd($socios);
+		//return redirect('/socios');
+		return Response::json($socios);
+    	//return response(json($array));
     	
-    	return redirect('/socios');
+    	
 
     }
 }

@@ -22,7 +22,7 @@ class CreateTmembresiasTable extends Migration
             $table->double('saldo',15,2);
             
             $table->integer('idsocios')->unsigned();
-            $table->foreign('idsocios')->references('idsocios')->on('socios');
+            $table->foreign('idsocios')->references('id')->on('socios');
             
             $table->integer('idperiodos')->unsigned();
             $table->foreign('idperiodos')->references('idperiodos')->on('periodos');

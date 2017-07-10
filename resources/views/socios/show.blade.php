@@ -145,7 +145,7 @@
 	</thead>
 	<tbody id="tabla" name="tabla">
 		@forelse($socios as $socio)
-		<tr id="{{ $socio->idsocios }}">
+		<tr id="{{ $socio->id }}">
 			<td style="padding:6px">{{ $socio->apodo }}</td>
 			<td>{{ $socio->nombre }}</td>
 			{{--<td>2017</td>--}}
@@ -154,9 +154,9 @@
 			{{--<td class="text-center">{{ $socio->tipoSocio }}</td>
 			--}}<td >{{ $socio->cargo }}</td>
 			<td class="text-center">
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->idsocios }}">Info</button>
-				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $socio->idsocios }}">Editar</button>
-				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $socio->idsocios }}">Eliminar</button>
+				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->id }}">Info</button>
+				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $socio->id }}">Editar</button>
+				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $socio->id }}">Eliminar</button>
 			</td>
 
         </tr>
@@ -373,7 +373,7 @@ $(document).ready(function(){
 
        if (state == "update"){
             type = "PUT"; //for updating existing resource
-            my_url += '/socios/update/' + socio_id;
+            my_url = '/socios/update/'+socio_id;
         }
 
         console.log(formData);
@@ -387,19 +387,20 @@ $(document).ready(function(){
             success: function (data) {
                console.log(data);
 
-        
+               	redirect('/socios');
+        		if(state=="add"){
            	    var row = '<tr><td>' + data.apodo + '</td>';
            	     row +='<td>' + data.nombre + '</td>';
 				 row +='<td>' + data.apellido + '</td>';
 				 row +='<td>' + data.email + '</td>';
 				 row +='<td>' + data.cargo + '</td>';       
-				 row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.idsocios+'">Info</button>  ';
-				 row += '<button type="button" class="btn btn-outline-success btn-sm " data-toggle="modal" data-target="#exampleModal" value="'+data.idsocios+'">Editar</button>  ';
-				 row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.idsocios+'">Eliminar</button>';
+				 row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
+				 row += '<button type="button" class="btn btn-outline-success btn-sm " data-toggle="modal" data-target="#exampleModal" value="'+data.id+'">Editar</button>  ';
+				 row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
 				 row +='</td></tr>';
 				//var task='<tr id="task"><td>rregre</td><td>';
 				$("#tabla").append(row);
-                
+               }
                 /*if (state == "add"){ //if user added a new record
                     $('#tasks-list').append(task);
                 }else{ //if user updated an existing record

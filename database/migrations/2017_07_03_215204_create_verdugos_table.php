@@ -19,7 +19,7 @@ class CreateVerdugosTable extends Migration
             $table->double('montoRecaudado');
             $table->double('montoRifa')->nullable()->default(null);
             $table->integer('idsocios')->unsigned();
-            $table->foreign('idsocios')->references('idsocios')->on('socios');
+            $table->foreign('idsocios')->references('id')->on('socios');
              
             $table->timestamps();
         });
