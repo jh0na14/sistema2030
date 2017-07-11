@@ -1,18 +1,24 @@
-<form id="frmsocios" name="frmsocios" action="/socios/create" method="POST">
-    <div class="form-group row">
+<form id="frmsocios" name="frmsocios" action="/socios/create" method="post">
+    <div  id="nombrediv" class="form-group row @if($errors->has('nombre')) has-danger @endif" >
         <label for="example-text-input" class="col-1 col-form-label offset-1">Nombre</label>
-        <div class="col-8 offset-1">
+        <div class="col-8 offset-1" >
              {{-- Token ue genera laravel es obligatorio
             debido a laraevl provee seguridad y da el toen 
             para que lo econozca que es nuestro formulario 
-            {{ csrf_field() }}--}}
+            {{ csrf_field() }} --}}
             <input class="form-control" type="text" value="kelvin" id="nombre" name="nombre">
+              {{-- @if($errors->has('nombre')) 
+               @foreach($errors->get('nombre') as $error)--}}
+                <div id="nombrefeed" class="form-control-feedback"></div>
+              {{--  @endforeach
+            @endif --}}
         </div>
     </div>
-     <div class="form-group row">
+     <div id="apellidodiv" class="form-group row">
         <label for="example-text-input" class="col-1 col-form-label offset-1">Apellido</label>
         <div class="col-8 offset-1">
             <input class="form-control" type="text" value="FLores" id="apellido" name="apellido">
+            <div id="apellidofeed" class="form-control-feedback"></div>              
         </div>
     </div>
     <div class="form-group row">
@@ -36,7 +42,7 @@
      <div class="form-group row">
         <label for="example-number-input" class="col-1 col-form-label offset-1">Telefono</label>
         <div class="col-8 offset-1">
-            <input class="form-control" type="text" value="1234-4656" id="telefono" name="telefono">
+            <input class="form-control" type="number" value="1234-4656" id="telefono" name="telefono">
         </div>
     </div>
     <div class="form-group row">

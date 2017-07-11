@@ -6,7 +6,7 @@
 namespace App\Http\Controllers;
 use App\socio;
 use Illuminate\Support\Facades\Response;
-
+use App\Http\Requests\CreateSociosRequest;
 use Illuminate\Http\Request;
 //use Illuminate\Foundation\Http\FormRequest;
 
@@ -61,7 +61,7 @@ class sociosController extends Controller
     	
     }
 
-    public function create(Request $request){
+    public function create(CreateSociosRequest $request){
     	//dd($request->all());
     	$message= socio::create([
     		'nombre'=> $request->input('nombre'),
@@ -78,16 +78,16 @@ class sociosController extends Controller
     		]);
 		//$response = socio::create($request->all());	
    		 
-    	 //dd($message);
+    	//dd($message);
     	 //$response = socio::create($request->all());	
    		 //dd($response);
     	return Response::json($message);
-    	//return response(json($message));
     	
-    	return redirect('/socios')->with('mensaje','Registro Guardado');;
+    	
+    	return redirect('/socios')->with('mensaje','Registro Guardado');
 
     }
-    public function update(Request $request,$socio_id){
+    public function update(CreateSociosRequest $request,$socio_id){
     	//dd($request->all());
     	$socios = socio::find($socio_id);//all()->where('id',"=",$socio_id);
     	 $socios->fill($request->all());
@@ -112,7 +112,7 @@ class sociosController extends Controller
 
 	//}*/
 		//dd($socios);
-		//return redirect('/socios');
+		////////////return redirect('/socios');
 		return Response::json($socios);
     	//return response(json($array));
     	

@@ -1,88 +1,81 @@
-<form id="frmsocios" action="/socios/create" method="POST">
-   
-    
+<form id="frmsocios" name="frmsocios" action="/socios/create" method="post">
+    <div class="form-group row @if($errors->has('nombre')) has-danger @endif" >
+        <label for="example-text-input" class="col-1 col-form-label offset-1">Nombre</label>
+        <div class="col-8 offset-1" >
+             {{-- Token ue genera laravel es obligatorio
+            debido a laraevl provee seguridad y da el toen 
+            para que lo econozca que es nuestro formulario --}}
+            {{ csrf_field() }}
+            <input class="form-control" type="text" value="kelvin" id="nombre" name="nombre">
+               @if($errors->has('nombre')) 
+               @foreach($errors->get('nombre') as $error)
+                <div class="form-control-feedback">{{ $error }}</div>
+                @endforeach
+            @endif {{----}}
+        </div>
+    </div>
+     <div class="form-group row">
+        <label for="example-text-input" class="col-1 col-form-label offset-1">Apellido</label>
+        <div class="col-8 offset-1">
+            <input class="form-control" type="text" value="FLores" id="apellido" name="apellido">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-date-input" class="col-1 col-form-label offset-1">Fecha</label>
+        <div class="col-8 offset-1">
+            <input class="form-control " type="text" value="2011-07-07" id="fechaNac" name="fechaNac">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-number-input" class="col-1 col-form-label offset-1">DUI</label>
+        <div class="col-8 offset-1">
+            <input class="form-control" type="text" value="123456789" id="dui" name="dui">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-number-input" class="col-1 col-form-label offset-1">Direccion</label>
+        <div class="col-8 offset-1">
+            <textarea class="form-control" type="text" id="direccion" name="direccion" value="mi casa" rows="2"></textarea>
+        </div>
+    </div>
+     <div class="form-group row">
+        <label for="example-number-input" class="col-1 col-form-label offset-1">Telefono</label>
+        <div class="col-8 offset-1">
+            <input class="form-control" type="text" value="1234-4656" id="telefono" name="telefono">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-email-input" class="col-1 col-form-label offset-1">Email</label>
+        <div class="col-8 offset-1">
+            <input class="form-control" type="email" value="bootstrap@example.com" id="email" name="email">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-number-input" class="col-1 col-form-label offset-1">Apodo</label>
+        <div class="col-8 offset-1">
+         <textarea class="form-control" type="text" id="apodo" name="apodo" value="FLorescucks" rows="2"></textarea>
+         </div>
+    </div>
+   <div class="form-group row">
+        <label for="example-email-input" class="col-1 col-form-label offset-1">Tipo</label>
+        <div class="col-8 offset-1">
+            <select class="form-control" id="tipoSocio" name="tipoSocio">
+                <option>Socio Activo</option>
+                <option>Activo Mayor</option>
+            </select> 
+       </div>
+    </div>
+    <div class="form-group row">
+        <label for="example-email-input" class="col-1 col-form-label offset-1">Cargo</label>
+        <div class="col-8 offset-1">
+            <select class="form-control" id="cargo" name="cargo">
+                <option>Sin Cargo</option>
+                <option>Presidente</option>
+                <option>Secretario</option>
+                <option>Tesorero</option>
+            </select> 
+       </div>
+    </div>
 
     
 </form>
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <title>Laravel Ajax CRUD Example</title>
-
-    <!-- Load Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container-narrow">
-        <h2>Laravel Ajax ToDo App</h2>
-        <button id="btn-add" name="btn-add" class="btn btn-primary btn-xs">Add New Task</button>
-        <div>
-
-            <!-- Table-to-load-the-data Part -->
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Task</th>
-                        <th>Description</th>
-                        <th>Date Created</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="tasks-list" name="tasks-list">
-                    @foreach ($tasks as $task)
-                    <tr id="task{{$task->id}}">
-                        <td>{{$task->id}}</td>
-                        <td>{{$task->task}}</td>
-                        <td>{{$task->description}}</td>
-                        <td>{{$task->created_at}}</td>
-                        <td>
-                            <button class="btn btn-warning btn-xs btn-detail open-modal" value="{{$task->id}}">Edit</button>
-                            <button class="btn btn-danger btn-xs btn-delete delete-task" value="{{$task->id}}">Delete</button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <!-- End of Table-to-load-the-data Part -->
-            <!-- Modal (Pop up when detail button clicked) -->
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Task Editor</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="frmTasks" name="frmTasks" class="form-horizontal" novalidate="">
-
-                                <div class="form-group error">
-                                    <label for="inputTask" class="col-sm-3 control-label">Task</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control has-error" id="task" name="task" placeholder="Task" value="">
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-3 control-label">Description</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes</button>
-                            <input type="hidden" id="task_id" name="task_id" value="0">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <meta name="_token" content="{!! csrf_token() !!}" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src="{{asset('js/ajax-crud.js')}}"></script>
-</body>
-</html>
