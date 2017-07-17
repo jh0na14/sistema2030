@@ -60,8 +60,8 @@ $(document).ready(function(){
             console.log(data);
             $('#nombre').val(data.nombre);
           $('#apellido').val(data.apellido);
-          $('#fechaNac').val(data.fechaNac);
           $('#dui').val(data.dui);
+          $('#fechaNac').val(data.fechaNac);
           $('#descripcion').val(data.descripcion);
            });
     //El boton para saber cambair de estado para guardar o modificar 
