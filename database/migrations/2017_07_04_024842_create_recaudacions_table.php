@@ -14,7 +14,7 @@ class CreateRecaudacionsTable extends Migration
     public function up()
     {
         Schema::create('recaudacions', function (Blueprint $table) {
-            $table->increments('idrecaudacions');
+            $table->increments('id');
             $table->text('descripcion');            
             $table->double('ingresos',15,2);
             $table->double('gastos',15,2);

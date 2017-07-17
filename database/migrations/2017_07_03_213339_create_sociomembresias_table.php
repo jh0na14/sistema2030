@@ -14,9 +14,9 @@ class CreateSociomembresiasTable extends Migration
     public function up()
     {
         Schema::create('sociomembresias', function (Blueprint $table) {
-            $table->increments('idsociomembresias');
+            $table->increments('id');
             $table->integer('idmembresias')->unsigned();
-            $table->foreign('idmembresias')->references('idmembresias')->on('membresias');
+            $table->foreign('idmembresias')->references('id')->on('membresias');
             $table->integer('idsocios')->unsigned();
             $table->foreign('idsocios')->references('id')->on('socios');
             $table->date('fechaPago');

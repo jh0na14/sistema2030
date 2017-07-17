@@ -14,7 +14,7 @@ class CreatePatrocinadorsTable extends Migration
     public function up()
     {
         Schema::create('patrocinadors', function (Blueprint $table) {
-            $table->increments('idpatrocinadors');
+            $table->increments('id');
             $table->string('nombre',30);
             $table->text('descripcion');                   
             $table->timestamps();

@@ -14,7 +14,7 @@ class CreateTmembresiasTable extends Migration
     public function up()
     {
         Schema::create('tmembresias', function (Blueprint $table) {
-            $table->increments('idtmembresias');
+            $table->increments('id');
             $table->date('fecha');
             $table->text('concepto');
             $table->double('ingreso',15,2);
@@ -25,7 +25,7 @@ class CreateTmembresiasTable extends Migration
             $table->foreign('idsocios')->references('id')->on('socios');
             
             $table->integer('idperiodos')->unsigned();
-            $table->foreign('idperiodos')->references('idperiodos')->on('periodos');
+            $table->foreign('idperiodos')->references('id')->on('periodos');
             
             $table->timestamps();
         });

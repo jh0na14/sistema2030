@@ -13,26 +13,8 @@
 
   <div style="clear:both; padding-bottom:15px;">
   </div>
- <div style="width:14%; float:left; padding-right:0px;" id="menu-vertical-pagos">
-			<button type="button" style="margin-left:100%" class="btn btn-outline-info btn-sm " data-toggle="modal" data-target="#myModal" >Nuevo Socio</button>
-<div style="clear:both; padding-bottom:15px;">
-  </div>
-			{{--<div class="list-group" style="padding-bottom:25px;">
-			<a href="/pagos/index/" class="list-group-item active">Carreras</a>
-	 		<a href="/pagos/index/1092" class="list-group-item">Ingeniería de Sistemas Informáticos</a>
-	 	</div>--}}
-		<div class="list-group " class="padding-bottom:25px;">
-			<li href="/pagos/index/" class="list-group-item active">Tipo de Socio{{--A&ntilde;os--}}</li>
-				
 
-				<div><a href="/socios/1" class="list-group-item list-group-item-action justify-content-between">Socio Activo<span class="badge badge-default badge-pill">{{$count0}}</span></a></div>
-				<a href="/socios/2" id="activoMayor" class="list-group-item justify-content-between">Activo Mayor <span class="badge badge-default badge-pill">{{$count}}</span></a>
-				{{--<a href="/pagos/pagoAnho/2015/1092/grado" class="list-group-item justify-content-between">Inactivos<span class="badge badge-default badge-pill">{{$count}}</span></a>
-				--}}
-			</div>	
-	</div>
-	
- 	<div style="width:85%; float:right;" id="contenido-pagos">
+ 	<div style="width:100%; float:right;">
 
  	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
@@ -61,21 +43,20 @@
 	        </tr>
 	</thead>
 	<tbody id="tabla" name="tabla">
-		@forelse($socios as $socio)
-		<tr id="{{ $socio->id }}">
+		@forelse($beneficiarios as $beneficiario)
+		<tr id="{{ $beneficiario->id }}">
 			<td style="padding:6px">{{ $socio->apodo }}</td>
-			<td>{{ $socio->nombre }} {{ $socio->apellido }}</td>
-			{{--<td>2017</td>
-			<td >{{ $socio->apellido }}</td>--}}
+			<td>{{ $beneficiario->nombre }} {{ $beneficiario->apellido }}</td>
+			<td >{{ $socio->apellido }}</td>
 			<td>{{ $socio->email }}</td>
 			{{--<td class="text-center">{{ $socio->tipoSocio }}</td>
 			--}}<td >{{ $socio->cargo }}</td>
 			<td class="text-center">
-				<button type="button" class="btn btn-outline-info btn-sm " value="{{ $socio->id }}">Pagos</button>
+				<button type="button" class="btn btn-outline-info btn-sm " value="{{ $beneficiario->id }}">Pagos</button>
 				
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->id }}">Info</button>
-				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $socio->id }}">Editar</button>
-				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $socio->id }}">Eliminar</button>
+				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $beneficiario->id }}">Info</button>
+				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $beneficiario->id }}">Editar</button>
+				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $beneficiario->id }}">Eliminar</button>
 			</td>
 
         </tr>

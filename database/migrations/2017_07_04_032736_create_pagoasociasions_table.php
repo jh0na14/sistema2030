@@ -14,12 +14,12 @@ class CreatePagoasociasionsTable extends Migration
     public function up()
     {
         Schema::create('pagoasociasions', function (Blueprint $table) {
-            $table->increments('idpagoasociasions');
+            $table->increments('id');
             $table->double('monto',15,2);
             $table->date('fecha');
            
             $table->integer('idperiodos')->unsigned();
-            $table->foreign('idperiodos')->references('idperiodos')->on('periodos');
+            $table->foreign('idperiodos')->references('id')->on('periodos');
             
             $table->timestamps();
         });

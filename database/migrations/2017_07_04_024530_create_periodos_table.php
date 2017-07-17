@@ -14,7 +14,7 @@ class CreatePeriodosTable extends Migration
     public function up()
     {
         Schema::create('periodos', function (Blueprint $table) {
-            $table->increments('idperiodos');
+            $table->increments('id');
             $table->date('fechaInicio');
             $table->date('fechaFin');
             $table->enum('estado',array('Iniciado','Finalizado'));

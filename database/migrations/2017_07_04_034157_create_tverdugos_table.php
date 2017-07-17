@@ -14,7 +14,7 @@ class CreateTverdugosTable extends Migration
     public function up()
     {
         Schema::create('tverdugos', function (Blueprint $table) {
-            $table->increments('idtverdugos');
+            $table->increments('id');
             $table->date('fecha');
             $table->text('concepto');
             $table->double('ingreso',15,2);
@@ -25,10 +25,10 @@ class CreateTverdugosTable extends Migration
             $table->foreign('idsocios')->references('id')->on('socios');
             
             $table->integer('idverdugos')->unsigned()->nullable()->default(null);
-            $table->foreign('idverdugos')->references('idverdugos')->on('verdugos');
+            $table->foreign('idverdugos')->references('id')->on('verdugos');
             
             $table->integer('idperiodos')->unsigned();
-            $table->foreign('idperiodos')->references('idperiodos')->on('periodos');
+            $table->foreign('idperiodos')->references('id')->on('periodos');
             
             
             $table->timestamps();

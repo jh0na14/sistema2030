@@ -1,4 +1,6 @@
 <form id="frmsocios" name="frmsocios" action="/socios/create" method="post">
+         <input type="hidden" id="socio_id" name="socio_id" value="0">
+       
     <div  id="nombrediv" class="form-group row @if($errors->has('nombre')) has-danger @endif" >
         <label for="example-text-input" class="col-1 col-form-label offset-1">Nombre</label>
         <div class="col-8 offset-1" >
@@ -21,41 +23,48 @@
             <div id="apellidofeed" class="form-control-feedback"></div>              
         </div>
     </div>
-    <div class="form-group row">
+    <div id="fechaNacdiv" class="form-group row">
         <label for="example-date-input" class="col-1 col-form-label offset-1">Fecha</label>
         <div class="col-8 offset-1">
             <input class="form-control " type="text" value="2011-07-07" id="fechaNac" name="fechaNac">
+            <div id="fechaNacfeed" class="form-control-feedback"></div>              
+       
         </div>
     </div>
-    <div class="form-group row">
+    <div id="duidiv" class="form-group row">
         <label for="example-number-input" class="col-1 col-form-label offset-1">DUI</label>
         <div class="col-8 offset-1">
             <input class="form-control" type="text" value="123456789" id="dui" name="dui">
+            <div id="duifeed" class="form-control-feedback"></div>              
         </div>
     </div>
-    <div class="form-group row">
+    <div id="direcciondiv" class="form-group row">
         <label for="example-number-input" class="col-1 col-form-label offset-1">Direccion</label>
         <div class="col-8 offset-1">
             <textarea class="form-control" type="text" id="direccion" name="direccion" value="mi casa" rows="2"></textarea>
+            <div id="direccionfeed" class="form-control-feedback"></div>                   
         </div>
     </div>
-     <div class="form-group row">
+     <div id="telefonodiv" class="form-group row">
         <label for="example-number-input" class="col-1 col-form-label offset-1">Telefono</label>
         <div class="col-8 offset-1">
             <input class="form-control" type="number" value="1234-4656" id="telefono" name="telefono">
+            <div id="telefonofeed" class="form-control-feedback"></div>               
         </div>
     </div>
-    <div class="form-group row">
+    <div id="emaildiv" class="form-group row">
         <label for="example-email-input" class="col-1 col-form-label offset-1">Email</label>
         <div class="col-8 offset-1">
             <input class="form-control" type="email" value="bootstrap@example.com" id="email" name="email">
+            <div id="emailfeed" class="form-control-feedback"></div>             
         </div>
     </div>
-    <div class="form-group row">
+    <div id="apododiv" class="form-group row">
         <label for="example-number-input" class="col-1 col-form-label offset-1">Apodo</label>
         <div class="col-8 offset-1">
          <textarea class="form-control" type="text" id="apodo" name="apodo" value="FLorescucks" rows="2"></textarea>
-         </div>
+         <div id="apodofeed" class="form-control-feedback"></div>              
+        </div>
     </div>
    <div class="form-group row">
         <label for="example-email-input" class="col-1 col-form-label offset-1">Tipo</label>

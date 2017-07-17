@@ -14,7 +14,7 @@ class CreateMembresiasTable extends Migration
     public function up()
     {
         Schema::create('membresias', function (Blueprint $table) {
-            $table->increments('idmembresias');
+            $table->increments('id');
             $table->double('monto');
             $table->string('mes');
             $table->integer('año');

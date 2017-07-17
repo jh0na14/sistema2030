@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
   $("#tabla").append('<tr id="task"><td>rregre</td><td>');
-  $("#fechaNac").mask('xxxx-xxxx');
+  //$("#fechaNac").mask('xxxx-xxxx');
   
   //$('#myModal').modal('toggle');
     //$('.modal').modal('show');  
@@ -10,6 +10,9 @@ $(document).ready(function(){
  $("#btnnuevo").click(function(){
 
   $('#btnsave').val("add");
+  $("#btnsave").html("Nuevo");
+  $("#btnsave").removeClass("btn-success");
+  $("#exampleModalLabel").html("Registro Socio");
   $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() +'</td><td>');
     $('#frmsocios').trigger('reset');
     //$('#frmsocios')[0].reset();
@@ -82,6 +85,10 @@ $(document).ready(function(){
      $('#exampleModal').modal('show');
      //$("#btnsave").removClass("btn btn-primary");//.addClass("btn btn-secondary");
      $("#btnsave").html("Modificar");
+     $("#btnsave").removeClass("btn-info");
+     $("#btnsave").addClass("btn-success"); 
+     ///titulo del modal
+     $("#exampleModalLabel").html("Modificar Socio");
       
     });
 $("#btnsavee").click(function (e) {
@@ -102,6 +109,7 @@ $("#btnsavee").click(function (e) {
 
         var formData = {
           //nombre:document.getElementById("nombre").value,
+          //socio:$('#socio_id').val(),
           nombre:$('#nombre').val(),
           apellido:$('#apellido').val(),
           fechaNac:$('#fechaNac').val(),
@@ -140,15 +148,15 @@ $("#btnsavee").click(function (e) {
             if(state=="add"){
                 var row = '<tr><td>' + data.apodo + '</td>';
                  row +='<td>' + data.nombre + '</td>';
-         row +='<td>' + data.apellido + '</td>';
-         row +='<td>' + data.email + '</td>';
-         row +='<td>' + data.cargo + '</td>';       
-         row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
-         row += '<button type="button" class="btn btn-outline-success btn-sm " data-toggle="modal" data-target="#exampleModal" value="'+data.id+'">Editar</button>  ';
-         row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
-         row +='</td></tr>';
-        //var task='<tr id="task"><td>rregre</td><td>';
-        $("#tabla").append(row);
+                 row +='<td>' + data.apellido + '</td>';
+                 row +='<td>' + data.email + '</td>';
+                 row +='<td>' + data.cargo + '</td>';       
+                 row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
+                 row += '<button type="button" class="btn btn-outline-success btn-sm " data-toggle="modal" data-target="#exampleModal" value="'+data.id+'">Editar</button>  ';
+                 row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
+                 row +='</td></tr>';
+                //var task='<tr id="task"><td>rregre</td><td>';
+                 $("#tabla").append(row);
                }
                 /*if (state == "add"){ //if user added a new record
                     $('#tasks-list').append(task);
@@ -165,12 +173,69 @@ $("#btnsavee").click(function (e) {
                 console.log('Error de noseq:', data);
                var errors=data.responseJSON;
                 console.log(errors);
-                $('#nombrefeed').text(errors.nombre);
-                //$( '#nombrediv' ).removeClass();
-                $( '#nombrediv' ).addClass("has-danger");
-                $( '#apellidodiv' ).addClass("has-danger");
-                $('#apellidofeed').text(errors.apellido);
-                
+                if(errors.nombre!=undefined)
+                {
+                  $('#nombrefeed').text(errors.nombre);
+                  //$( '#nombrediv' ).removeClass();
+                  $( '#nombrediv' ).addClass("has-danger");
+                }else{
+                  $( '#nombrediv' ).removeClass("has-danger");
+                  $( '#nombrefeed' ).text("");
+                  }
+                  
+                if(errors.apellido!=undefined)
+                {
+                  $( '#apellidodiv' ).addClass("has-danger");
+                  $('#apellidofeed').text(errors.apellido);
+                }else{
+                  $( '#apellidodiv' ).removeClass("has-danger");
+                  $( '#apellidofeed' ).text("");
+                  }
+
+                if(errors.email!=undefined)
+                {
+                  $( '#emaildiv' ).addClass("has-danger");
+                  $('#emailfeed').text(errors.email);
+                }else{
+                  $( '#emaildiv' ).removeClass("has-danger");
+                  $( '#emailfeed' ).text("");
+                  }
+
+                if(errors.dui!=undefined)
+                {
+                 $( '#duidiv' ).addClass("has-danger");
+                 $('#duifeed').text(errors.dui);
+                }else{
+                  $( '#duidiv' ).removeClass("has-danger");
+                  $( '#duifeed' ).text("");
+                  }
+
+                if(errors.direccion!=undefined)
+                {
+                  $( '#direcciondiv' ).addClass("has-danger");
+                  $('#direccionfeed').text(errors.direccion);
+                }else{
+                  $( '#direcciondiv' ).removeClass("has-danger");
+                  $( '#direccionfeed' ).text("");
+                  }
+
+                if(errors.telefono!=undefined)
+                {        
+                  $( '#telefonodiv' ).addClass("has-danger");
+                  $('#telefonofeed').text(errors.telefono);
+                }else{
+                  $( '#telefonodiv' ).removeClass("has-danger");
+                  $( '#telefonofeed' ).text("");
+                  }
+
+               if(errors.apodo!=undefined)
+                {        
+                  $( '#apododiv' ).addClass("has-danger");
+                  $('#apodofeed').text(errors.telefono);
+                }else{
+                  $( '#apododiv' ).removeClass("has-danger");
+                  $( '#apodofeed' ).text("");
+                  }
                 
             }
         });

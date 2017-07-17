@@ -14,7 +14,7 @@ class CreateVerdugosTable extends Migration
     public function up()
     {
         Schema::create('verdugos', function (Blueprint $table) {
-            $table->increments('idverdugos');
+            $table->increments('id');
             $table->date('fechaPago');
             $table->double('montoRecaudado');
             $table->double('montoRifa')->nullable()->default(null);

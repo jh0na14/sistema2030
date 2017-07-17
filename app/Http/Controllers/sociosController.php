@@ -106,17 +106,40 @@ class sociosController extends Controller
    		$socios->email=$request->email;
    		$socios->apodo=$request->apodo;
    		$socios->tipoSocio=$request->tipoSocio;
-   		$socios->cargo=$request->cargo;
-   		
-		
-
+   	    $socios->cargo=$request->cargo;
 	//}*/
 		//dd($socios);
 		////////////return redirect('/socios');
 		return Response::json($socios);
     	//return response(json($array));
-    	
-    	
-
     }
+    
+    public function buscar($socio_id){
+        //dd($socio_id);
+    $socio = socio::find($socio_id);//all()->where('idsocios',"=",$socio_id);//find($socio_id);
+    //console.log($socio);
+    //dd($socio);
+    
+    /*$array=array();
+    //If uso asi que no sirve ahora porq antes ocupaba idsocios en ves de id
+    $socio = socio::all()->where('idsocios',"=",$socio_id);
+    //tengo que hacer esto
+    foreach($socio as $socios)
+    {
+        $array=[
+        'nombre'=>$socios->nombre,
+        'apellido'=>$socios->apellido,
+        'fechaNac'=>$socios->fechaNac,
+        'dui'=> $socios->dui,
+        'direccion'=> $socios->direccion,
+        'telefono'=> $socios->telefono,
+        'email'=> $socios->email,
+        'apodo'=> $socios->apodo,
+        'tipoSocio'=>$socios->tipoSocio,
+        'cargo'=> $socios->cargo
+        ];  
+    }*/
+    return Response::json($socio);
+
+    } 
 }

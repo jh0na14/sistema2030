@@ -14,13 +14,13 @@ class CreatePeticionsTable extends Migration
     public function up()
     {
         Schema::create('peticions', function (Blueprint $table) {
-            $table->increments('idpeticions');
+            $table->increments('id');
             $table->date('fecha');
             $table->string('nombre',30);
             $table->string('apellido', 30)->nullable()->default(null);
             $table->string('dui', 10);
             $table->integer('idbeneficiarios')->unsigned();
-            $table->foreign('idbeneficiarios')->references('idbeneficiarios')->on('beneficiarios');
+            $table->foreign('idbeneficiarios')->references('id')->on('beneficiarios');
             
             $table->timestamps();
         });

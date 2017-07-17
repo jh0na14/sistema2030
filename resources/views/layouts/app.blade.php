@@ -1,89 +1,99 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <title>Expediente en Línea | Expediente en Línea :: Pagos</title>
+        {{-- link de boostrap 4--}}
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    </head>
+    <body>
+<!-- Amplio el Alto al 90% -->
+<style type="text/css">
+    html, body {
+        height: 100%;
+        margin: 0px;
+        font-size: 15px;
+    }
+    .container {
+        min-height: 90%;
+        height: auto !important;
+        height: 100%;
+        /*margin-left: 0 auto -90px;*/
+        margin-left:4%;
+        margin-right:0%; 
+        max-width: 100%;
+    }
+    table,th,td{
+        padding: 0px;
+        margin: 0px;
+    }
+    
+    footer {
+        height: 80px;
+        width: 100%;
+    }
+    
+    .push {
+        height: 80px;
+    }
+    .modal .modal-body {
+    max-height: 450px;
+    overflow-y: auto;
+}
+//Estos 3 webkits es para cambiar el look de el scrooll
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+::-webkit-scrollbar
+{
+    width: 10px;
+    background-color: #F0F0F0;
+}
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+::-webkit-scrollbar-thumb
+{
+    background-color: #FFFFFF;
+    border: 2px solid #888FFF;
+}
+</style>
 
-    <!-- Styles -->
-   <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-   -->
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+        <nav class="navbar navbar-light bg-faded" >
+  <a class="navbar-brand" href="#">
+    <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
+    <span >Club Activo 20-30</span>
+  </a>
+</nav>
+<div class="container" >
+     @yield('content') 
+    
 
-</head>
-<body>
-    <div id="app" class="container">
-           <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-        <nav class="navbar navbar-light static-top navbar-toggleable-md bg-faded">
-            <div class="container">
-                {{--Esto se suone no va -}}
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle
-                    collapsed" data-toggle="collapse" data-target="
-                    #app-navbar-collapse">
-                    
-                    </button>
-                </div>
-                {{-- hsta a ui --}}
+</div>
+<div class="push"></div>
+    
+<div >
+    <hr>
+    <footer>
+        <p style="padding-left:25px;">DTI &copy; Universidad de El Salvador 2017</p>
+    </footer>
+</div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}">Registrarse</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu" role="menu">
-                                    
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    
-                                </div>
-                            </li>
-                        @endif
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-        @yield('content')
-    </div>
-
-    <!-- Scripts -->
-    <!--<script src="{{ asset('js/app.js') }}"></script>
--->
-<script
+{{-- No se si me daba error esste token cuando lo utilizaba sin ajax--}}
+<meta name="_token" content="{{ csrf_token() }}">
+  <script
   src="http://code.jquery.com/jquery-3.2.1.js"
   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+ 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    @yield('script') 
+   
 
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
 
-</body>
+    </body>
+  
 </html>

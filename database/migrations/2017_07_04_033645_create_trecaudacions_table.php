@@ -14,7 +14,7 @@ class CreateTrecaudacionsTable extends Migration
     public function up()
     {
         Schema::create('trecaudacions', function (Blueprint $table) {
-            $table->increments('idtrecaudacions');
+            $table->increments('id');
             $table->date('fecha');
             $table->text('concepto');
             $table->double('ingreso',15,2);
@@ -25,10 +25,10 @@ class CreateTrecaudacionsTable extends Migration
             $table->foreign('idsocios')->references('id')->on('socios');
             
             $table->integer('idrecaudacions')->unsigned()->nullable()->default(null);
-            $table->foreign('idrecaudacions')->references('idrecaudacions')->on('recaudacions');
+            $table->foreign('idrecaudacions')->references('id')->on('recaudacions');
             
             $table->integer('idperiodos')->unsigned();
-            $table->foreign('idperiodos')->references('idperiodos')->on('periodos');
+            $table->foreign('idperiodos')->references('id')->on('periodos');
             
              
             
