@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 use App\Http\Requests\createBeneficiariosRequest;
+//cmd php artisan make:controller beneficiariosController
 class beneficiariosController extends Controller
 {
     //
