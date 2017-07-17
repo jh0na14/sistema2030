@@ -7,7 +7,7 @@
 	
 	<ul class="nav nav-tabs">
 		<li class="nav-item  active">
-			<a class="nav-link active" href="/pagos/pagoAnho">{{$tipoSocio}}</a>
+			<a class="nav-link active" href="/pagos/pagoAnho">Beneficiarios</a>
 		<li>
 	</ul>
 
@@ -19,8 +19,8 @@
  	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
 	        <tr>
-	            <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"><label >{{strtoupper($tipoSocio)}}</label> DE CLUB ACTIVO 20-30</th>
-	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
+	            <th colspan="3" style="text-align:center; font-weight:bold; letter-spacing:5px;">DE CLUB ACTIVO 20-30</th>
+	            <th colspan="2" style="text-align:right; font-weight:bold; letter-spacing:5px;">
 	            	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
 					  Launch demo modal
 					</button>	
@@ -30,33 +30,28 @@
 	</thead>
 	<thead >
 	        <tr >
-	        	<th style="text-align: center">Apodo</th>
-	           	
-	            <th class="center ">Nombre</th>
-	           {{--	<th class="center ">Apellido</th>
+	        	<th style="text-align: center">Nombre</th>
+	           	<th class="center ">Apellido</th>
+	            <th class="center ">DUI</th>
+	           {{--	
 	           	
 	           	<th>A&ntilde;o</th>--}}
-	           	<th>Email</th>
+	           	<th>Fecha</th>
 	           	{{--<th style="text-align: center">Tipo</th>
-	           	--}}<th class="center ">Cargo</th>
+	           	--}}
 	           	<th style="text-align: center">Estado</th>
 	        </tr>
 	</thead>
 	<tbody id="tabla" name="tabla">
 		@forelse($beneficiarios as $beneficiario)
 		<tr id="{{ $beneficiario->id }}">
-			<td style="padding:6px">{{ $socio->apodo }}</td>
-			<td>{{ $beneficiario->nombre }} {{ $beneficiario->apellido }}</td>
-			<td >{{ $socio->apellido }}</td>
-			<td>{{ $socio->email }}</td>
-			{{--<td class="text-center">{{ $socio->tipoSocio }}</td>
-			--}}<td >{{ $socio->cargo }}</td>
+			<td>{{ $beneficiario->nombre }}</td>
+			<td >{{ $beneficiario->apellido }}</td>
+			<td>{{ $beneficiario->dui }}</td>
+			<td >{{ $beneficiario->fechaNac }}</td>
 			<td class="text-center">
-				<button type="button" class="btn btn-outline-info btn-sm " value="{{ $beneficiario->id }}">Pagos</button>
-				
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $beneficiario->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $beneficiario->id }}">Editar</button>
-				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $beneficiario->id }}">Eliminar</button>
 			</td>
 
         </tr>
@@ -70,7 +65,7 @@
 	</table>
 {{--@if(count($socios))@endif--}}
   <div class="mt-2 mx-auto">
-  {{ $socios->links('
+  {{ $beneficiarios->links('
   pagination::bootstrap-4') }}
   </div>
 
@@ -112,7 +107,7 @@
       </div>
       <div class="modal-body">
         <div class="">
-            @include('socios.form')
+            @include('beneficiarios.formBen')
         </div>
       </div>
       <div class="modal-footer">
@@ -133,6 +128,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/socios.js')}}"></script>
+  <script src="{{asset('js/beneficiarios.js')}}"></script>
 
 @endsection

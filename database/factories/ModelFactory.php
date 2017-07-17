@@ -48,3 +48,20 @@ $factory->define(App\socio::class, function(Faker\Generator
 
 	];
 });
+
+////para ejecutar esto en cmd php artisan db:seed --class=bebeficiariosTableSeeder
+$factory->define(App\beneficiario::class, function(Faker\Generator 
+    $faker){
+    return [
+
+        'nombre' => $faker->name,
+        'apellido' => $faker->lastName,
+        'fechaNac'=>$faker->dateTime,
+       //'dui'=>$faker->numberBetween('11111111111','99999999911'),
+        'dui'=>$faker->realText(random_int(10,10)),
+        'descripcion'=>$faker->name,//realText(random_int(20,30)),
+        'created_at'=>$faker->dateTimeThisDecade,
+        'updated_at'=>$faker->dateTimeThisDecade,
+
+    ];
+});

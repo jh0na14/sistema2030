@@ -18,5 +18,9 @@ class sociosTableSeeder extends Seeder
         factory(App\socio::class)
         ->times(10)
         ->create();
+        factory(App\beneficiario::class)
+        ->times(10)
+        ->create();
+           
     }
 }
