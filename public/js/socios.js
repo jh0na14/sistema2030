@@ -1,11 +1,31 @@
 
 $(document).ready(function(){
-  $("#tabla").append('<tr id="task"><td>rregre</td><td>');
+  //$("#tabla").append('<tr id="task"><td>rregre</td><td>');
   //$("#fechaNac").mask('xxxx-xxxx');
   
   //$('#myModal').modal('toggle');
     //$('.modal').modal('show');  
    });   
+////////////////Esto para busqueda
+ $("#search").on('keyup',function(){
+    var value = $(this).val();
+     $.ajax({
+
+            type: "GET",
+            url: '/socios/busqueda/'+value,
+            data: {'search':value},
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                 $("#tabla").html(data);            
+            
+            },
+            error: function (data) {
+                console.log('Error de info boton:', data);
+            }
+       });
+ });
+///////////////////fin busqueda
 
  $("#btnnuevo").click(function(){
 
@@ -21,7 +41,9 @@ $(document).ready(function(){
 
 ///////////editodal el boton es la clase infomodal por que id en el boton no agarraba por que repetia
 ///////////en el listado d la tabla
- $(".infomodal").click(function(){
+$(document).on('click','.infomodal',function(){
+//asi no funciona cuando retorno de ayax un boton la accion onclick
+// $(".infomodal").click(function(){
       $("#tabla").append('<tr id="task"><td>info</td><td>');
        var socio_id = $(this).val();
        //$('#nombrediv').text("ldjkds");
@@ -37,7 +59,7 @@ $(document).ready(function(){
             success: function (data) {
                 console.log(data);
         
-                var row = '<tr><td> Nombre: </td><td>' + data.nombre + '</td>';
+                var row = '<tr><td width="45%"> Nombre: </td><td width="55%">' + data.nombre + '</td>';
                  row +='<tr><td> Apellido: </td><td>' + data.apellido + '</td>';
          row +='<tr><td> Apodo: </td><td>' + data.apodo + '</td>';
          row +='<tr><td> Fecha de Nacimiento: </td><td>' + data.fechaNac + '</td>';
@@ -59,7 +81,9 @@ $(document).ready(function(){
 
 ///////////editodal el boton es la clase editmodal por que id en el boton no agarraba por que repetia
 ///////////en el listado d la tabla
- $(".editModal").click(function(){
+$(document).on('click','.editModal',function(){
+//asi no funciona cuando retorno de ayax un boton la accion onclick 
+// $(".editModal").click(function(){
   var socio_id = $(this).val();
     $("#socio_id").val(socio_id);
     
@@ -79,7 +103,7 @@ $(document).ready(function(){
           $('#cargo').val(data.cargo);//enum    
         });
     //El boton para saber cambair de estado para guardar o modificar 
-    $("#btnsave").val("update")
+    $("#btnsave").val("update");
     $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() + $("#socio_id").val() +'</td><td>');
 
      $('#exampleModal').modal('show');
@@ -152,7 +176,7 @@ $("#btnsavee").click(function (e) {
                  row +='<td>' + data.email + '</td>';
                  row +='<td>' + data.cargo + '</td>';       
                  row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
-                 row += '<button type="button" class="btn btn-outline-success btn-sm " data-toggle="modal" data-target="#exampleModal" value="'+data.id+'">Editar</button>  ';
+                 row += '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'+data.id+'">Editar</button>  ';
                  row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
                  row +='</td></tr>';
                 //var task='<tr id="task"><td>rregre</td><td>';
@@ -231,7 +255,7 @@ $("#btnsavee").click(function (e) {
                if(errors.apodo!=undefined)
                 {        
                   $( '#apododiv' ).addClass("has-danger");
-                  $('#apodofeed').text(errors.telefono);
+                  $('#apodofeed').text(errors.apodo);
                 }else{
                   $( '#apododiv' ).removeClass("has-danger");
                   $( '#apodofeed' ).text("");

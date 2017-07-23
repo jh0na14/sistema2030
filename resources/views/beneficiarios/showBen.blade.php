@@ -9,28 +9,61 @@
 		<li class="nav-item  active">
 			<a class="nav-link active" href="/pagos/pagoAnho">Beneficiarios</a>
 		<li>
+	    <li class="nav-item active">
+			<a class="nav-link" href="/pagos/pagoAnho">Peticiones</a>
+		<li>
+
 	</ul>
 
   <div style="clear:both; padding-bottom:15px;">
   </div>
 
+		
  	<div style="width:100%; float:right;">
 
- 	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
+ 	<div class="card">
+ 	 <div class="card-block">
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Beneficiarios de Club Activo 20-30</h6>
+         
+
+
+  	 {{--<div class="row" >
+		<div class="col-4 offset-4">
+			<label for="example-text-input" style="text-align:left; font-weight:bold; font-size:20px; " ><i>Beneficiarios de Club Activo 20-30</i></label>
+     	</div>
+ 	 	
+	</div>--}}
+
+ 		<div class="row" >
+ 		<div class="col-2" style="clear:both; padding-top:15px;">
+  			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
+			Nuevo</button>	
+     	</div>
+     	<div class="col-4">
+  			<label style="text-align:left; font-weight:bold; font-size:20px; "> </label>	
+     	</div>
+     	<div class="form-group row col-6">
+ 	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
+  			<div class="col-9 offset-1 ">
+      				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
+  				</div>
+  	  
+		</div>
+  	  </div>
+
+ 	<table class="table {{--table-bordered--}}  table-hover table-sm  " align="center">
 	<thead >
-	        <tr>
-	            <th colspan="3" style="text-align:center; font-weight:bold; letter-spacing:5px;">DE CLUB ACTIVO 20-30</th>
-	            <th colspan="2" style="text-align:right; font-weight:bold; letter-spacing:5px;">
-	            	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
-					  Launch demo modal
-					</button>	
+	 {{-- <tr>
+	            <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"> DE CLUB ACTIVO 20-30</th>
+	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
+	            	
 	            </th>
 	        
-	        </tr>
+	        </tr>--}}
 	</thead>
-	<thead >
-	        <tr >
-	        	<th style="text-align: center">Nombre</th>
+	<thead class="">
+	        <tr>
+	        	<th style="text-align: center" style="text-color:#000000;">Nombre</th>
 	           	<th class="center ">Apellido</th>
 	            <th class="center ">DUI</th>
 	           {{--	
@@ -80,15 +113,24 @@
                         </div>
                         <div class="modal-body">
                             <div class="">
+                            	<div class="card">
+  								<div class="card-block">
+    							<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Informacion</h6>
             					<table   class="table {{--table-bordered--}}  table-sm " align="center">
             					<tbody id="tablainfo">
             					</tbody>
             					</table>
+            				</div>
+            				</div>
 					        </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" id="btn-saveiuy" value="add" data-toggle="modal" data-target="#exampleModal">Save changes</button>
-                           
+                        	<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+       
+                        	<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+       
+                           {{-- <button type="button" class="btn btn-primary" id="btn-saveiuy" value="add" data-toggle="modal" data-target="#exampleModal">Save changes</button>
+                           --}}
                         </div>
                     </div>
                 </div>
@@ -120,7 +162,8 @@
 {{-- /////////////////////FIN--}}
 	
   
-
+	</div>{{--fin cards--}}
+	</div>{{--fin cards--}}
 	{{-- FIn style width 85% --}}</div>
 	
 	

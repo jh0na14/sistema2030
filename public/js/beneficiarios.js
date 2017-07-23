@@ -1,10 +1,29 @@
 
 $(document).ready(function(){
-  $("#tabla").append('<tr id="task"><td>rregre</td><td>');
+  //$("#tabla").append('<tr id="task"><td>rregre</td><td>');
   //$("#fechaNac").mask('xxxx-xxxx');
   
    });   
+////////////////Esto para busqueda
+ $("#search").on('keyup',function(){
+    var value = $(this).val();
+     $.ajax({
 
+            type: "GET",
+            url: '/beneficiarios/busqueda/'+value,
+            data: {'search':value},
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                 $("#tabla").html(data);            
+            
+            },
+            error: function (data) {
+                console.log('Error de info boton:', data);
+            }
+       });
+ });
+///////////////////fin busqueda
  $("#btnnuevo").click(function(){
 
   $('#btnsave').val("add");
@@ -19,7 +38,9 @@ $(document).ready(function(){
 
 ///////////editodal el boton es la clase infomodal por que id en el boton no agarraba por que repetia
 ///////////en el listado d la tabla
- $(".infomodal").click(function(){
+$(document).on('click','.infomodal',function(){
+//asi no funciona cuando retorno de ayax un boton la accion onclick
+// $(".infomodal").click(function(){
       $("#tabla").append('<tr id="task"><td>info</td><td>');
        var form_id = $(this).val();
        
@@ -33,7 +54,7 @@ $(document).ready(function(){
             success: function (data) {
                 console.log(data);
         
-                var row = '<tr><td> Nombre: </td><td>' + data.nombre + '</td>';
+                var row = '<tr><td width="45%"> Nombre: </td><td width="55%">' + data.nombre + '</td>';
                  row +='<tr><td> Apellido: </td><td>' + data.apellido + '</td>';
                  row +='<tr><td> DUI: </td><td>' + data.dui + '</td>';
                  row +='<tr><td> Fecha de Nacimiento: </td><td>' + data.fechaNac + '</td>';
@@ -50,7 +71,9 @@ $(document).ready(function(){
 
 ///////////editodal el boton es la clase editmodal por que id en el boton no agarraba por que repetia
 ///////////en el listado d la tabla
- $(".editModal").click(function(){
+$(document).on('click','.editModal',function(){
+//asi no funciona cuando retorno de ayax un boton la accion onclick 
+ //$(".editModal").click(function(){
   var form_id = $(this).val();
     $("#form_id").val(form_id);
     
@@ -65,7 +88,7 @@ $(document).ready(function(){
           $('#descripcion').val(data.descripcion);
            });
     //El boton para saber cambair de estado para guardar o modificar 
-    $("#btnsave").val("update")
+    $("#btnsave").val("update");
     $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() + $("#form_id").val() +'</td><td>');
 
      $('#exampleModal').modal('show');
@@ -132,7 +155,7 @@ $("#btnsavee").click(function (e) {
                  row +='<td>' + data.dui + '</td>';
                  row +='<td>' + data.fechaNac + '</td>';       
                  row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
-                 row += '<button type="button" class="btn btn-outline-success btn-sm " data-toggle="modal" data-target="#exampleModal" value="'+data.id+'">Editar</button>  ';
+                 row += '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'+data.id+'">Editar</button> ';
                  row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
                  row +='</td></tr>';
                 //var task='<tr id="task"><td>rregre</td><td>';

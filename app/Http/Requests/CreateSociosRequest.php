@@ -38,7 +38,7 @@ class CreateSociosRequest extends FormRequest
                 'direccion' => ['required'],
                 'telefono' => 'required',
                 'email' => 'required|email|unique:socios,email,'.$this->socio_id,
-                'apodo' => 'required',
+                'apodo' => 'required|max:35',
                   ];    
                 //break;
                }
@@ -55,7 +55,7 @@ class CreateSociosRequest extends FormRequest
                 'direccion' => ['required'],
                 'telefono' => 'required',
                 'email' => 'required|email|unique:socios,email',
-                'apodo' => 'required',
+                'apodo' => 'required|max:35',
                   ]; 
 
                 break;

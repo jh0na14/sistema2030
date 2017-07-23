@@ -19,10 +19,10 @@
         min-height: 90%;
         height: auto !important;
         height: 100%;
-        /*margin-left: 0 auto -90px;*/
-        margin-left:4%;
+        margin-left: 0 auto -90px;
+       /* margin-left:4%;
         margin-right:0%; 
-        max-width: 100%;
+        max-width: 100%;*/
     }
     table,th,td{
         padding: 0px;
@@ -61,11 +61,33 @@
 }
 </style>
 
-        <nav class="navbar navbar-light bg-faded" >
+        <nav class="navbar navbar-toggleable-md {{--navbar-light bg-faded--}} navbar-inverse bg-danger" >
   <a class="navbar-brand" href="#">
     <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="">
     <span >Club Activo 20-30</span>
   </a>
+      <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Socios <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Peticiones</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#"></a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+
 </nav>
 <div class="container" >
      @yield('content') 
