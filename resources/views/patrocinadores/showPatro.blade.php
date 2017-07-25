@@ -15,6 +15,10 @@
   </div>
 
  	<div style="width:100%; float:right;">
+ <div class="card">
+ 	 <div class="card-block">
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Solicitantes de Club Activo 20-30</h6>
+   
 	<div class="form-group row col-6">
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
   			<div class="col-9 offset-1 ">
@@ -23,11 +27,11 @@
   	  
 		</div>
   	  </div>
-
+  	  
  	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
 	        <tr>
-	            <th colspan="3" style="text-align:center; font-weight:bold; letter-spacing:5px;">DE CLUB ACTIVO 20-30</th>
+	            <th colspan="3" style="text-align:center; font-weight:bold; letter-spacing:5px;"> PATROCINADORES DE CLUB ACTIVO 20-30</th>
 	            <th colspan="2" style="text-align:right; font-weight:bold; letter-spacing:5px;">
 	            	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
 					  Nuevo Patrocinador
@@ -82,10 +86,15 @@
                         </div>
                         <div class="modal-body">
                             <div class="">
+                            <div class="card">
+  								<div class="card-block">
+    							<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Informacion</h6>
             					<table   class="table {{--table-bordered--}}  table-sm " align="center">
             					<tbody id="tablainfo">
             					</tbody>
             					</table>
+            					</div>
+            				</div>
 					        </div>
                         </div>
                         <div class="modal-footer">

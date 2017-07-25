@@ -1,6 +1,9 @@
 <form id="frm" name="frmpatrocinador" action="/patrocinador/create" method="post">
          <input type="hidden" id="form_id" name="form_id" value="0">
-       
+  <div class="card">
+  <div class="card-block">
+    <div class="row"><h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Formulario</h6></div>       
+
     <div  id="nombrediv" class="form-group row @if($errors->has('nombre')) has-danger @endif" >
         <label for="example-text-input" class="col-1 col-form-label offset-1">Nombre</label>
         <div class="col-8 offset-1" >
@@ -23,5 +26,6 @@
             <div id="descripcionfeed" class="form-control-feedback"></div>                   
         </div>
     </div>
-    
+  </div>
+</div>  
 </form>
