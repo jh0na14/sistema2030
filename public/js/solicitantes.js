@@ -202,13 +202,13 @@ $("#btnsavee").click(function (e) {
                   $( '#duifeed' ).text("");
                   }
 
-                if(errors.descripcion!=undefined)
+                if(errors.telefono!=undefined)
                 {
-                  $( '#descripciondiv' ).addClass("has-danger");
-                  $('#descripcionfeed').text(errors.direccion);
+                  $( '#telefonodiv' ).addClass("has-danger");
+                  $('#telefonofeed').text(errors.telefono);
                 }else{
-                  $( '#descripciondiv' ).removeClass("has-danger");
-                  $( '#descripcionfeed' ).text("");
+                  $( '#telefonodiv' ).removeClass("has-danger");
+                  $( '#telefonofeed' ).text("");
                   }
                 
             }

@@ -124,4 +124,5 @@
 @section('script')
   <script src="{{asset('js/patrocinador.js')}}"></script>
 
+
 @endsection

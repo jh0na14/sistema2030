@@ -5,7 +5,7 @@ use App\solicitante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
-//use App\Http\Requests\createBeneficiariosRequest;
+use App\Http\Requests\createSolicitantesRequest;
 
 class solicitantesController extends Controller
 {
@@ -22,7 +22,7 @@ class solicitantesController extends Controller
     return Response::json($solicitante);
 
     } 
-    public function create(Request $request){
+    public function create(createSolicitantesRequest $request){
     	//dd($request->all());
     	$message= solicitante::create($request->all());
 		//$response = socio::create($request->all());	
@@ -33,7 +33,7 @@ class solicitantesController extends Controller
     	return redirect('/socios')->with('mensaje','Registro Guardado');
 
     }
-    public function update(Request $request,$id){
+    public function update(createSolicitantesRequest $request,$id){
     	//dd($request->all());
     	$message = solicitante::find($id);
     	 $message->fill($request->all());
