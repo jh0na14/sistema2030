@@ -6,11 +6,11 @@
     
 	
 	<ul class="nav nav-tabs">
-		<li class="nav-item active">
-			<a class="nav-link active" href="/pagos/pagoAnho">Solicitantes</a>
+		<li class="nav-item ">
+			<a class="nav-link" href="/beneficiarios">Beneficiarios</a>
 		<li>
 	    <li class="nav-item ">
-			<a class="nav-link " href="/pagos/pagoAnho">Beneficiarios</a>
+			<a class="nav-link active " href="/solicitantes">Solicitantes</a>
 		<li>
 
 	</ul>
@@ -46,12 +46,12 @@
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
   			<div class="col-9 offset-1 ">
       				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
-  				</-div>
+  				</div>
   	  
 		</div>
   	  </div>
 
- 	<table class="table {{--table-bordered--}}  table-hover table-sm  " align="center">
+ 	<table class="table {{--table-bordered--}}  table-hover table-sm " align="center">
 	<thead >
 	 {{-- <tr>
 	            <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"> DE CLUB ACTIVO 20-30</th>
@@ -61,7 +61,7 @@
 	        
 	        </tr>--}}
 	</thead>
-	<thead class="">
+	<thead >
 	        <tr>
 	        	<th style="text-align: center" style="text-color:#000000;">Nombre</th>
 	           	<th class="center ">Apellido</th>
@@ -69,7 +69,7 @@
 	           {{--	
 	           	
 	           	<th>A&ntilde;o</th>--}}
-	           	<th>Fecha</th>
+	           	<th>Telefono</th>
 	           	{{--<th style="text-align: center">Tipo</th>
 	           	--}}
 	           	<th style="text-align: center">Estado</th>
@@ -83,6 +83,7 @@
 			<td>{{ $solicitante->dui }}</td>
 			<td >{{ $solicitante->telefono}}</td>
 			<td class="text-center">
+        <button type="button" class="btn btn-outline-primary btn-sm peticionModal" value="{{ $solicitante->id }}">Crear Peticion</button>
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $solicitante->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $solicitante->id }}">Editar</button>
 			</td>
@@ -126,9 +127,7 @@
                         </div>
                         <div class="modal-footer">
                         	<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       
-                        	<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       
+ 
                            {{-- <button type="button" class="btn btn-primary" id="btn-saveiuy" value="add" data-toggle="modal" data-target="#exampleModal">Save changes</button>
                            --}}
                         </div>
@@ -160,7 +159,29 @@
   </div>
 </div>	
 {{-- /////////////////////FIN--}}
-	
+<!-- Modal -->
+<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog {{--modal-lg--}} " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Crear Peticion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+            @include('solicitantes.formPeticion')
+        </div>
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnsavepeticion" value="Anhadir">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>  
+{{-- /////////////////////FIN--}}	
   
 	</div>{{--fin cards--}}
 	</div>{{--fin cards--}}

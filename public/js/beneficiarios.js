@@ -59,6 +59,7 @@ $(document).on('click','.infomodal',function(){
                  row +='<tr><td> DUI: </td><td>' + data.dui + '</td>';
                  row +='<tr><td> Fecha de Nacimiento: </td><td>' + data.fechaNac + '</td>';
                  row +='<tr><td> Direccion: </td><td>' + data.descripcion + '</td>';
+                 row +='<tr><td> Creado: </td><td>' + data.created_at + '</td>';
                   $("#tablainfo").append(row);            
             
             },

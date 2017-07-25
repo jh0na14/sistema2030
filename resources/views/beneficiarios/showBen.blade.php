@@ -7,10 +7,10 @@
 	
 	<ul class="nav nav-tabs">
 		<li class="nav-item  active">
-			<a class="nav-link active" href="/pagos/pagoAnho">Beneficiarios</a>
+			<a class="nav-link active" href="/beneficiarios">Beneficiarios</a>
 		<li>
 	    <li class="nav-item active">
-			<a class="nav-link" href="/pagos/pagoAnho">Peticiones</a>
+			<a class="nav-link" href="/solicitantes">Solicitantes</a>
 		<li>
 
 	</ul>
@@ -61,7 +61,7 @@
 	        
 	        </tr>--}}
 	</thead>
-	<thead class="">
+	<thead >
 	        <tr>
 	        	<th style="text-align: center" style="text-color:#000000;">Nombre</th>
 	           	<th class="center ">Apellido</th>
