@@ -42,6 +42,27 @@ class patrocinadorController extends Controller
         return Response::json($message);
         //return response(json($array));
     }
+	
+	public function busqueda($texto){
+    	$output="";
+    	$messages=patrocinador::where('nombre','like','%'.$texto.'%')
+    	->get();
+    	if($messages){
+    		foreach ($messages as $key => $message) {
+    			$output.='<tr>'.
+    					'<td>'.$message->nombre.'</td>'.
+    					'<td>'.$message->descripcion.'</td>'.
+    '<td class="text-center">'.
+    '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
+    'Info</button> '.
+    '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> </td>'.
+    '</tr>';
+    		}
+    		return Response::json($output);
+    	}
+    		return Response::json($messages);
+    	
+    }
 
     //
 }

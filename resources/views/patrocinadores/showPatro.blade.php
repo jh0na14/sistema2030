@@ -15,6 +15,14 @@
   </div>
 
  	<div style="width:100%; float:right;">
+	<div class="form-group row col-6">
+ 	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
+  			<div class="col-9 offset-1 ">
+      				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
+  				</-div>
+  	  
+		</div>
+  	  </div>
 
  	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
