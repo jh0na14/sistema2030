@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+/// php artisan make:request createNombrelicitantes
 class createSolicitantesRequest extends FormRequest
 {
     /**
@@ -23,8 +23,36 @@ class createSolicitantesRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        switch ($this->method()) {
+              case 'PUT':
+              case 'PATCH':
+              { 
+             return [
+                'nombre' => ['required','max:30'],
+                'apellido' => ['required','max:30'],
+                'dui' => 'required|max:10|unique:solicitantes,dui,'.$this->id,//.$this->socios,
+                 //'dui'=>Rule::unique('socios')->ignore($socios->id);
+                'telefono' => ['required'],
+                  ];    
+                //break;
+               }
+              case 'POST':
+              {
+
+             return [
+                'nombre' => ['required','max:30'],
+                'apellido' => ['required','max:30'],
+                'dui' => 'required|max:10|unique:solicitantes,dui,',//.$this->socios,
+                 //'dui'=>Rule::unique('socios')->ignore($socios->id);
+                'telefono' => ['required'],
+                  ]; 
+
+                break;
+              }
+            
+            default:
+                # code...
+                break;
+        }//fin switch
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\patrocinador;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Response;
 use App\Http\Requests\createPatrocinadorRequest;
 
 class patrocinadorController extends Controller
