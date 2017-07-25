@@ -28,6 +28,11 @@ Route::get('/beneficiarios/buscar/{id?}','beneficiariosController@buscar');
 Route::post('/beneficiarios/create','beneficiariosController@create');
 Route::put('/beneficiarios/update/{id?}','beneficiariosController@update');
 
+Route::get('/patrocinador','patrocinadorController@show');
+Route::get('/patrocinador/buscar/{id?}','patrocinadorController@buscar');
+Route::post('/patrocinador/create','patrocinadorController@create');
+Route::put('/patrocinador/update/{id?}','patrocinadorController@update');
+
 //Route::get('/socios/1','sociosController@show2');
 /*
 Route::post('/socios/create',function(Request $request){
