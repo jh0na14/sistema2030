@@ -30,6 +30,12 @@ Route::post('/beneficiarios/create','beneficiariosController@create');
 Route::put('/beneficiarios/update/{id?}','beneficiariosController@update');
 Route::get('/beneficiarios/busqueda/{texto?}','beneficiariosController@busqueda');
 
+Route::get('/solicitantes','solicitantesController@show');
+Route::get('/solicitantes/buscar/{id?}','solicitantesController@buscar');
+Route::post('/solicitantes/create','solicitantesController@create');
+Route::put('/solicitantes/update/{id?}','solicitantesController@update');
+Route::get('/solicitantes/busqueda/{texto?}','solicitantesController@busqueda');
+
 //Route::get('/socios/1','sociosController@show2');
 /*
 Route::post('/socios/create',function(Request $request){

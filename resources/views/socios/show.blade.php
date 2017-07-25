@@ -102,7 +102,7 @@
 				@endif
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $socio->id }}">Editar</button>
-				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $socio->id }}">Eliminar</button>
+				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $socio->id }}">Dar Baja</button>
 			</td>
 
         </tr>
@@ -176,11 +176,11 @@
 </div>	
 {{-- /////////////////////FIN--}}
 	
-  
+  </div>{{--fin cards--}}
+	</div>{{--fin cards--}}
 
 	{{-- FIn style width 85% --}}</div>
-	</div>{{--fin cards--}}
-	</div>{{--fin cards--}}
+	
 	
 	<div style="clear:both;"></div>
 @endsection

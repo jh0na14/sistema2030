@@ -150,21 +150,22 @@ class sociosController extends Controller
         ->get();
         if($messages){
             foreach ($messages as $key => $message) {
-                if($message->tipoSocio=='Socio Activo')
-                {
+                //if($message->tipoSocio=='Socio Activo')
+                //{
                     $sAc='<td class="text-center">'.
     '<button type="button" class="btn btn-outline-warning btn-sm " value="'.$message->id.'">Pagos</button>  '.                
     '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
     'Info</button> '.
-    '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> </td>'.
+    '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> '.
+    '<button type="button" class="btn btn-outline-danger btn-sm" value="'.$message->id.'">Eliminar</button> </td>'.
     '</tr>';
-                }else{
+      /*          }else{
             $sAc='<td class="text-center">'.
     '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
     'Info</button> '.
     '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> </td>'.
     '</tr>';    }
-                $output.='<tr>'.
+    */            $output.='<tr>'.
                         '<td>'.$message->apodo.'</td>'.
                         '<td>'.$message->nombre.
                         ' '.$message->apellido.'</td>'.
