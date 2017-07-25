@@ -10,7 +10,7 @@ $(document).ready(function(){
      $.ajax({
 
             type: "GET",
-            url: '/beneficiarios/busqueda/'+value,
+            url: '/solicitantes/busqueda/'+value,
             data: {'search':value},
             dataType: 'json',
             success: function (data) {
@@ -29,7 +29,7 @@ $(document).ready(function(){
   $('#btnsave').val("add");
   $("#btnsave").html("Nuevo");
   $("#btnsave").removeClass("btn-success");
-  $("#exampleModalLabel").html("Registro Beneficiario");
+  $("#exampleModalLabel").html("Registro Solicitante");
   $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() +'</td><td>');
     $('#frm').trigger('reset');
     //$('#frmsocios')[0].reset();
@@ -48,7 +48,7 @@ $(document).on('click','.infomodal',function(){
         $.ajax({
 
             type: "GET",
-            url: '/beneficiarios/buscar/'+form_id,
+            url: '/solicitantes/buscar/'+form_id,
             data: form_id,
             dataType: 'json',
             success: function (data) {
@@ -57,8 +57,8 @@ $(document).on('click','.infomodal',function(){
                 var row = '<tr><td width="45%"> Nombre: </td><td width="55%">' + data.nombre + '</td>';
                  row +='<tr><td> Apellido: </td><td>' + data.apellido + '</td>';
                  row +='<tr><td> DUI: </td><td>' + data.dui + '</td>';
-                 row +='<tr><td> Fecha de Nacimiento: </td><td>' + data.fechaNac + '</td>';
-                 row +='<tr><td> Direccion: </td><td>' + data.descripcion + '</td>';
+                 row +='<tr><td> Fecha de Nacimiento: </td><td>' + data.telefono + '</td>';
+                 row +='<tr><td> Creado en: </td><td>' + data.created_at + '</td>';
                   $("#tablainfo").append(row);            
             
             },
@@ -78,14 +78,13 @@ $(document).on('click','.editModal',function(){
     $("#form_id").val(form_id);
     
     //Otra forma de realizar el get ajax el mismo de infomodal    
-    $.get('/beneficiarios/buscar/' + form_id, function (data) {
+    $.get('/solicitantes/buscar/' + form_id, function (data) {
           //success data
             console.log(data);
             $('#nombre').val(data.nombre);
           $('#apellido').val(data.apellido);
           $('#dui').val(data.dui);
-          $('#fechaNac').val(data.fechaNac);
-          $('#descripcion').val(data.descripcion);
+          $('#telefono').val(data.telefono);
            });
     //El boton para saber cambair de estado para guardar o modificar 
     $("#btnsave").val("update");
@@ -97,7 +96,7 @@ $(document).on('click','.editModal',function(){
      $("#btnsave").removeClass("btn-info");
      $("#btnsave").addClass("btn-success"); 
      ///titulo del modal
-     $("#exampleModalLabel").html("Modificar Beneficiario");
+     $("#exampleModalLabel").html("Modificar Solicitante");
       
     });
 $("#btnsavee").click(function (e) {
@@ -122,19 +121,18 @@ $("#btnsavee").click(function (e) {
           nombre:$('#nombre').val(),
           apellido:$('#apellido').val(),
           dui:$('#dui').val(),
-          fechaNac:$('#fechaNac').val(),
-          descripcion:$('#descripcion').val(),
+          telefono:$('#telefono').val(),
            }       
 
         //used to determine the http verb to use [add=POST], [update=PUT]
         var state = $('#btnsave').val();
         var type = "POST"; //for creating new resource
         var form_id = $('#form_id').val();;
-        var my_url = "/beneficiarios/create";
+        var my_url = "/solicitantes/create";
 
        if (state == "update"){
             type = "PUT"; //for updating existing resource
-            my_url = '/beneficiarios/update/'+form_id;
+            my_url = '/solicitantes/update/'+form_id;
         }
 
         console.log(formData);
@@ -153,7 +151,7 @@ $("#btnsavee").click(function (e) {
                 var row = '<tr><td>' + data.nombre + '</td>';
                  row +='<td>' + data.apellido + '</td>';
                  row +='<td>' + data.dui + '</td>';
-                 row +='<td>' + data.fechaNac + '</td>';       
+                 row +='<td>' + data.telefono + '</td>';       
                  row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
                  row += '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'+data.id+'">Editar</button> ';
                  row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';

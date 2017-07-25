@@ -6,11 +6,11 @@
     
 	
 	<ul class="nav nav-tabs">
-		<li class="nav-item  active">
-			<a class="nav-link active" href="/pagos/pagoAnho">Beneficiarios</a>
+		<li class="nav-item active">
+			<a class="nav-link active" href="/pagos/pagoAnho">Solicitantes</a>
 		<li>
-	    <li class="nav-item active">
-			<a class="nav-link" href="/pagos/pagoAnho">Peticiones</a>
+	    <li class="nav-item ">
+			<a class="nav-link " href="/pagos/pagoAnho">Beneficiarios</a>
 		<li>
 
 	</ul>
@@ -23,7 +23,7 @@
 
  	<div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Beneficiarios de Club Activo 20-30</h6>
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Solicitantes de Club Activo 20-30</h6>
          
 
 
@@ -35,18 +35,18 @@
 	</div>--}}
 
  		<div class="row" >
- 		<div class="col-2" style="clear:both; padding-top:15px;">
+ 		<div class="col-6" style="clear:both; padding-top:15px;">
   			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
 			Nuevo</button>	
      	</div>
-     	<div class="col-4">
+     	{{--<div class="col-4">
   			<label style="text-align:left; font-weight:bold; font-size:20px; ">Beneficiarios de Club Activo 20-30 </label>	
-     	</div>
+     	</div>--}}
      	<div class="form-group row col-6">
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
   			<div class="col-9 offset-1 ">
       				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
-  				</div>
+  				</-div>
   	  
 		</div>
   	  </div>
@@ -76,15 +76,15 @@
 	        </tr>
 	</thead>
 	<tbody id="tabla" name="tabla">
-		@forelse($beneficiarios as $beneficiario)
-		<tr id="{{ $beneficiario->id }}">
-			<td>{{ $beneficiario->nombre }}</td>
-			<td >{{ $beneficiario->apellido }}</td>
-			<td>{{ $beneficiario->dui }}</td>
-			<td >{{ $beneficiario->fechaNac }}</td>
+		@forelse($solicitantes as $solicitante)
+		<tr id="{{ $solicitante->id }}">
+			<td>{{ $solicitante->nombre }}</td>
+			<td >{{ $solicitante->apellido }}</td>
+			<td>{{ $solicitante->dui }}</td>
+			<td >{{ $solicitante->telefono}}</td>
 			<td class="text-center">
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $beneficiario->id }}">Info</button>
-				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $beneficiario->id }}">Editar</button>
+				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $solicitante->id }}">Info</button>
+				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $solicitante->id }}">Editar</button>
 			</td>
 
         </tr>
@@ -96,9 +96,9 @@
 
 
 	</table>
-{{--@if(count($socios))@endif--}}
+{{--@if(count($solicitantes))@endif--}}
   <div class="mt-2 mx-auto">
-  {{ $beneficiarios->links('
+  {{ $solicitantes->links('
   pagination::bootstrap-4') }}
   </div>
 
@@ -149,7 +149,7 @@
       </div>
       <div class="modal-body">
         <div class="">
-            @include('beneficiarios.formBen')
+            @include('solicitantes.formSoli')
         </div>
       </div>
       <div class="modal-footer">
@@ -171,6 +171,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/beneficiarios.js')}}"></script>
+  <script src="{{asset('js/solicitantes.js')}}"></script>
 
 @endsection

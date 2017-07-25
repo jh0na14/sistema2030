@@ -25,14 +25,7 @@
             <div id="apellidofeed" class="form-control-feedback"></div>              
         </div>
     </div>
-    <div id="fechaNacdiv" class="form-group row">
-        <label for="example-date-input" class="col-3 col-form-label ">Fecha Ingreso: *</label>
-        <div class="col-9">
-            <input class="form-control " type="date" value="2011-07-07" id="fechaNac" name="fechaNac">
-            <div id="fechaNacfeed" class="form-control-feedback"></div>              
-       
-        </div>
-    </div>
+    
     <div id="duidiv" class="form-group row">
         <label for="example-number-input" class="col-3 col-form-label ">DUI: *</label>
         <div class="col-9">
@@ -40,20 +33,14 @@
             <div id="duifeed" class="form-control-feedback"></div>              
         </div>
     </div>
-    <div id="descripciondiv" class="form-group row">
-        <label for="example-number-input" class="col-3 col-form-label ">Descripcion:*</label>
-        <div class="col-9 ">
-            <textarea class="form-control" type="text" id="descripcion" name="descripcion" value="mi casa" rows="2"></textarea>
-            <div id="descripcionfeed" class="form-control-feedback"></div>                   
-        </div>
-    </div>
-    {{--<div id="telefonodiv" class="form-group row">
+ 
+    <div id="telefonodiv" class="form-group row">
         <label for="example-number-input" class="col-1 col-form-label ">Telefono</label>
         <div class="col-9 offset-2">
             <input class="form-control" type="number"  id="telefono" name="telefono">
             <div id="telefonofeed" class="form-control-feedback"></div>               
         </div>
-    </div>--}}
+    </div>
 </div>
 </div>
 </form>

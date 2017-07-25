@@ -14,8 +14,7 @@
   <div style="clear:both; padding-bottom:15px;">
   </div>
  <div style="width:14%; float:left; padding-right:0px;" id="menu-vertical-pagos">
-			<button type="button" style="margin-left:100%" class="btn btn-outline-info btn-sm " data-toggle="modal" data-target="#myModal" >Nuevo Socio</button>
-<div style="clear:both; padding-bottom:15px;">
+<div style="clear:both; padding-bottom:35px;">
   </div>
 			{{--<div class="list-group" style="padding-bottom:25px;">
 			<a href="/pagos/index/" class="list-group-item active">Carreras</a>
@@ -33,17 +32,44 @@
 	</div>
 	
  	<div style="width:85%; float:right;" id="contenido-pagos">
+ <div class="card">
+  <div class="card-block">
+  {{--	<h4 class="card-title">Socios de Club Activo 20-30</h4>
+  	--}}<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Socios de Activo 20-30</h6>
+            					
+	{{--<div class="row" >
+		<div class="col-8 offset-3">
+			<label for="example-text-input" style="text-align:left; font-weight:bold; font-size:20px; " ><i>Beneficiarios de Club Activo 20-30</i></label>
+     	</div>
+ 	 	
+	</div>--}}
+ 		<div class="row" >
+ 		<div class="col-2" style="clear:both; padding-top:15px;">
+  			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
+			Nuevo</button>	
+     	</div>
+     	<div class="col-4">
+  			<label style="text-align:left; font-weight:bold; font-size:20px; "> </label>	
+     	</div>
+     	<div class="form-group row col-6">
+ 	 <label for="example-text-input"  class="col-1 col-form-label offset-1"> Buscar </label>
+  			<div class="col-9 offset-1 ">
+      				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
+  				</div>
+  	  
+		</div>
+  	  </div>
 
  	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
 	        <tr>
-	            <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"><label >{{strtoupper($tipoSocio)}}</label> DE CLUB ACTIVO 20-30</th>
+	  {{--          <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"><label >{{strtoupper($tipoSocio)}}</label> DE CLUB ACTIVO 20-30</th>
 	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
 	            	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
 					  Launch demo modal
 					</button>	
 	            </th>
-	        
+	      --}}  
 	        </tr>
 	</thead>
 	<thead >
@@ -71,11 +97,12 @@
 			{{--<td class="text-center">{{ $socio->tipoSocio }}</td>
 			--}}<td >{{ $socio->cargo }}</td>
 			<td class="text-center">
-				<button type="button" class="btn btn-outline-info btn-sm " value="{{ $socio->id }}">Pagos</button>
-				
+				@if($socio->tipoSocio=='Socio Activo')
+				<button type="button" class="btn btn-outline-warning btn-sm " value="{{ $socio->id }}">Pagos</button>
+				@endif
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $socio->id }}">Editar</button>
-				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $socio->id }}">Eliminar</button>
+				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $socio->id }}">Dar Baja</button>
 			</td>
 
         </tr>
@@ -104,10 +131,16 @@
                         </div>
                         <div class="modal-body">
                             <div class="">
+                            	<div class="card">
+  								<div class="card-block">
+    							<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Informacion</h6>
+            					
             					<table   class="table {{--table-bordered--}}  table-sm " align="center">
             					<tbody id="tablainfo">
             					</tbody>
             					</table>
+            					</div>
+            					</div>
 					        </div>
                         </div>
                         <div class="modal-footer">
@@ -121,7 +154,7 @@
 {{-- //////////////FIN MODLA--}}
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog {{--modal-lg--}} " role="document">
+  <div class="modal-dialog modal-lg " role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
@@ -143,7 +176,8 @@
 </div>	
 {{-- /////////////////////FIN--}}
 	
-  
+  </div>{{--fin cards--}}
+	</div>{{--fin cards--}}
 
 	{{-- FIn style width 85% --}}</div>
 	

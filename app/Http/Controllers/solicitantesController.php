@@ -1,31 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\beneficiario;
+use App\solicitante;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Response;
 
-use App\Http\Requests\createBeneficiariosRequest;
-//cmd php artisan make:controller beneficiariosController
-class beneficiariosController extends Controller
+//use App\Http\Requests\createBeneficiariosRequest;
+
+class solicitantesController extends Controller
 {
     //
-    public function show(){   
-    	$beneficiarios=beneficiario::latest()->paginate(8);  
-    	   return view('beneficiarios.showBen',[
-    		'beneficiarios'=> $beneficiarios,
+     public function show(){   
+    	$solicitantes=solicitante::latest()->paginate(8);  
+    	   return view('solicitantes.showSoli',[
+    		'solicitantes'=> $solicitantes,
     		]);
     }
-    
+
     public function buscar($id){
-    $beneficiario = beneficiario::find($id);
-    return Response::json($beneficiario);
+    $solicitante = solicitante::find($id);
+    return Response::json($solicitante);
 
     } 
-    public function create(createBeneficiariosRequest $request){
+    public function create(Request $request){
     	//dd($request->all());
-    	$message= beneficiario::create($request->all());
+    	$message= solicitante::create($request->all());
 		//$response = socio::create($request->all());	
    		 
     	return Response::json($message);
@@ -34,9 +33,9 @@ class beneficiariosController extends Controller
     	return redirect('/socios')->with('mensaje','Registro Guardado');
 
     }
-    public function update(createBeneficiariosRequest $request,$id){
+    public function update(Request $request,$id){
     	//dd($request->all());
-    	$message = beneficiario::find($id);
+    	$message = solicitante::find($id);
     	 $message->fill($request->all());
     	$message->save();
     	return Response::json($message);
@@ -45,7 +44,7 @@ class beneficiariosController extends Controller
 
     public function busqueda($texto){
     	$output="";
-    	$messages=beneficiario::where('nombre','like','%'.$texto.'%')
+    	$messages=solicitante::where('nombre','like','%'.$texto.'%')
     	->orWhere('apellido','like','%'.$texto.'%')
     	->orWhere('dui','like','%'.$texto.'%')
     	->get();
@@ -55,7 +54,7 @@ class beneficiariosController extends Controller
     					'<td>'.$message->nombre.'</td>'.
     					'<td>'.$message->apellido.'</td>'.
     					'<td>'.$message->dui.'</td>'.
-    					'<td>'.$message->fechaNac.'</td>'.
+    					'<td>'.$message->telefono.'</td>'.
     '<td class="text-center">'.
     '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
     'Info</button> '.
@@ -67,5 +66,6 @@ class beneficiariosController extends Controller
     		return Response::json($messages);
     	
     }
+
 
 }

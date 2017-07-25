@@ -16,7 +16,7 @@ class sociosController extends Controller
     	 //->where('name', 'John')->value('email');
     	//$socios=DB::table('socios')->where('tipoSocio','=',"Socio Activo");//>paginate(10);
     	$tipoSocio="Socio Activo";
-    	$socios=socio::where('tipoSocio','=',"Socio Activo")->paginate(10);
+    	$socios=socio::where('tipoSocio','=',"Socio Activo")->paginate(9);
 		//count0($socios);/////no se por que no agarra paginate si pongo all()
     	$count0=count(socio::all()->where('tipoSocio','=',"Socio Activo"));
     	$count=socio::where('tipoSocio','=','Activo Mayor')->count();//count($socios);
@@ -34,7 +34,7 @@ class sociosController extends Controller
     public function showactivoMayor($tipoSocio){
     	if($tipoSocio==1){///ES aactivo
     		$tipoSocio="Socio Activo";
-    		$socios=socio::where('tipoSocio','=',"Socio Activo")->paginate(10);
+    		$socios=socio::where('tipoSocio','=',"Socio Activo")->paginate(9);
     	    //count0($socios);
     	
     	    $count0=count(socio::all()->where('tipoSocio','=',"Socio Activo"));
@@ -43,7 +43,7 @@ class sociosController extends Controller
     	    //dd($socios);  
     	}
     	if($tipoSocio==2){///ES aactivo Mayor
-    		$socios=socio::where('tipoSocio','=',"Activo Mayor")->paginate(10);
+    		$socios=socio::where('tipoSocio','=',"Activo Mayor")->paginate(9);
     	    
     		$count=count(socio::all()->where('tipoSocio','=',"Activo Mayor"));
     	    $tipoSocio="Activo Mayor";
@@ -88,7 +88,6 @@ class sociosController extends Controller
 
     }
     public function update(CreateSociosRequest $request,$socio_id){
-    	//dd($request->all());
     	$socios = socio::find($socio_id);//all()->where('id',"=",$socio_id);
     	 $socios->fill($request->all());
     	$socios->save();
@@ -113,7 +112,7 @@ class sociosController extends Controller
 		return Response::json($socios);
     	//return response(json($array));
     }
-    
+
     public function buscar($socio_id){
         //dd($socio_id);
     $socio = socio::find($socio_id);//all()->where('idsocios',"=",$socio_id);//find($socio_id);
@@ -142,4 +141,47 @@ class sociosController extends Controller
     return Response::json($socio);
 
     } 
+
+    public function busqueda($texto){
+        $output="";
+        $messages=socio::where('nombre','like','%'.$texto.'%')
+        ->orWhere('email','like','%'.$texto.'%')
+        ->orWhere('apodo','like','%'.$texto.'%')
+        ->get();
+        if($messages){
+            foreach ($messages as $key => $message) {
+                //if($message->tipoSocio=='Socio Activo')
+                //{
+                    $sAc='<td class="text-center">'.
+    '<button type="button" class="btn btn-outline-warning btn-sm " value="'.$message->id.'">Pagos</button>  '.                
+    '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
+    'Info</button> '.
+    '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> '.
+    '<button type="button" class="btn btn-outline-danger btn-sm" value="'.$message->id.'">Eliminar</button> </td>'.
+    '</tr>';
+      /*          }else{
+            $sAc='<td class="text-center">'.
+    '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
+    'Info</button> '.
+    '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> </td>'.
+    '</tr>';    }
+    */            $output.='<tr>'.
+                        '<td>'.$message->apodo.'</td>'.
+                        '<td>'.$message->nombre.
+                        ' '.$message->apellido.'</td>'.
+                        '<td>'.$message->email.'</td>'.
+                        '<td>'.$message->cargo.'</td>';
+                $output.=$sAc;        
+   /* '<td class="text-center">'.
+    '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
+    'Info</button> '.
+    '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> </td>'.
+    '</tr>';
+     */       }
+            return Response::json($output);
+        }
+            return Response::json($messages);
+        
+    }
+
 }
