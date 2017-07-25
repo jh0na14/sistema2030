@@ -3,7 +3,87 @@ $(document).ready(function(){
   //$("#tabla").append('<tr id="task"><td>rregre</td><td>');
   //$("#fechaNac").mask('xxxx-xxxx');
   
-   });   
+   }); 
+$("#btnsavepeticion").click(function (e) {
+    //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("messageform").value+'"</td><td>');
+    $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+
+        e.preventDefault(); 
+
+        var formData = {
+          soli_id:$('#soli_id').val(),
+          titulo:$('#titulo').val(),
+          descripcion:$('#descripcion').val(),
+          fecha:$('#fecha').val(),
+          bene_id:$('#bene_id').val(),
+           }       
+
+        //used to determine the http verb to use [add=POST], [update=PUT]
+        var state = $('#btnsavepeticion').val();
+        var type = "POST"; //for creating new resource
+        var form_id = $('#form_id').val();;
+        var my_url = "/solicitantes/create";
+
+       if (state == "update"){
+            type = "PUT"; //for updating existing resource
+            my_url = '/solicitantes/update/'+form_id;
+        }
+
+        console.log(formData);
+
+        $.ajax({
+
+            type: type,
+            url: my_url,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+               console.log(data);
+
+                //redirect('/socios');
+            if(state=="add"){
+                var row = '<tr><td>' + data.nombre + '</td>';
+                 row +='<td>' + data.apellido + '</td>';
+                 row +='<td>' + data.dui + '</td>';
+                 row +='<td>' + data.telefono + '</td>';       
+                 row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
+                 row += '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'+data.id+'">Editar</button> ';
+                 row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
+                 row +='</td></tr>';
+                //var task='<tr id="task"><td>rregre</td><td>';
+                 $("#tabla").append(row);
+               }
+                /*if (state == "add"){ //if user added a new record
+                    $('#tasks-list').append(task);
+                }else{ //if user updated an existing record
+
+                    $("#task" + task_id).replaceWith( task );
+                }*/
+
+               // $('#frmsocios').trigger("reset");
+
+               // $('#exampleModal').modal('hide')
+            },
+            error: function (data) {
+                console.log('Error de noseq:', data);
+               var errors=data.responseJSON;
+                console.log(errors);
+                
+            }
+        });
+    });
+
+$(document).on('click','.peticionModal',function(){
+//asi no funciona cuando retorno de ayax un boton la accion onclick
+// $(".infomodal").click(function(){
+      
+   $('#Modal3').modal('show'); 
+    });
+
 ////////////////Esto para busqueda
  $("#search").on('keyup',function(){
     var value = $(this).val();
@@ -57,7 +137,7 @@ $(document).on('click','.infomodal',function(){
                 var row = '<tr><td width="45%"> Nombre: </td><td width="55%">' + data.nombre + '</td>';
                  row +='<tr><td> Apellido: </td><td>' + data.apellido + '</td>';
                  row +='<tr><td> DUI: </td><td>' + data.dui + '</td>';
-                 row +='<tr><td> Fecha de Nacimiento: </td><td>' + data.telefono + '</td>';
+                 row +='<tr><td> Telefono: </td><td>' + data.telefono + '</td>';
                  row +='<tr><td> Creado en: </td><td>' + data.created_at + '</td>';
                   $("#tablainfo").append(row);            
             
