@@ -34,7 +34,7 @@ $(document).ready(function(){
                 console.log(data);
         
                 var row = '<tr><td> Nombre: </td><td>' + data.nombre + '</td>';
-                 row +='<tr><td> Direccion: </td><td>' + data.descripcion + '</td>';
+                 row +='<tr><td> Descripcion: </td><td>' + data.descripcion + '</td>';
                   $("#tablainfo").append(row);            
             
             },
