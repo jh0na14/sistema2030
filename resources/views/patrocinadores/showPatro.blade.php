@@ -17,7 +17,7 @@
  	<div style="width:100%; float:right;">
  <div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Solicitantes de Club Activo 20-30</h6>
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Solicitantes a Donacion de Club Activo 20-30</h6>
    
 	<div class="form-group row col-6">
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
@@ -27,7 +27,7 @@
   	  
 		</div>
   	  </div>
-  	  
+
  	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
 	        <tr>
