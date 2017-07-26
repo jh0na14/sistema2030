@@ -2,8 +2,29 @@
 $(document).ready(function(){
   //$("#tabla").append('<tr id="task"><td>rregre</td><td>');
   //$("#fechaNac").mask('xxxx-xxxx');
-  
+   //$(".beneid").chosen({width: "95%"});
+    $(".beneid2").select2({
+      tags: "true",
+  placeholder: "Select an option",
+  allowClear: true,width: "100%"});
+    $(".beneid").select2({
+      tags: "true",
+  placeholder: "Select an option",
+  allowClear: true,width: "100%"});
+    //$(".js-example-data-array").select2();
+//$("#.beneid").append("<option value='otro' selected>otro</option>");
+//$('#.beneid').trigger('change'); 
    }); 
+
+/*$(document).on('keyup', '.beneid', function (e) {
+      $(".beneid").select2({width: "100%"});
+     // $(".beneid").select2({width: "100%"});
+      
+
+
+
+});  */
+
 $("#btnsavepeticion").click(function (e) {
     //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("messageform").value+'"</td><td>');
     $.ajaxSetup({
@@ -18,7 +39,6 @@ $("#btnsavepeticion").click(function (e) {
           soli_id:$('#soli_id').val(),
           titulo:$('#titulo').val(),
           descripcion:$('#descripcion').val(),
-          fecha:$('#fecha').val(),
           bene_id:$('#bene_id').val(),
            }       
 
@@ -78,13 +98,28 @@ $("#btnsavepeticion").click(function (e) {
     });
 
 $(document).on('click','.peticionModal',function(){
-//asi no funciona cuando retorno de ayax un boton la accion onclick
-// $(".infomodal").click(function(){
-      
+ //var value = $(this).val();
+  var output = "";
+   //Otra forma de realizar el get ajax el mismo de infomodal    
+    $.getJSON('/solicitantes/bus/beneficiarios', function (data) {
+          //success data
+            console.log(data);
+             
+            for (var i = 0; i < data.length; i++) {
+         //     $.each(data[i], function(key, val) {
+            //$("#tabla").append('<tr id="task"><td>"'+data[i].nombre+'"</td><td>"'+data[i].ide+'"</td></tr>');
+            $("#bene_id").append('<option value="' + data[i].ide + '">' + data[i].nombre + ' ' + data[i].apellido + '</option>');
+            output += '<option value="' + data[i].ide + '">' + data[i].nombre + '</option>';
+       // });
+            };
+        
+                    
+           });
+   //$("#bene_id").html(output);
    $('#Modal3').modal('show'); 
     });
 
-////////////////Esto para busqueda
+////////////////Esto para busqueda de search
  $("#search").on('keyup',function(){
     var value = $(this).val();
      $.ajax({
@@ -99,7 +134,7 @@ $(document).on('click','.peticionModal',function(){
             
             },
             error: function (data) {
-                console.log('Error de info boton:', data);
+                console.log('Error de busqueda search:', data);
             }
        });
  });

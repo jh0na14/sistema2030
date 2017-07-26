@@ -74,7 +74,7 @@ class sociosController extends Controller
     		'apodo'=> $request->input('apodo'),
     		'tipoSocio'=> $request->input('tipoSocio'),
     		'cargo'=> $request->input('cargo'),
-    		
+            'estado'=>'Activo',
     		]);
 		//$response = socio::create($request->all());	
    		 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\solicitante;
+use App\beneficiario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -65,6 +66,21 @@ class solicitantesController extends Controller
     	}
     		return Response::json($messages);
     	
+    }
+    public function busquedaBen(){
+        $beneficiario=beneficiario::get(); 
+    $array=array();
+    $con=0;
+    foreach($beneficiario as $beneficiarios)
+    {
+        $array[$con]=([
+        'ide'=>$beneficiarios->id,
+        'nombre'=>$beneficiarios->nombre,
+        'apellido'=>$beneficiarios->apellido,
+        ]);  
+        $con++;
+    }
+        return Response::json($array);  
     }
 
 

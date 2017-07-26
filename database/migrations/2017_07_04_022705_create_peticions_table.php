@@ -15,12 +15,13 @@ class CreatePeticionsTable extends Migration
     {
         Schema::create('peticions', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('fecha');
-            $table->string('nombre',30);
-            $table->string('apellido', 30)->nullable()->default(null);
-            $table->string('dui', 10);
-            $table->integer('idbeneficiarios')->unsigned();
-            $table->foreign('idbeneficiarios')->references('id')->on('beneficiarios');
+            $table->integer('numero');
+            $table->string('titulo',30);
+            $table->text('descripcion')->nullable()->default(null);
+            $table->enum('estado',array('Disponible','Sin Finalizar','Finalizado'));
+              
+           // $table->integer('idbeneficiarios')->unsigned();
+           // $table->foreign('idbeneficiarios')->references('id')->on('beneficiarios');
             
             $table->timestamps();
         });

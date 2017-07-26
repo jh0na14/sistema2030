@@ -35,6 +35,7 @@ Route::get('/solicitantes/buscar/{id?}','solicitantesController@buscar');
 Route::post('/solicitantes/create','solicitantesController@create');
 Route::put('/solicitantes/update/{id?}','solicitantesController@update');
 Route::get('/solicitantes/busqueda/{texto?}','solicitantesController@busqueda');
+Route::get('/solicitantes/bus/beneficiarios','solicitantesController@busquedaBen');
 
 Route::get('/patrocinador','patrocinadorController@show');
 Route::get('/patrocinador/buscar/{id?}','patrocinadorController@buscar');

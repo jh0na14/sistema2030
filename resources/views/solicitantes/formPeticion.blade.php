@@ -25,24 +25,21 @@
             <div id="descripcionfeed" class="form-control-feedback"></div>                   
         </div>
     </div>
-    <div id="fechadiv" class="form-group row">
-        <label for="example-date-input" class="col-3 col-form-label ">Fecha: *</label>
-        <div class="col-9">
-            <input class="form-control " type="date" value="2011-07-07" id="fecha" name="fecha">
-            <div id="fechafeed" class="form-control-feedback"></div>              
-       
-        </div>
-    </div>
     <div class="form-group row">
-        <label for="example-email-input" class="col-3 col-form-label ">Beneficiario: *</label>
-        <div class="col-9">
-            <select class="form-control" id="bene_id" name="bene_id">
-                <option>Sin Cargo</option>
-                <option>Presidente</option>
-                <option>Secretario</option>
-                <option>Tesorero</option>
+        <label for="example-email-input" class="col-3 col-form-label ">Beneficiario:*</label>
+        <div class="col-8">
+            <select  class="beneid" id="bene_id" name="bene_id">
+                
             </select> 
+
+            <div id="bene_idfeed" class="form-control-feedback">dui: 12345678-5</div>                   
        </div>
+       <div class="col-1"><span class="input-group-btn">
+        <button class="btn btn-secondary btn-sm" type="button"></button>
+      </span>
+        <button type="button" class="btn btn-outline-primary btn-sm" style="margin-right:8px;"></button>
+       </div>
+
     </div>
 </div>
 </div>

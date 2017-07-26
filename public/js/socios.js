@@ -69,6 +69,8 @@ $(document).on('click','.infomodal',function(){
          row +='<tr><td> Email: </td><td>' + data.email + '</td>';
          row +='<tr><td> Tipo de Socio: </td><td>' + data.tipoSocio + '</td>';
          row +='<tr><td> Cargo: </td><td>' + data.cargo + '</td>';
+         row +='<tr><td> Estado: </td><td>' + data.estado + '</td>';
+         
                   $("#tablainfo").append(row);            
             
             },

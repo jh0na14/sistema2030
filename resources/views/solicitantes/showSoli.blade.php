@@ -102,7 +102,16 @@
   {{ $solicitantes->links('
   pagination::bootstrap-4') }}
   </div>
-
+<div class="form-group row">
+        <label for="example-email-input" class="col-3 col-form-label ">Beneficiario:*</label>
+        <div class="col-9">
+            <select  class="beneid2" id="bene_id2" name="bene_id2">
+                <option><span><img src="vendor/images/flags/">sd sd</span>Sin Cargo</option>
+                <option>Presidente</option>
+                <option>Secretario</option>
+                <option>Tesorero</option>
+            </select> 
+       </div>
 
 {{-- //////////////////////////MODAL FICHA--}}
 <div class="modal fade" id="myModal" name="myModal" stabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -159,8 +168,8 @@
   </div>
 </div>	
 {{-- /////////////////////FIN--}}
-<!-- Modal -->
-<div class="modal fade" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal con tabindex -1 no funciona select2-->
+<div class="modal fade" id="Modal3"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog {{--modal-lg--}} " role="document">
     <div class="modal-content">
       <div class="modal-header">
