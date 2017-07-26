@@ -41,6 +41,13 @@ Route::get('/patrocinador/buscar/{id?}','patrocinadorController@buscar');
 Route::post('/patrocinador/create','patrocinadorController@create');
 Route::put('/patrocinador/update/{id?}','patrocinadorController@update');
 Route::get('/patrocinador/busqueda/{texto?}','patrocinadorController@busqueda');
+
+Route::get('/verdugo','verdugoController@show');
+Route::get('/verdugo/buscar/{id?}','verdugoController@buscar');
+Route::post('/verdugo/create','verdugoController@create');
+Route::put('/verdugo/update/{id?}','verdugoController@update');
+Route::get('/verdugo/busqueda/{texto?}','verdugoController@busqueda');
+
 //Route::get('/socios/1','sociosController@show2');
 /*
 Route::post('/socios/create',function(Request $request){
