@@ -9,10 +9,10 @@
 			<a class="nav-link" href="/beneficiarios">Beneficiarios</a>
 		<li>
 	    <li class="nav-item ">
-			<a class="nav-link active " href="/solicitantes">Solicitantes</a>
+			<a class="nav-link  " href="/solicitantes">Solicitantes</a>
 		<li>
     <li class="nav-item ">
-      <a class="nav-link" href="/peticiones">Peticiones</a>
+      <a class="nav-link active" href="/peticiones">Peticiones</a>
     <li>
 
 	</ul>
@@ -20,34 +20,42 @@
   <div style="clear:both; padding-bottom:15px;">
   </div>
 
-		
- 	<div style="width:100%; float:right;">
-    <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
-        <strong>Well done!</strong> You successfully read this important alert message.
-    </div>
+		<div style="width:14%; float:left; padding-right:0px;" id="menu-vertical-pagos">
+<div style="clear:both; padding-bottom:35px;">
+  </div>
+     
+    <div class="list-group " class="padding-bottom:25px;">
+
+      <li href="/pagos/index/" class="list-group-item list-group-item-action list-group-item-info active">Tipos{{--A&ntilde;os--}}</li>
+      
+{{--<a href="#" class="list-group-item list-group-item-action list-group-item-info active">These Boots Are </a> 
+--}}
+        <a href="/socios/2" id="count" class="list-group-item list-group-item-action justify-content-between">Sin Finalizar <span class="badge badge-default badge-pill"></span></a>
+        <a href="/socios/3" id="count2" class="list-group-item list-group-item-action justify-content-between">Finalizados<span class="badge badge-default badge-pill"></span></a>
+        
+      </div>  
+  </div>
+ 	<div style="width:85%; float:right;">
 
  	<div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Solicitantes de Club Activo 20-30</h6>
-         
-
-
-  	 {{--<div class="row" >
-		<div class="col-4 offset-4">
-			<label for="example-text-input" style="text-align:left; font-weight:bold; font-size:20px; " ><i>Beneficiarios de Club Activo 20-30</i></label>
-     	</div>
- 	 	
-	</div>--}}
+  	{{--<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Peticiones a Club Activo 20-30</h6>
+        --}}
 
  		<div class="row" >
- 		<div class="col-6" style="clear:both; padding-top:15px;">
+ 		{{--<div class="col-6" style="clear:both; padding-top:15px;">
   			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
 			Nuevo</button>	
      	</div>
-     	{{--<div class="col-4">
+     	<div class="col-4">
   			<label style="text-align:left; font-weight:bold; font-size:20px; ">Beneficiarios de Club Activo 20-30 </label>	
      	</div>--}}
-     	<div class="form-group row col-6">
+      <div class="col-6">
+        <h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Peticiones a Club Activo 20-30</h6>
+        
+        <label style="text-align:left; font-size:18px; "></label>  
+      </div>
+     	<div class="form-group row col-6 ">
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
   			<div class="col-9 offset-1 ">
       				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
@@ -55,59 +63,42 @@
   	  
 		</div>
   	  </div>
+ 
+     
+<div class="row" id="tabla">
+{{--<div id="tabla"></div>finn id tabla --}}
 
- 	<table class="table {{--table-bordered--}}  table-hover table-sm " align="center">
-	<thead >
-	 {{-- <tr>
-	            <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"> DE CLUB ACTIVO 20-30</th>
-	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
-	            	
-	            </th>
-	        
-	        </tr>--}}
-	</thead>
-	<thead >
-	        <tr>
-	        	<th style="text-align: center" style="text-color:#000000;">Nombre</th>
-	           	<th class="center ">Apellido</th>
-	            <th class="center ">DUI</th>
-	           {{--	
-	           	
-	           	<th>A&ntilde;o</th>--}}
-	           	<th>Telefono</th>
-	           	{{--<th style="text-align: center">Tipo</th>
-	           	--}}
-	           	<th style="text-align: center">Estado</th>
-	        </tr>
-	</thead>
-	<tbody id="tabla" name="tabla">
-		@forelse($solicitantes as $solicitante)
-		<tr id="{{ $solicitante->id }}">
-			<td>{{ $solicitante->nombre }}</td>
-			<td >{{ $solicitante->apellido }}</td>
-			<td>{{ $solicitante->dui }}</td>
-			<td >{{ $solicitante->telefono}}</td>
-			<td class="text-center">
-        <button type="button" class="btn btn-outline-primary btn-sm peticionModal" value="{{ $solicitante->id }}">Crear Peticion</button>
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $solicitante->id }}">Info</button>
-				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $solicitante->id }}">Editar</button>
-			</td>
+		@forelse($peticiones as $peticion)
+    <div class="col-4">
+<div class="card  card-outline- " style="margin-top:5px; {{--max-height: 20rem;--}} {{--@if($peticion->id==8)display:none;@endif--}}">
+  <div class="card-block">
+    <h6 class="card-title">{{ $peticion->titulo }}</h6>
+    <hr>
+    <p class="card-text" style="font-size:13px">{{ $peticion->descripcion }}</p>
+    <div class="card-text text-muted float-right" style="font-size:14px">
+     <small class="text-muted"> {{ $peticion->created_at}}</small>
+    </div>
+  </div>  
+<div class="card-footer" {{--style="background-color: #fBfBfB"--}}>  
+    <button type="button"style="font-size:12px" class="btn btn-outline-primary btn-sm peticionModal" value="{{ $peticion->id }}">Crear Proyecto</button>
+    <button type="button" style="font-size:12px" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">+Info</button>
+    <button type="button" style="font-size:12px" class="btn btn-outline-danger btn-sm editModal" value="{{ $peticion->id }}">Eliminar</button>
+      
+</div> 
+</div>{{-- fin card--}}  
 
-        </tr>
+</div> {{--fin col--}}   
 		@empty
-    	<p>No hay mensajes destacados</p>
+    	<p>No hay Peticiones</p>
   		@endforelse
-		        
-		</tbody>
+       
 
-
-	</table>
+</div>
 {{--@if(count($solicitantes))@endif--}}
   <div class="mt-2 mx-auto">
-  {{ $solicitantes->links('
+  {{ $peticiones->links('
   pagination::bootstrap-4') }}
   </div>
-
 
 {{-- //////////////////////////MODAL FICHA--}}
 <div class="modal fade" id="myModal" name="myModal" stabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -197,6 +188,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/solicitantes.js')}}"></script>
+  <script src="{{asset('js/peticion.js')}}"></script>
 
 @endsection

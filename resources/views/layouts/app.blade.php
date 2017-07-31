@@ -40,7 +40,7 @@
         height: 80px;
     }
     .modal .modal-body {
-    max-height: 400px;
+    max-height: 450px;
     overflow-y: auto;
    
 }
@@ -71,22 +71,22 @@
   </a>
       <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Socios <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/socios">Socios <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="#">Peticiones</a>
+        <a class="nav-link" href="/peticiones">Peticiones</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#"></a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
+          Proyectos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <a class="dropdown-item" href="/peticiones">Crear Proyectos de donacion</a>
+          <a class="dropdown-item" href="#">Crear Proyectos de recaudacion</a>
+          <a class="dropdown-item" href="#">Proyectos realizados</a>
         </div>
       </li>
     </ul>

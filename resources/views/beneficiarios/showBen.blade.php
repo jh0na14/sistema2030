@@ -12,6 +12,9 @@
 	    <li class="nav-item active">
 			<a class="nav-link" href="/solicitantes">Solicitantes</a>
 		<li>
+      <li class="nav-item ">
+      <a class="nav-link" href="/peticiones">Peticiones</a>
+    <li>
 
 	</ul>
 
@@ -20,6 +23,9 @@
 
 		
  	<div style="width:100%; float:right;">
+    <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
+        <strong>Well done!</strong> You successfully read this important alert message.
+    </div>
 
  	<div class="card">
  	 <div class="card-block">

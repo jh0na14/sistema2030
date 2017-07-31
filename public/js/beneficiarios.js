@@ -30,7 +30,7 @@ $(document).ready(function(){
   $("#btnsave").html("Nuevo");
   $("#btnsave").removeClass("btn-success");
   $("#exampleModalLabel").html("Registro Beneficiario");
-  $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() +'</td><td>');
+  //$("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() +'</td><td>');
     $('#frm').trigger('reset');
     //$('#frmsocios')[0].reset();
 
@@ -41,7 +41,7 @@ $(document).ready(function(){
 $(document).on('click','.infomodal',function(){
 //asi no funciona cuando retorno de ayax un boton la accion onclick
 // $(".infomodal").click(function(){
-      $("#tabla").append('<tr id="task"><td>info</td><td>');
+      //$("#tabla").append('<tr id="task"><td>info</td><td>');
        var form_id = $(this).val();
        
         $("#tablainfo").empty();
@@ -90,7 +90,7 @@ $(document).on('click','.editModal',function(){
            });
     //El boton para saber cambair de estado para guardar o modificar 
     $("#btnsave").val("update");
-    $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() + $("#form_id").val() +'</td><td>');
+    //$("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() + $("#form_id").val() +'</td><td>');
 
      $('#exampleModal').modal('show');
      //$("#btnsave").removClass("btn btn-primary");//.addClass("btn btn-secondary");
@@ -148,6 +148,13 @@ $("#btnsavee").click(function (e) {
             dataType: 'json',
             success: function (data) {
                console.log(data);
+               $('#exampleModal').modal('hide');
+              $("#msjshow").show();
+              if(state=="add"){
+               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro guardado exitosamente (recargar pagina para ver cambios)");
+               }else{
+               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro editado exitosamente (recargar pagina para ver cambios)");  
+               }
 
                 //redirect('/socios');
             if(state=="add"){
@@ -162,6 +169,11 @@ $("#btnsavee").click(function (e) {
                 //var task='<tr id="task"><td>rregre</td><td>';
                  $("#tabla").append(row);
                }
+               setTimeout(function(){
+                  $("#msjshow").hide();
+                //$(location).attr('href','/socios');
+                }, 4000);
+
                 /*if (state == "add"){ //if user added a new record
                     $('#tasks-list').append(task);
                 }else{ //if user updated an existing record

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\createPatrocinadorRequest;
 
+//cmd php artisan make:controller beneficiariosController
 class patrocinadorController extends Controller
 {
 

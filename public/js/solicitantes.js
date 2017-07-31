@@ -7,10 +7,11 @@ $(document).ready(function(){
       tags: "true",
   placeholder: "Select an option",
   allowClear: true,width: "100%"});
-    $(".beneid").select2({
+    $("#bene_id").select2({
       tags: "true",
   placeholder: "Select an option",
-  allowClear: true,width: "100%"});
+  width: "100%"});
+    
     //$(".js-example-data-array").select2();
 //$("#.beneid").append("<option value='otro' selected>otro</option>");
 //$('#.beneid').trigger('change'); 
@@ -25,7 +26,7 @@ $(document).ready(function(){
 
 });  */
 
-$("#btnsavepeticion").click(function (e) {
+$("#btnsave2").click(function (e) {
     //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("messageform").value+'"</td><td>');
     $.ajaxSetup({
             headers: {
@@ -34,7 +35,6 @@ $("#btnsavepeticion").click(function (e) {
         })
 
         e.preventDefault(); 
-
         var formData = {
           soli_id:$('#soli_id').val(),
           titulo:$('#titulo').val(),
@@ -42,17 +42,8 @@ $("#btnsavepeticion").click(function (e) {
           bene_id:$('#bene_id').val(),
            }       
 
-        //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btnsavepeticion').val();
         var type = "POST"; //for creating new resource
-        var form_id = $('#form_id').val();;
-        var my_url = "/solicitantes/create";
-
-       if (state == "update"){
-            type = "PUT"; //for updating existing resource
-            my_url = '/solicitantes/update/'+form_id;
-        }
-
+        var my_url = "/solicitantes/createPeticion";
         console.log(formData);
 
         $.ajax({
@@ -63,59 +54,62 @@ $("#btnsavepeticion").click(function (e) {
             dataType: 'json',
             success: function (data) {
                console.log(data);
+              $('#Modal3').modal('hide');
+              $("#msjshow").show();
+              $("#msjshow").html(" <strong>Bien hecho!</strong> Peticion guardada exitosamente");
+              setTimeout(function(){
+                  $("#msjshow").hide();
+                $(location).attr('href','/peticiones');
+              }, 4000);
 
-                //redirect('/socios');
-            if(state=="add"){
-                var row = '<tr><td>' + data.nombre + '</td>';
-                 row +='<td>' + data.apellido + '</td>';
-                 row +='<td>' + data.dui + '</td>';
-                 row +='<td>' + data.telefono + '</td>';       
-                 row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
-                 row += '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'+data.id+'">Editar</button> ';
-                 row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
-                 row +='</td></tr>';
-                //var task='<tr id="task"><td>rregre</td><td>';
-                 $("#tabla").append(row);
-               }
-                /*if (state == "add"){ //if user added a new record
-                    $('#tasks-list').append(task);
-                }else{ //if user updated an existing record
 
-                    $("#task" + task_id).replaceWith( task );
-                }*/
-
-               // $('#frmsocios').trigger("reset");
-
-               // $('#exampleModal').modal('hide')
+           
             },
             error: function (data) {
-                console.log('Error de noseq:', data);
+                console.log('Error de peticion:', data);
                var errors=data.responseJSON;
                 console.log(errors);
+                if(errors.titulo!=undefined)
+                {
+                  $('#titulofeed').text(errors.titulo);
+                  //$( '#nombrediv' ).removeClass();
+                  $( '#titulodiv' ).addClass("has-danger");
+                }else{
+                  $( '#titulodiv' ).removeClass("has-danger");
+                  $( '#titulofeed' ).text("");
+                  }
+                  
+                if(errors.descripcion!=undefined)
+                {
+                  $( '#descripciondiv' ).addClass("has-danger");
+                  $('#descripcionfeed').text(errors.descripcion);
+                }else{
+                  $( '#descripciondiv' ).removeClass("has-danger");
+                  $( '#descripcionfeed' ).text("");
+                  }
                 
             }
         });
     });
 
 $(document).on('click','.peticionModal',function(){
- //var value = $(this).val();
+ var value = $(this).val();
   var output = "";
    //Otra forma de realizar el get ajax el mismo de infomodal    
     $.getJSON('/solicitantes/bus/beneficiarios', function (data) {
           //success data
-            console.log(data);
-             
+            console.log(data);     
             for (var i = 0; i < data.length; i++) {
          //     $.each(data[i], function(key, val) {
             //$("#tabla").append('<tr id="task"><td>"'+data[i].nombre+'"</td><td>"'+data[i].ide+'"</td></tr>');
-            $("#bene_id").append('<option value="' + data[i].ide + '">' + data[i].nombre + ' ' + data[i].apellido + '</option>');
-            output += '<option value="' + data[i].ide + '">' + data[i].nombre + '</option>';
+            $("#bene_id").append('<option value="' + data[i].id + '">' + data[i].nombre + ' ' + data[i].apellido + '</option>');
+         //   output += '<option value="' + data[i].ide + '">' + data[i].nombre + '</option>';
        // });
-            };
-        
-                    
+            };      
            });
    //$("#bene_id").html(output);
+   $("#soli_id").val(value);
+   
    $('#Modal3').modal('show'); 
     });
 
@@ -260,6 +254,13 @@ $("#btnsavee").click(function (e) {
             dataType: 'json',
             success: function (data) {
                console.log(data);
+              $('#exampleModal').modal('hide');
+              $("#msjshow").show();
+              if(state=="add"){
+               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro guardado exitosamente (recargar pagina para ver cambios)");
+              }else{
+               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro editado exitosamente (recargar pagina para ver cambios)");  
+               }
 
                 //redirect('/socios');
             if(state=="add"){
@@ -274,6 +275,12 @@ $("#btnsavee").click(function (e) {
                 //var task='<tr id="task"><td>rregre</td><td>';
                  $("#tabla").append(row);
                }
+
+                setTimeout(function(){
+                  $("#msjshow").hide();
+                //$(location).attr('href','/socios');
+                }, 4000);
+
                 /*if (state == "add"){ //if user added a new record
                     $('#tasks-list').append(task);
                 }else{ //if user updated an existing record

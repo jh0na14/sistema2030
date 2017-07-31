@@ -2,6 +2,9 @@
          <input type="hidden" id="socio_id" name="socio_id" value="0">
 <div class="card">
   <div class="card-block">
+    <div id="msjform" style="display: none;" class="alert alert-success" role="alert">
+      <strong>Well done!</strong> You successfully read this important alert message.
+    </div>
     <h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Detalle</h6>
 <div class="row">
     <div  id="nombrediv" class="form-group col-6 @if($errors->has('nombre')) has-danger @endif" >

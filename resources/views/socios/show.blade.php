@@ -7,9 +7,15 @@
 	
 	<ul class="nav nav-tabs">
 		<li class="nav-item  active">
-			<a class="nav-link active" href="/pagos/pagoAnho">{{$tipoSocio}}</a>
+			<a class="nav-link active" href="/pagos/pagoAnho">Socios</a>
 		<li>
 	</ul>
+	{{--<ul class="breadcrumb">
+<li class="breadcrumb-item"><a href="#">Home</a></li>
+<li class="breadcrumb-item"><a href="#">Fruit</a></li>
+<li class="breadcrumb-item active">Pears</li>
+</ul>--}}
+
 
   <div style="clear:both; padding-bottom:15px;">
   </div>
@@ -21,22 +27,49 @@
 	 		<a href="/pagos/index/1092" class="list-group-item">Ingeniería de Sistemas Informáticos</a>
 	 	</div>--}}
 		<div class="list-group " class="padding-bottom:25px;">
-			<li href="/pagos/index/" class="list-group-item active">Tipo de Socio{{--A&ntilde;os--}}</li>
-				
 
-				<div><a href="/socios/1" class="list-group-item list-group-item-action justify-content-between">Socio Activo<span class="badge badge-default badge-pill">{{$count0}}</span></a></div>
-				<a href="/socios/2" id="activoMayor" class="list-group-item justify-content-between">Activo Mayor <span class="badge badge-default badge-pill">{{$count}}</span></a>
-				{{--<a href="/pagos/pagoAnho/2015/1092/grado" class="list-group-item justify-content-between">Inactivos<span class="badge badge-default badge-pill">{{$count}}</span></a>
-				--}}
+			{{--<li href="/pagos/index/" class="list-group-item list-group-item-action list-group-item-info active">Tipo de Socio</li>
+			
+<a href="#" class="list-group-item list-group-item-action list-group-item-info active">These Boots Are </a>	
+--}}
+				<div>
+				<a href="/socios/1" id="count0"  class="list-group-item list-group-item-action justify-content-between
+				 @if($tipoSocio=='Socio Activo')active @endif">Socio Activo<span class="badge badge-default badge-pill">{{$count0}}</span></a></div>
+				<a href="/socios/2" id="count" class="list-group-item justify-content-between
+				@if($tipoSocio=='Activo Mayor' ) active @endif">Activo Mayor <span class="badge badge-default badge-pill">{{$count}}</span></a>
+				<a href="/socios/3" id="count2" class="list-group-item justify-content-between
+				@if($estado=='Inactivo')active @endif">Inactivos<span class="badge badge-default badge-pill">{{$count2}}</span></a>
+				
 			</div>	
 	</div>
 	
  	<div style="width:85%; float:right;" id="contenido-pagos">
+ 		{{--<div class="media">
+			<div class="media-body">
+				<h4>Media Heading</h4>
+				<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+			</div>
+		</div>
+	
+		<div class="media">
+			<div class="media-body">
+			<div class="media-header"><h4>Media Heading</h4></div>
+				<h4>Titulo:</h4>
+				<p>Sed ut perspiciatis unde omnis iste natus error sit </p>
+			</div>
+			<div class="media-footer">ir</div>
+		</div>--}}
+
+ 		<div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
+  			<strong>Well done!</strong> You successfully read this important alert message.
+		</div>
  <div class="card">
+
   <div class="card-block">
+
   {{--	<h4 class="card-title">Socios de Club Activo 20-30</h4>
   	--}}<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Socios de Activo 20-30</h6>
-            					
+
 	{{--<div class="row" >
 		<div class="col-8 offset-3">
 			<label for="example-text-input" style="text-align:left; font-weight:bold; font-size:20px; " ><i>Beneficiarios de Club Activo 20-30</i></label>
@@ -88,7 +121,7 @@
 	</thead>
 	<tbody id="tabla" name="tabla">
 		@forelse($socios as $socio)
-		<tr id="{{ $socio->id }}">
+		<tr id="trow{{$socio->id}}">
 			<td style="padding:6px">{{ $socio->apodo }}</td>
 			<td>{{ $socio->nombre }} {{ $socio->apellido }}</td>
 			{{--<td>2017</td>
@@ -97,12 +130,19 @@
 			{{--<td class="text-center">{{ $socio->tipoSocio }}</td>
 			--}}<td >{{ $socio->cargo }}</td>
 			<td class="text-center">
-				@if($socio->tipoSocio=='Socio Activo')
+				@if($socio->estado=='Activo')
 				<button type="button" class="btn btn-outline-warning btn-sm " value="{{ $socio->id }}">Pagos</button>
 				@endif
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $socio->id }}">Editar</button>
-				<button type="button" class="btn btn-outline-danger btn-sm" value="{{ $socio->id }}">Dar Baja</button>
+				@if($socio->estado=='Activo')
+				<button type="button" class="btn btn-outline-danger btn-sm darBaja" value="{{ $socio->id }}">Dar Baja</button>
+				@endif
+				
+				@if($socio->estado=='Inactivo')
+				<button type="button" class="btn btn-outline-primary btn-sm darAlta" value="{{ $socio->id }}">Dar Alta</button>
+				@endif
+				
 			</td>
 
         </tr>
@@ -157,6 +197,7 @@
   <div class="modal-dialog modal-lg " role="document">
     <div class="modal-content">
       <div class="modal-header">
+
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -168,6 +209,7 @@
         </div>
       </div>
       <div class="modal-footer">
+
        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="btnsave" value="Anhadir">Save changes</button>
       </div>

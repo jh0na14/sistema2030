@@ -15,12 +15,16 @@ class sociosController extends Controller
     public function show(){
     	 //->where('name', 'John')->value('email');
     	//$socios=DB::table('socios')->where('tipoSocio','=',"Socio Activo");//>paginate(10);
-    	$tipoSocio="Socio Activo";
-    	$socios=socio::where('tipoSocio','=',"Socio Activo")->paginate(9);
+    	
+        $estado='Activo';
+        $tipoSocio="Socio Activo";
+    	$socios=socio::where('tipoSocio','=',"Socio Activo")
+        ->where('estado','Activo')->paginate(9);
 		//count0($socios);/////no se por que no agarra paginate si pongo all()
-    	$count0=count(socio::all()->where('tipoSocio','=',"Socio Activo"));
-    	$count=socio::where('tipoSocio','=','Activo Mayor')->count();//count($socios);
-    	   
+    	$count0=count(socio::all()->where('tipoSocio','=',"Socio Activo")->where('estado','Activo'));
+    	$count=socio::where('tipoSocio','=','Activo Mayor')->where('estado','Activo')->count();//count($socios);
+    	$count2=socio::where('estado','Inactivo')->count();//count($socios);
+           
     	 // dd($socios);
     	  
     	   return view('socios.show',[
@@ -28,35 +32,54 @@ class sociosController extends Controller
     		'tipoSocio'=>$tipoSocio,
     		'count0'=>$count0,
     		'count'=>$count,
-    		
+    		'count2'=>$count2,
+            'estado'=>$estado,
     		]);
     }
-    public function showactivoMayor($tipoSocio){
+    public function showactivoMayor($tipoSocio){//tipo socio solo es la accion de los lados de la vvista
     	if($tipoSocio==1){///ES aactivo
+            $estado='Activo';
     		$tipoSocio="Socio Activo";
-    		$socios=socio::where('tipoSocio','=',"Socio Activo")->paginate(9);
+    		$socios=socio::where('tipoSocio','=',"Socio Activo")
+            ->where('estado','Activo')->paginate(9);
     	    //count0($socios);
-    	
-    	    $count0=count(socio::all()->where('tipoSocio','=',"Socio Activo"));
-    	    $count=socio::where('tipoSocio','=','Activo Mayor')->count();//count($socios);
-    	//count($socios);
+    	   $count=socio::where('tipoSocio','=','Activo Mayor')->where('estado','Activo')->count();//count($socios);
+    	    $count0=count(socio::all()->where('tipoSocio','=',"Socio Activo")->where('estado','Activo'));
+    	      $count2=socio::where('estado','Inactivo')->count();//count($socios);
+         
+        //count($socios);
     	    //dd($socios);  
     	}
     	if($tipoSocio==2){///ES aactivo Mayor
-    		$socios=socio::where('tipoSocio','=',"Activo Mayor")->paginate(9);
+            $estado='Activo';
+    		$socios=socio::where('tipoSocio','=',"Activo Mayor")
+            ->where('estado','Activo')->paginate(9);
     	    
-    		$count=count(socio::all()->where('tipoSocio','=',"Activo Mayor"));
+    		$count=count(socio::all()->where('tipoSocio','=',"Activo Mayor")->where('estado','Activo'));
     	    $tipoSocio="Activo Mayor";
-    	    $count0=socio::where('tipoSocio','=','Socio Activo')->count();//count($socios);
-    	 //  dd($socios);
+    	    $count0=socio::where('tipoSocio','=','Socio Activo')->where('estado','Activo')->count();//count($socios);
+    	    $count2=socio::where('estado','Inactivo')->count();//count($socios);
+         //  dd($socios);
     	    //dd($count);  
     	}
+        if($tipoSocio==3){///ES aactivo Mayor
+            $estado='Inactivo';
+            $socios=socio::where('estado','Inactivo')->paginate(9);
+            
+            $count=count(socio::all()->where('tipoSocio','=',"Activo Mayor")->where('estado','Activo'));
+            $tipoSocio="";
+            $count0=socio::where('tipoSocio','=','Socio Activo')->where('estado','Activo')->count();//count($socios);
+            $count2=socio::where('estado','Inactivo')->count();//count($socios);
+         //  dd($socios);
+            //dd($count);  
+        }
     	return view('socios.show',[
     		'socios'=> $socios,
     		'tipoSocio'=>$tipoSocio,
     		'count0'=>$count0,
     		'count'=>$count,
-    		
+            'count2'=>$count2,
+    		 'estado'=>$estado,
     		]);
     	
     }
@@ -147,25 +170,27 @@ class sociosController extends Controller
         $messages=socio::where('nombre','like','%'.$texto.'%')
         ->orWhere('email','like','%'.$texto.'%')
         ->orWhere('apodo','like','%'.$texto.'%')
+        ->limit(8)
         ->get();
         if($messages){
             foreach ($messages as $key => $message) {
-                //if($message->tipoSocio=='Socio Activo')
-                //{
+                if($message->estado=='Activo')
+                {
                     $sAc='<td class="text-center">'.
     '<button type="button" class="btn btn-outline-warning btn-sm " value="'.$message->id.'">Pagos</button>  '.                
     '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
     'Info</button> '.
     '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> '.
-    '<button type="button" class="btn btn-outline-danger btn-sm" value="'.$message->id.'">Eliminar</button> </td>'.
+    '<button type="button" class="btn btn-outline-danger btn-sm" value="'.$message->id.'">Dar Baja</button> </td>'.
     '</tr>';
-      /*          }else{
+                }else{
             $sAc='<td class="text-center">'.
     '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
     'Info</button> '.
-    '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> </td>'.
+    '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> '.
+    '<button type="button" class="btn btn-outline-primary btn-sm" value="'.$message->id.'">Dar de Alta</button> </td>'.
     '</tr>';    }
-    */            $output.='<tr>'.
+               $output.='<tr>'.
                         '<td>'.$message->apodo.'</td>'.
                         '<td>'.$message->nombre.
                         ' '.$message->apellido.'</td>'.
@@ -183,5 +208,28 @@ class sociosController extends Controller
             return Response::json($messages);
         
     }
+    public function darBaja($id){
+        $socios = socio::find($id);//all()->where('id',"=",$socio_id);
+        $socios->fill([
+            'estado'=>'Inactivo',
+            ]);
+        if($socios->save())
+            return Response::json('Socio '.$socios->nombre.' '.'Cambio a Inactivo');
+            else
+                return Response::json('No pudo cambiar');
+        //return Response::json('Socio '.$socios->nombre.' '.'Cambio a Inactivo');
+    }
+    public function darAlta($id){
+        $socios = socio::find($id);//all()->where('id',"=",$socio_id);
+        $socios->fill([
+            'estado'=>'Activo',
+            ]);
+        if($socios->save())
+            return Response::json('Socio '.$socios->nombre.' '.'Cambio a Activo');
+            else
+                return Response::json('No pudo cambiar');
+        //return Response::json('Socio '.$socios->nombre.' '.'Cambio a Inactivo');
+    }
+
 
 }

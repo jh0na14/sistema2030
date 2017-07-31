@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 use App\solicitante;
 use App\beneficiario;
+use App\peticion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 use App\Http\Requests\createSolicitantesRequest;
+use App\Http\Requests\createPeticionRequest;
 
 class solicitantesController extends Controller
 {
@@ -34,6 +36,22 @@ class solicitantesController extends Controller
     	return redirect('/socios')->with('mensaje','Registro Guardado');
 
     }
+    public function createPeticion(createPeticionRequest $request){
+        //dd($request->all());
+       $message= peticion::create([
+            'numero'=> '1',
+            'titulo'=> $request->input('titulo'),
+            'descripcion'=> $request->input('descripcion'),
+            'idbeneficiarios'=> $request->input('bene_id'),
+            'idsolicitantes'=> $request->input('soli_id'),
+            'estado'=>'Disponible',
+            ]);
+        return Response::json($message);
+        
+        
+        return redirect('/socios')->with('mensaje','Registro Guardado');
+
+    }
     public function update(createSolicitantesRequest $request,$id){
     	//dd($request->all());
     	$message = solicitante::find($id);
@@ -57,6 +75,8 @@ class solicitantesController extends Controller
     					'<td>'.$message->dui.'</td>'.
     					'<td>'.$message->telefono.'</td>'.
     '<td class="text-center">'.
+    '<button type="button" class="btn btn-outline-primary btn-sm peticionModal" value="'.$message->id.'">'.
+    'Crear Peticion</button> '.
     '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
     'Info</button> '.
     '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button> </td>'.
@@ -67,7 +87,7 @@ class solicitantesController extends Controller
     		return Response::json($messages);
     	
     }
-    public function busquedaBen(){
+    public function busquedaSelect(){
         $beneficiario=beneficiario::get(); 
     $array=array();
     $con=0;
@@ -80,7 +100,7 @@ class solicitantesController extends Controller
         ]);  
         $con++;
     }
-        return Response::json($array);  
+        return Response::json($beneficiario);  
     }
 
 
