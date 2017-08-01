@@ -48,6 +48,8 @@ Route::get('/verdugo/buscar/{id?}','verdugoController@buscar');
 Route::post('/verdugo/create','verdugoController@create');
 Route::put('/verdugo/update/{id?}','verdugoController@update');
 Route::get('/verdugo/busqueda/{texto?}','verdugoController@busqueda');
+Route::get('/verdugo/bus/socios','verdugoController@busquedaSelect');
+
 
 //Route::get('/socios/1','sociosController@show2');
 /*

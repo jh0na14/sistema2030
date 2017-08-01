@@ -63,7 +63,8 @@
 	</thead>
 	<thead >
 	        <tr>
-	        	<th style="text-align: center" style="text-color:#000000;">fechaPago</th>
+          <th style="text-align: center" style="text-color:#000000;">Socio Verdugo</th>
+	        	<th style="text-align: center" style="text-color:#000000;">Fecha Reunion </th>
 	           	<th class="center ">Monto Recaudado</th>
 	            <th class="center ">Monto Rifa</th>
 	           {{--	
@@ -75,7 +76,8 @@
 	<tbody id="tabla" name="tabla">
 		@forelse($verdugos as $verdugo)
 		<tr id="{{ $verdugo->id }}">
-			<td>{{ $verdugo->fechaPago }}</td>
+			<td>{{ $verdugo->nombre }}</td>
+      <td>{{ $verdugo->fechaPago }}</td>
 			<td >{{ $verdugo->montoRecaudado }}</td>
 			<td>{{ $verdugo->montoRifa }}</td>
 			<td class="text-center">
@@ -85,6 +87,7 @@
 			</td>
 
         </tr>
+         
 		@empty
     	<p>No hay mensajes destacados</p>
   		@endforelse
@@ -93,6 +96,7 @@
 
 
 	</table>
+  
 {{--@if(count($verdugos))@endif--}}
   <div class="mt-2 mx-auto">
   {{ $verdugos->links('
@@ -101,7 +105,7 @@
 
 
 {{-- //////////////////////////MODAL FICHA--}}
-<div class="modal fade" id="myModal" name="myModal" stabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" name="myModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -115,8 +119,10 @@
     							<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Informacion</h6>
             					<table   class="table {{--table-bordered--}}  table-sm " align="center">
             					<tbody id="tablainfo">
+                       
             					</tbody>
             					</table>
+                      
             				</div>
             				</div>
 					        </div>
@@ -133,7 +139,7 @@
    </div>
 {{-- //////////////FIN MODLA--}}
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog {{--modal-lg--}} " role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -146,9 +152,9 @@
         <div class="">
             @include('verdugos.formVerdu')
         </div>
-      </div>
+        </div>
       <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close verdu</button>
         <button type="button" class="btn btn-primary" id="btnsave" value="Anhadir">Save changes</button>
       </div>
     </div>
