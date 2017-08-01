@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\verdugo;
+use App\socio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\createVerdugoRequest;
 
 class verdugoController extends Controller
@@ -12,7 +13,14 @@ class verdugoController extends Controller
     //
         //
     public function show(){   
-        $verdugo=verdugo::latest()->paginate(10);  
+    	$verdugo=DB::table('verdugos')
+    	->join('socios','verdugos.idsocios','=','socios.id')
+    	->select('verdugos.*','socios.nombre','socios.apellido')
+    	->paginate(10);
+    	//->get();
+    	 //return Response::json($verdugo);
+        //$verdugo=verdugo::latest()->paginate(10);  
+       // return Response::json($verdugo);
            return view('verdugos.showVerdu',[
             'verdugos'=> $verdugo,
             ]);
@@ -64,5 +72,22 @@ class verdugoController extends Controller
     		return Response::json($messages);
     	
     }
+
+  public function busquedaSelect(){
+        $socio=socio::get(); 
+    $array=array();
+    $con=0;
+    foreach($socio as $socios)
+    {
+        $array[$con]=([
+        'id'=>$socios->id,
+        'nombre'=>$socios->nombre,
+        'apellido'=>$socios->apellido,
+        ]);  
+        $con++;
+    }
+        return Response::json($socio);  
+    }
+
 
 }

@@ -2,8 +2,19 @@
 $(document).ready(function(){
   //$("#tabla").append('<tr id="task"><td>rregre</td><td>');
   //$("#fechaNac").mask('xxxx-xxxx');
-  
+     //para select con relacion 
+      $("#socioid2").select2({
+      tags: "true",
+  placeholder: "Select an option",
+  allowClear: true,width: "100%"});
+    $(".socioid").select2({
+      tags: "true",
+  placeholder: "Select an option",
+  width: "100%"});
    });   
+
+
+
 ////////////////Esto para busqueda
  $("#search").on('keyup',function(){
     var value = $(this).val();
@@ -25,6 +36,22 @@ $(document).ready(function(){
  });
 ///////////////////fin busqueda
  $("#btnnuevo").click(function(){
+  var output = "";
+   //Otra forma de realizar el get ajax el mismo de infomodal    
+    $.getJSON('/verdugo/bus/socios', function (data) {
+          //success data
+            console.log(data);
+             
+            for (var i = 0; i < data.length; i++) {
+         //     $.each(data[i], function(key, val) {
+            //$("#tabla").append('<tr id="task"><td>"'+data[i].nombre+'"</td><td>"'+data[i].ide+'"</td></tr>');
+            $("#socioid2").append('<option value="' + data[i].id + '">' + data[i].nombre + ' ' + data[i].apellido + '</option>');
+            output += '<option value="' + data[i].id + '">' + data[i].nombre + '</option>';
+       // });
+            };
+        
+                    
+           });
 
   $('#btnsave').val("add");
   $("#btnsave").html("Nuevo");
@@ -116,9 +143,11 @@ $("#btnsavee").click(function (e) {
         var formData = {
           //nombre:document.getElementById("nombre").value,
           //socio:$('#socio_id').val(),
+          
           fechaPago:$('#fechaPago').val(),
           montoRecaudado:$('#montoRecaudado').val(),
           montoRifa:$('#montoRifa').val(),
+          idsocios:$('#socioid2').val(),
            }       
 
         //used to determine the http verb to use [add=POST], [update=PUT]

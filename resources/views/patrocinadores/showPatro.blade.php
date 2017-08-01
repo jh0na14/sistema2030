@@ -17,28 +17,27 @@
  	<div style="width:100%; float:right;">
  <div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Solicitantes a Donacion de Club Activo 20-30</h6>
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Patrocinadores para Donacion de Club Activo 20-30</h6>
    
-	<div class="form-group row col-6">
- 	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
-  			<div class="col-9 offset-1 ">
-      				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
-  				</-div>
-  	  
-		</div>
-  	  </div>
-
+	<div class="row" >
+    <div class="col-6" style="clear:both; padding-top:15px;">
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
+      Nuevo</button>  
+      </div>
+      {{--<div class="col-4">
+        <label style="text-align:left; font-weight:bold; font-size:20px; ">Beneficiarios de Club Activo 20-30 </label>  
+      </div>--}}
+      <div class="form-group row col-6">
+   <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
+        <div class="col-9 offset-1 ">
+              <input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
+          </div>
+      
+    </div>
+      </div>
  	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
-	        <tr>
-	            <th colspan="3" style="text-align:center; font-weight:bold; letter-spacing:5px;"> PATROCINADORES DE CLUB ACTIVO 20-30</th>
-	            <th colspan="2" style="text-align:right; font-weight:bold; letter-spacing:5px;">
-	            	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
-					  Nuevo Patrocinador
-					</button>	
-	            </th>
 	        
-	        </tr>
 	</thead>
 	<thead >
 	        <tr >
@@ -130,6 +129,9 @@
 </div>	
 {{-- /////////////////////FIN--}}
 	
+  </div>{{--fin cards--}}
+  </div>{{--fin cards--}}
+  {{-- FIn style width 85% --}}</div>
   
 
 	{{-- FIn style width 85% --}}</div>
