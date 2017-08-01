@@ -30,7 +30,7 @@
         <div class="col-8">
             <select  class="beneid" id="bene_id" name="bene_id">
                 
-            </select> 
+            </select><i class="glyphicon glyphicon-th"></i>ss</span>
 
             <div id="bene_idfeed" class="form-control-feedback">dui: 12345678-5</div>                   
        </div>
