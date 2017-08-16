@@ -16,7 +16,7 @@ class peticionesController extends Controller
     public function show(){   
     	$estado='Disponible';
         $peticion=peticion::where('estado','Disponible')->paginate(8);  
-           return view('peticiones.showPeticion',[
+           return view('peticiones.showPeticion2',[
             'peticiones'=> $peticion,
             'estado'=>$estado,
             ]);

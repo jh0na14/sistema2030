@@ -47,6 +47,7 @@ class patrocinadorController extends Controller
 	public function busqueda($texto){
     	$output="";
     	$messages=patrocinador::where('nombre','like','%'.$texto.'%')
+        ->limit(6)
     	->get();
     	if($messages){
     		foreach ($messages as $key => $message) {

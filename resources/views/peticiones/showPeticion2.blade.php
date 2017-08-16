@@ -69,22 +69,35 @@
 {{--<div id="tabla"></div>finn id tabla --}}
 
 		@forelse($peticiones as $peticion)
-    <div class="col-4">
+    <div class="col-12">
 <div class="card  card-outline- " style="margin-top:5px; {{--max-height: 20rem;--}} {{--@if($peticion->id==8)display:none;@endif--}}">
   <div class="card-block">
     <h6 class="card-title">{{ $peticion->titulo }}</h6>
     <hr>
-    <p class="card-text" style="font-size:13px">{{ $peticion->descripcion }}</p>
-    <div class="card-text text-muted float-right" style="font-size:14px">
+      <div style="width:85%; float:left; padding-right:0px;" >
+         <p class="card-text" style="font-size:13px">{{ $peticion->descripcion }}</p>
+    <div class="card-text text-muted float-left" style="font-size:14px">
+     
      <small class="text-muted"> {{ $peticion->created_at}}</small>
+   
+      </div>
+
+      </div>
+       <div style="width:10%; float:left; padding-right:0px;" >
+      <button type="button"style="font-size:12px" class="btn btn-outline-primary btn-sm peticionModal" value="{{ $peticion->id }}">Crear Proyecto</button>
+    <button type="button" style="font-size:12px" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">+Info</button>
+    <button type="button" style="font-size:12px" class="btn btn-outline-danger btn-sm editModal" value="{{ $peticion->id }}">Eliminar</button>
+      
+      </div>
     </div>
-  </div>  
+  
 <div class="card-footer" {{--style="background-color: #fBfBfB"--}}>  
     <button type="button"style="font-size:12px" class="btn btn-outline-primary btn-sm peticionModal" value="{{ $peticion->id }}">Crear Proyecto</button>
     <button type="button" style="font-size:12px" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">+Info</button>
     <button type="button" style="font-size:12px" class="btn btn-outline-danger btn-sm editModal" value="{{ $peticion->id }}">Eliminar</button>
       
 </div> 
+
 </div>{{-- fin card--}}  
 
 </div> {{--fin col--}}   

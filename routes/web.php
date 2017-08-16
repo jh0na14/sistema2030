@@ -26,6 +26,13 @@ Route::get('/socios/busqueda/{socio_id?}','sociosController@busqueda');
 Route::put('/socios/darBaja/{id?}','sociosController@darBaja');
 Route::put('/socios/darAlta/{id?}','sociosController@darAlta');
 
+Route::get('/periodos','periodosController@show');
+Route::get('/periodos/buscar/{id?}','periodosController@buscar');
+Route::post('/periodos/create','periodosController@create');
+Route::put('/periodos/update/{id?}','periodosController@update');
+Route::get('/periodos/busqueda/{texto?}','periodosController@busqueda');
+Route::get('/periodos/bus/socios','periodosController@busquedaSelect');
+
 Route::get('/beneficiarios','beneficiariosController@show');
 Route::get('/beneficiarios/buscar/{id?}','beneficiariosController@buscar');
 Route::post('/beneficiarios/create','beneficiariosController@create');
@@ -39,7 +46,6 @@ Route::put('/solicitantes/update/{id?}','solicitantesController@update');
 Route::get('/solicitantes/busqueda/{texto?}','solicitantesController@busqueda');
 Route::get('/solicitantes/bus/beneficiarios','solicitantesController@busquedaSelect');
 Route::post('/solicitantes/createPeticion','solicitantesController@createPeticion');
-
 
 Route::get('/peticiones','peticionesController@show');
 Route::get('/peticiones/{estado}','peticionesController@showEstado');

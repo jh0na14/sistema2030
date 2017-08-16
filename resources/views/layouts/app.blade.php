@@ -87,6 +87,7 @@
           <a class="dropdown-item" href="/peticiones">Crear Proyectos de donacion</a>
           <a class="dropdown-item" href="#">Crear Proyectos de recaudacion</a>
           <a class="dropdown-item" href="#">Proyectos realizados</a>
+          <a class="dropdown-item" href="/periodos">Periodos</a>
         </div>
       </li>
     </ul>

@@ -48,6 +48,7 @@ class beneficiariosController extends Controller
     	$messages=beneficiario::where('nombre','like','%'.$texto.'%')
     	->orWhere('apellido','like','%'.$texto.'%')
     	->orWhere('dui','like','%'.$texto.'%')
+        ->limit(6)
     	->get();
     	if($messages){
     		foreach ($messages as $key => $message) {
