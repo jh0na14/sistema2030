@@ -17,6 +17,49 @@ $(document).ready(function(){
   
   }); 
 
+$(document).on('click','.activar',function(e){
+    var value = $(this).val();
+  //token siempre para ingresar y modificar 
+  $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+  e.preventDefault();     
+    $.ajax({
+            type: "PUT",
+            url: '/periodos/activar/'+value,
+            data: {'id':value},
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                $("#msjshow").show();
+                $("#msjshow").html("<strong>"+data+"</strong>");
+    
+                  setTimeout(function(){
+                  $("#msjshow").hide();
+                $(location).attr('href','/periodos');
+                }, 4000);         
+            },
+            error: function (data) {
+                console.log('Error al activar:', data);
+            }
+       }); 
+
+
+});
+
+
+$(document).on('click','.desactivar',function(){
+   $("#msjshow").show();
+   $("#msjshow").html("<strong>No se puede! </strong>Solo se desactiva creando un nuevo periodo o activando otro periodo "); 
+   setTimeout(function(){
+    $("#msjshow").hide();
+    $(location).attr('href','/periodos');
+    }, 4000);     
+});
+
+
 ////////////////Esto para busqueda de search
  $("#search").on('keyup',function(){
     var value = $(this).val();
@@ -84,7 +127,9 @@ $(document).on('click','.infomodal',function(){
         
                 var row = '<tr><td width="45%"> Fecha Inicio: </td><td width="55%">' + data.fechaInicio + '</td>';
                  row +='<tr><td> Fecha Fin: </td><td>' + data.fechaFin + '</td>';
-                 row +='<tr><td> estado: </td><td>' + data.estado + '</td>';
+                 row +='<tr><td> Estado: </td><td>' + data.estado + '</td>';
+                 row +='<tr><td> Semestre: </td><td>' + data.semestre + '</td>';
+               
                 row +='<tr><td> Creado en: </td><td>' + data.created_at + '</td>';
                   $("#tablainfo").append(row);            
             
@@ -147,6 +192,7 @@ $("#btnsavee").click(function (e) {
           //socio:$('#socio_id').val(),
           fechaInicio:$('#fechaInicio').val(),
           fechaFin:$('#fechaFin').val(),
+          semestre:$('#semestre').val(),
            }       
 
         //used to determine the http verb to use [add=POST], [update=PUT]
@@ -170,13 +216,29 @@ $("#btnsavee").click(function (e) {
             dataType: 'json',
             success: function (data) {
                console.log(data);
-              $('#exampleModal').modal('hide');
-              $("#msjshow").show();
-              if(state=="add"){
-               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro guardado exitosamente (recargar pagina para ver cambios)");
-              }else{
-               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro editado exitosamente (recargar pagina para ver cambios)");  
-               }
+               if(data.validar!=undefined){
+                  $('#semestrefeed').text(data.validar);
+                  $( '#semestrediv' ).addClass("has-danger");
+                  
+                  $( '#fechaIniciodiv' ).removeClass("has-danger");
+                  $( '#fechaIniciofeed' ).text("");
+                  $( '#fechaFindiv' ).removeClass("has-danger");
+                  $( '#fechaFinfeed' ).text("");
+                
+                }else{
+                  $( '#semestrediv' ).removeClass("has-danger");
+                  $( '#semestrefeed' ).text("");
+
+                   $('#exampleModal').modal('hide');
+                   $("#msjshow").show();
+                  if(state=="add"){
+                  $("#msjshow").html(" <strong>Bien hecho!</strong> Registro guardado exitosamente (recargar pagina para ver cambios)");
+                  }else{
+                  $("#msjshow").html(" <strong>Bien hecho!</strong> Registro editado exitosamente (recargar pagina para ver cambios)");  
+                   }
+                }
+
+             
 
                 //redirect('/socios');
             if(state=="add"){

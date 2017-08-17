@@ -32,6 +32,8 @@ Route::post('/periodos/create','periodosController@create');
 Route::put('/periodos/update/{id?}','periodosController@update');
 Route::get('/periodos/busqueda/{texto?}','periodosController@busqueda');
 Route::get('/periodos/bus/socios','periodosController@busquedaSelect');
+Route::put('/periodos/activar/{id?}','periodosController@activar');
+Route::put('/periodos/desactivar/{id?}','periodosController@desactivar');//no la uso 
 
 Route::get('/beneficiarios','beneficiariosController@show');
 Route::get('/beneficiarios/buscar/{id?}','beneficiariosController@buscar');

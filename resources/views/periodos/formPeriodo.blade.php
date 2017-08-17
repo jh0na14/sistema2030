@@ -38,11 +38,30 @@
        
         </div>
     </div>
+    {{--
+<div class="form-inline">
+  
+  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Jane Doe">
 
+  <label class="sr-only" for="inlineFormInputGroup">Username</label>
+  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+    <div class="input-group-addon">@</div>
+    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+  </div>
+
+  <div class="form-check mb-2 mr-sm-2 mb-sm-0">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox"> Remember me
+    </label>
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</div>--}}
     
     <div class="form-group row">
         <label for="example-email-input" class="col-3 col-form-label ">Presidente:*</label>
         <div class="col-8">
+
             <select  id="socio1" name="socio1">
             </select>
             <div id="socio1feed" class="form-control-feedback">dui: 12345678-5</div>                   
@@ -50,6 +69,7 @@
        <div class="col-1"><span class="input-group-btn">
         {{--<button class="btn btn-secondary btn-sm" type="button"></button>--}}
       </span>
+
         <button type="button" class="btn btn-outline-secondary btn-sm" style="margin-rigth:5px;">+</button>
        </div>
 

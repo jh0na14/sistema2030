@@ -6,7 +6,7 @@ use App\socio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\createPeriodosRequest;
-
+use DateTime;
 class periodosController extends Controller
 {
     //
@@ -31,9 +31,25 @@ class periodosController extends Controller
     		'estado'=>'Finalizado',
     		])->save();
         }
-
-    	$message= periodo::create($request->all());   		 
-    	return Response::json($message);
+        
+        $x=$request->input('fechaInicio');
+        
+        $date = DateTime::createFromFormat("Y-m-d", $x);
+        $fecha=$request->input('semestre')."-".$date->format("Y");
+        if(periodo::where('semestre',$fecha)->first()){
+            $array = array('validar' => 'Hay un periodo ya con esos datos', );
+            return Response::json($array);
+            
+        }
+        // return Response::json($request->input('semestre')."-".$date->format("Y"));
+       //$message= periodo::create($request->all());
+        $message= periodo::create([
+            'fechaInicio'=> $request->input('fechaInicio'),
+            'fechaFin'=> $request->input('fechaFin'),
+            'semestre'=> ($fecha),
+            'estado'=>'Iniciado',
+            ]); 
+       return Response::json($message);
     	
     	
     	return redirect('/socios')->with('mensaje','Registro Guardado');
@@ -44,6 +60,8 @@ class periodosController extends Controller
     	$message = periodo::find($id);
     	 $message->fill($request->all());
     	$message->save();
+        // $date = DateTime::createFromFormat("Y-m-d", $pdate);
+        // $date->format("Y")
     	return Response::json($message);
     	//return response(json($array));
     }
@@ -79,5 +97,26 @@ class periodosController extends Controller
         return Response::json($message);  
 
     } 
+     public function desactivar($id){
+        return Response::json('Solo se desactiva creando un nuevo periodo o activando otro periodo');
+        
+     }
+    public function activar($id){
+         if(periodo::where('estado','Iniciado')->first()){
+            $select=periodo::where('estado','Iniciado')->first();
+            $select->fill([
+            'estado'=>'Finalizado',
+            ])->save();
+        }
+        $message = periodo::find($id);//all()->where('id',"=",$socio_id);
+        $message->fill([
+            'estado'=>'Iniciado',
+            ]);
+        if($message->save())
+            return Response::json('Periodo Cambio a Activo');
+            else
+                return Response::json('No pudo cambiar');
+       
+    }
 
 }

@@ -30,7 +30,7 @@ class createPeriodosRequest extends FormRequest
              return [
                 'fechaInicio' => 'required|date|date_format:Y-m-d|before:fechaFin',
                 'fechaFin' => 'required|date|date_format:Y-m-d|after:fechaInicio',
-                'semestre' => 'required',
+                
                   ];    
                 //break;
                }
@@ -40,7 +40,6 @@ class createPeriodosRequest extends FormRequest
              return [
                 'fechaInicio' => 'required|date|date_format:Y-m-d|before:fechaFin',
                 'fechaFin' => 'required|date|date_format:Y-m-d|after:fechaInicio',
-                'semestre' => 'required',
                   ]; 
 
                 break;

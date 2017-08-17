@@ -53,6 +53,7 @@
 	           	{{--<th style="text-align: center">Tipo</th>
 	           	--}}
 	           	<th >Estado</th>
+              <th >Semestre</th>
 	        <th style="text-align: center">Accion</th>
           </tr>
 	</thead>
@@ -63,13 +64,15 @@
       <td>{{ $periodo->fechaInicio }}</td>
 			<td >{{ $periodo->fechaFin }}</td>
       <td >{{ $periodo->estado }}</td>
+      <td >{{ $periodo->semestre }}</td>
+      
 			<td class="text-center">
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $periodo->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $periodo->id }}">Editar</button>
 			  @if($periodo->estado =='Finalizado')
-        <button type="button" class="btn btn-outline-primary btn-sm" value="{{ $periodo->id }}">Activar</button>
+        <button type="button" class="btn btn-outline-primary btn-sm activar" value="{{ $periodo->id }}">Activar</button>
         @else
-         <button type="button" class="btn btn-outline-danger btn-sm" value="{{ $periodo->id }}">Desactivar</button>
+         <button type="button" class="btn btn-outline-danger btn-sm desactivar" value="{{ $periodo->id }}">Desactivar</button>
         @endif
       </td>
 

@@ -17,8 +17,7 @@ class CreatePeriodosTable extends Migration
             $table->increments('id');
             $table->date('fechaInicio');
             $table->date('fechaFin');
-            $table->enum('semestre',array('I','II'));
-            
+            $table->string('semestre');
             $table->enum('estado',array('Iniciado','Finalizado'));
             $table->timestamps();
         });
