@@ -20,7 +20,7 @@
   <div style="clear:both; padding-bottom:15px;">
   </div>
 <div style="width:12%; float:left; padding-right:0px;" id="menu-vertical-pagos">
-<div style="clear:both; padding-bottom:35px;">
+<div style="clear:both; padding-bottom:15px;">
   </div>
      
     <div class="list-group " class="padding-bottom:25px;">
@@ -33,12 +33,47 @@
         @if($estado=='Disponible')active  @endif">Disponibles <span class="badge badge-default badge-pill"></span>
       </a>
       <a href="/peticiones/1" id="count" class="list-group-item list-group-item-action justify-content-between
-       @if($estado=='Sin Finalizar')active @endif ">Sin Finalizar <span class="badge badge-default badge-pill"></span>
+       @if($estado=='En Progreso')active @endif ">En Progreso <span class="badge badge-default badge-pill"></span>
       </a>
       <a href="/peticiones/2" id="count2" class="list-group-item list-group-item-action justify-content-between
        @if($estado=='Finalizado')list-group-item-danger active @endif ">Finalizados<span class="badge badge-default badge-pill"></span>
       </a>
+      <a href="/peticiones/3" id="count" class="list-group-item list-group-item-action justify-content-between
+       @if($estado=='Cancelado')list-group-item-danger active @endif ">Cancelados<span class="badge badge-default badge-pill"></span>
+      </a>
         
+      </div> 
+      
+      <div style="clear:both; padding-bottom:15px;">
+      </div>
+      
+      <div class="list-group " class="padding-bottom:25px;">
+
+    <li class="list-group-item list-group-item-action list-group-item-info active">Semestre</li>
+       
+   {{--   <a href="#" class="list-group-item list-group-item-action list-group-item-info active">These Boots Are </a> 
+--}}
+        @forelse($periodos as $periodo)
+        <div style="display:none;">
+            @if($estado=='Disponible'){{ $x=1 }}@endif
+            @if($estado=='En Progreso'){{ $x=2 }}@endif
+            @if($estado=='Finalizado'){{ $x=3 }} @endif 
+            $h={{ $periodo->id }}
+        </div>
+        {{--  Para que no se vea en el navegador Sin%20Fnalizar --}}
+        @if($estado=='En Progreso')
+       <a href="/peticiones/EnProgreso/{{ $periodo->semestre }}" class="list-group-item list-group-item-action justify-content-between"><span class="badge badge-default badge-pill"></span>
+      {{ $periodo->semestre }}
+      </a>
+      @else
+      <a href="/peticiones/{{ $estado }}/{{ $periodo->semestre }}" class="list-group-item list-group-item-action justify-content-between"><span class="badge badge-default badge-pill"></span>
+      {{ $periodo->semestre }}
+      </a>
+      @endif
+      
+        @empty
+        <p>No hay mensajes destacados</p>
+        @endforelse       
       </div>  
   </div>
 		
@@ -46,7 +81,7 @@
 
  	<div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Peticiones a Club Activo 20-30</h6>
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Peticiones a Club Activo 20-30 <strong>PERIODO {{ $periodoActual }}</strong></h6>
         
 
  		<div class="row" >
@@ -103,11 +138,15 @@
 			<td>{{ $peticion->titulo }}</td>
 			<td style="font-size:14px">{{ $peticion->descripcion }}</td>
 			<td class="text-center">
-        <button type="button" class="btn btn-outline-primary btn-sm peticionModal" value="{{ $peticion->id }}">Crear Proyecto</button>
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">Info</button>
+        @if($peticion->estado=='Disponible')
+        <button type="button" class="btn btn-outline-primary btn-sm proyectoModal" value="{{ $peticion->id }}">Crear Proyecto</button>
+				@endif
+        <button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">Info</button>
+
+        <button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $peticion->id }}">Editar</button>
 				@if($peticion->estado=='Disponible')
-        <button type="button" class="btn btn-outline-danger btn-sm darBaja" value="{{ $peticion->id }}">Eliminar</button>
-         @endif
+        <button type="button" class="btn btn-outline-danger btn-sm darBaja" value="{{ $peticion->id }}">Cancelar</button>
+        @endif
        </td>
 
         </tr>
@@ -170,12 +209,12 @@
       </div>
       <div class="modal-body">
         <div class="">
-            @include('solicitantes.formSoli')
+            @include('solicitantes.formPeticion')
         </div>
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnsave" value="Anhadir">Save changes</button>
+        <button type="button" class="btn btn-primary" id="btnsave" value="Anhadir">Guardar</button>
       </div>
     </div>
   </div>
@@ -186,24 +225,58 @@
   <div class="modal-dialog {{--modal-lg--}} " role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" >Crear Peticion</h5>
+        <h5 class="modal-title" >Crear Proyecto</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <div class="">
-            @include('solicitantes.formPeticion')
+            @include('peticiones.formProyecto')
         </div>
       </div>
       <div class="modal-footer">
        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnsave2" value="Anhadir">Save changes</button>
+        <button type="button" class="btn btn-primary" id="btnsave2" value="Anhadir">Guardar</button>
       </div>
     </div>
   </div>
 </div>  
 {{-- /////////////////////FIN--}}	
+<!-- Modal con tabindex -1 no funciona select2-->
+<div class="modal fade" id="Modal4" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" >Motivo de cancelacion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+           <form>
+<div  id="motivodiv" class="form-group row @if($errors->has('nombre')) has-danger @endif" >
+        <label for="example-text-input" class="col-3 offset-1 col-form-label ">Explique el motivo de su cancelacion</label>
+        <div class="col-7 " >
+                <textarea class="form-control" type="text"  id="motivo" name="motivo" rows="2"></textarea>
+                <div id="motivofeed" class="form-control-feedback"></div>
+        </div>
+      </div>
+       <input type="hidden" class="form-control" type="text"  id="delete_id" name="delete_id">
+          
+           </form>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" id="btnsave3">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>  
+{{-- /////////////////////FIN--}} 
   
 	</div>{{--fin cards--}}
 	</div>{{--fin cards--}}

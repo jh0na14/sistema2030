@@ -36,9 +36,9 @@ $("#btnsave2").click(function (e) {
 
         e.preventDefault(); 
         var formData = {
-          soli_id:$('#soli_id').val(),
           titulo:$('#titulo').val(),
           descripcion:$('#descripcion').val(),
+          soli_id:$('#soli_id').val(),
           bene_id:$('#bene_id').val(),
            }       
 

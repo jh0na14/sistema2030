@@ -16,7 +16,6 @@ class periodosController extends Controller
     		'periodos'=> $periodo,
     		]);
     }
-
     public function buscar($id){
     $periodo = periodo::find($id);
     return Response::json($periodo);

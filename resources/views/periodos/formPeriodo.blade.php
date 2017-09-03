@@ -10,7 +10,7 @@
             debido a laraevl provee seguridad y da el toen 
             para que lo econozca que es nuestro formulario 
             {{ csrf_field() }} --}}
-            <input class="form-control " type="date" value="2011-07-07" id="fechaInicio" name="fechaInicio">
+            <input class="form-control " type="date" id="fechaInicio" name="fechaInicio">
             {{-- @if($errors->has('nombre')) 
                @foreach($errors->get('nombre') as $error)--}}
             <div id="fechaIniciofeed" class="form-control-feedback"></div>              
@@ -21,17 +21,17 @@
     <div id="fechaFindiv" class="form-group row">
         <label for="example-date-input" class="col-3 col-form-label ">Fecha Fin: *</label>
         <div class="col-9">
-            <input class="form-control " type="date" value="2011-07-07" id="fechaFin" name="fechaFin">
+            <input class="form-control " type="date" id="fechaFin" name="fechaFin">
             <div id="fechaFinfeed" class="form-control-feedback"></div>              
        
         </div>
     </div>
     <div id="semestrediv" class="form-group row">
         <label for="example-email-input" class="col-3 col-form-label ">Semestre:*</label>
-        <div class="col-5">
+        <div class="col-8">
             <select class="form-control form-control-sm" id="semestre" name="semestre">
-                <option>I</option>
-                <option>II</option>
+                <option value="I">Semestre I</option>
+                <option value="II">Semestre II</option>
                 
             </select>
              <div id="semestrefeed" class="form-control-feedback"></div>              
@@ -64,7 +64,7 @@
 
             <select  id="socio1" name="socio1">
             </select>
-            <div id="socio1feed" class="form-control-feedback">dui: 12345678-5</div>                   
+            <div id="socio1feed" class="form-control-feedback"></div>                   
        </div>
        <div class="col-1"><span class="input-group-btn">
         {{--<button class="btn btn-secondary btn-sm" type="button"></button>--}}

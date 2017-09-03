@@ -18,7 +18,8 @@ class CreatePeticionsTable extends Migration
             //$table->integer('numero');
             $table->string('titulo',30);
             $table->text('descripcion')->nullable()->default(null);
-            $table->enum('estado',array('Disponible','Sin Finalizar','Finalizado'));
+            $table->enum('estado',array('Disponible','En Progreso','Finalizado','Cancelado'));
+            $table->text('motivoCancelacion')->nullable()->default(null);
               
            // $table->integer('idbeneficiarios')->unsigned();
            // $table->foreign('idbeneficiarios')->references('id')->on('beneficiarios');

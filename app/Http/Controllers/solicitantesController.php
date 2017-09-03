@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\solicitante;
 use App\beneficiario;
 use App\peticion;
+use App\periodo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -38,13 +39,14 @@ class solicitantesController extends Controller
     }
     public function createPeticion(createPeticionRequest $request){
         //dd($request->all());
+        $periodo=periodo::where('estado','Iniciado')->get()->first();
        $message= peticion::create([
-            'numero'=> '1',
             'titulo'=> $request->input('titulo'),
             'descripcion'=> $request->input('descripcion'),
             'idbeneficiarios'=> $request->input('bene_id'),
             'idsolicitantes'=> $request->input('soli_id'),
             'estado'=>'Disponible',
+            'idperiodos'=>$periodo->id,
             ]);
         return Response::json($message);
         

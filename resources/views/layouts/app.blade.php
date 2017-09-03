@@ -23,8 +23,9 @@
         height: 100%;
         margin-left: 0 auto -90px;
        /* margin-left:4%;
-        margin-right:0%; 
-        max-width: 100%;*/
+        margin-right:0%; */
+        max-width: 1920px !important;
+        max-width: 100%;
     }
     table,th,td{
         padding: 0px;

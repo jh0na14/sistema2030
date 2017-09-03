@@ -15,15 +15,17 @@ class CreateProyectosTable extends Migration
     {
         Schema::create('proyectos', function (Blueprint $table) {
             $table->increments('id');
-            $table->date('fecha');
+            $table->string('nombre',30);
+            $table->date('fechaInicio');
+            $table->date('fechaFin');
             $table->enum('tipo',array('Recaudacion','Donacion'));
             $table->enum('estado',array('Programado','Sin finalizar','Finalizado'));
             $table->double('presupuesto');
             $table->integer('idrecaudacions')->unsigned()->nullable()->default(null);
             $table->foreign('idrecaudacions')->references('id')->on('recaudacions');
             
-            $table->integer('iddonacions')->unsigned()->nullable()->default(null);
-            $table->foreign('iddonacions')->references('id')->on('donacions');
+            $table->integer('idpeticions')->unsigned()->nullable()->default(null);
+            $table->foreign('idpeticions')->references('id')->on('peticions');
             
             $table->integer('idperiodos')->unsigned();
             $table->foreign('idperiodos')->references('id')->on('periodos');

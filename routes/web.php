@@ -51,9 +51,13 @@ Route::post('/solicitantes/createPeticion','solicitantesController@createPeticio
 
 Route::get('/peticiones','peticionesController@show');
 Route::get('/peticiones/{estado}','peticionesController@showEstado');
+Route::put('/peticiones/update/{id?}','peticionesController@update');
 Route::get('/peticiones/busqueda/{texto?}','peticionesController@busqueda');
 Route::put('/peticiones/darBaja/{id?}','peticionesController@darBaja');
 Route::get('/peticiones/buscar/{id?}','peticionesController@buscar');
+Route::get('/peticiones/buscar1/{id?}','peticionesController@buscar1');
+Route::get('/peticiones/{estado?}/{semestre?}','peticionesController@showParametros');
+Route::post('/peticiones/createProyecto','peticionesController@createProyecto');
 
 Route::get('/patrocinador','patrocinadorController@show');
 Route::get('/patrocinador/buscar/{id?}','patrocinadorController@buscar');

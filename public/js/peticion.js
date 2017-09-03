@@ -1,32 +1,11 @@
 
 $(document).ready(function(){
-  //$("#tabla").append('<tr id="task"><td>rregre</td><td>');
-  //$("#fechaNac").mask('xxxx-xxxx');
-   //$(".beneid").chosen({width: "95%"});
-    $(".beneid2").select2({
-      tags: "true",
-  placeholder: "Select an option",
-  allowClear: true,width: "100%"});
-    $("#bene_id").select2({
-      tags: "true",
-  placeholder: "Select an option",
-  width: "100%"});
-    
-    //$(".js-example-data-array").select2();
-//$("#.beneid").append("<option value='otro' selected>otro</option>");
-//$('#.beneid').trigger('change'); 
+ 
    }); 
-
-/*$(document).on('keyup', '.beneid', function (e) {
-      $(".beneid").select2({width: "100%"});
-     // $(".beneid").select2({width: "100%"});
-      
-
-
-
-});  */
-$(document).on('click','.darBaja',function(e){
-   var value = $(this).val();
+//del modal del motivo de eliminacion
+$("#btnsave3").click(function (e) {
+   //es ell id de peticion pude tambien elegido peticion_id de variable
+   var value = $('#delete_id').val();
   //Otra forma de realizar el get ajax 
   //token siempre para ingresar y modificar 
   $.ajaxSetup({
@@ -35,16 +14,24 @@ $(document).on('click','.darBaja',function(e){
             }
         })
 
-        e.preventDefault();     
+        e.preventDefault(); 
+        var formData = {
+          motivoCancelacion:$('#motivo').val(),
+          // delete_id:$('#delete_id').val(),
+           }   
+
+        console.log(formData);    
+    
     $.ajax({
             type: "PUT",
             url: '/peticiones/darBaja/'+value,
-            data: {'id':value},
+            data: formData,
             dataType: 'json',
             success: function (data) {
                 console.log(data);
+                $('#Modal4').modal('hide'); 
                 $("#msjshow").show();
-                $("#msjshow").html(" Registro <strong> Sin Finalizar</strong> ");
+                $("#msjshow").html(" Registro <strong> Cancelado</strong> ");
     
                  $("#trow" + value).remove();
                  //$("#count2").val()+1;
@@ -57,7 +44,13 @@ $(document).on('click','.darBaja',function(e){
                 console.log('Error al dar Baja:', data);
             }
        }); 
-    
+});
+
+$(document).on('click','.darBaja',function(e){
+  var value = $(this).val();
+  //es ell id de peticion pude tambien elegido peticion_id de variable
+  $('#delete_id').val(value);
+  $('#Modal4').modal('show'); 
 });
 
 $("#btnsave2").click(function (e) {
@@ -70,14 +63,15 @@ $("#btnsave2").click(function (e) {
 
         e.preventDefault(); 
         var formData = {
-          soli_id:$('#soli_id').val(),
-          titulo:$('#titulo').val(),
-          descripcion:$('#descripcion').val(),
-          bene_id:$('#bene_id').val(),
+          nombre:$('#nombre').val(),
+          fechaInicio:$('#fechaInicio').val(),
+          fechaFin:$('#fechaFin').val(),
+          presupuesto:$('#presupuesto').val(),
+          peticion_id:$('#peticion_id').val(),
            }       
 
         var type = "POST"; //for creating new resource
-        var my_url = "/solicitantes/createPeticion";
+        var my_url = "/peticiones/createProyecto";
         console.log(formData);
 
         $.ajax({
@@ -90,7 +84,7 @@ $("#btnsave2").click(function (e) {
                console.log(data);
               $('#Modal3').modal('hide');
               $("#msjshow").show();
-              $("#msjshow").html(" <strong>Bien hecho!</strong> Peticion guardada exitosamente");
+              $("#msjshow").html(" <strong>Bien hecho!</strong> Proyecto guardado exitosamente");
               setTimeout(function(){
                   $("#msjshow").hide();
                 $(location).attr('href','/peticiones');
@@ -103,46 +97,57 @@ $("#btnsave2").click(function (e) {
                 console.log('Error de peticion:', data);
                var errors=data.responseJSON;
                 console.log(errors);
-                if(errors.titulo!=undefined)
+                if(errors.nombre!=undefined)
                 {
-                  $('#titulofeed').text(errors.titulo);
+                  $('#nombrefeed').text(errors.nombre);
                   //$( '#nombrediv' ).removeClass();
-                  $( '#titulodiv' ).addClass("has-danger");
+                  $( '#nombrediv' ).addClass("has-danger");
                 }else{
-                  $( '#titulodiv' ).removeClass("has-danger");
-                  $( '#titulofeed' ).text("");
+                  $( '#nombrediv' ).removeClass("has-danger");
+                  $( '#nombrefeed' ).text("");
                   }
                   
-                if(errors.descripcion!=undefined)
+                if(errors.fechaInicio!=undefined)
                 {
-                  $( '#descripciondiv' ).addClass("has-danger");
-                  $('#descripcionfeed').text(errors.descripcion);
+                  $( '#fechaIniciodiv' ).addClass("has-danger");
+                  $('#fechaIniciofeed').text(errors.fechaInicio);
                 }else{
-                  $( '#descripciondiv' ).removeClass("has-danger");
-                  $( '#descripcionfeed' ).text("");
+                  $( '#fechaIniciodiv' ).removeClass("has-danger");
+                  $( '#fechaIniciofeed' ).text("");
                   }
-                
+
+                if(errors.fechaFin!=undefined)
+                {
+                  $( '#fechaFindiv' ).addClass("has-danger");
+                  $('#fechaFinfeed').text(errors.fechaFin);
+                }else{
+                  $( '#fechaFindiv' ).removeClass("has-danger");
+                  $( '#fechaFinfeed' ).text("");
+                  }
+
+                if(errors.presupuesto!=undefined)
+                {
+                  $( '#presupuestodiv' ).addClass("has-danger");
+                  $('#presupuestofeed').text(errors.presupuesto);
+                }else{
+                  $( '#presupuestodiv' ).removeClass("has-danger");
+                  $( '#presupuestofeed' ).text("");
+                  }
+                  
             }
         });
     });
 
-$(document).on('click','.peticionModal',function(){
+$(document).on('click','.proyectoModal',function(){
  var value = $(this).val();
   var output = "";
-   //Otra forma de realizar el get ajax el mismo de infomodal    
-    $.getJSON('/solicitantes/bus/beneficiarios', function (data) {
+   $("#peticion_id").val(value);
+    //Otra forma de realizar el get ajax el mismo de infomodal    
+    $.get('/peticiones/buscar1/' + value, function (data) {
           //success data
-            console.log(data);     
-            for (var i = 0; i < data.length; i++) {
-         //     $.each(data[i], function(key, val) {
-            //$("#tabla").append('<tr id="task"><td>"'+data[i].nombre+'"</td><td>"'+data[i].ide+'"</td></tr>');
-            $("#bene_id").append('<option value="' + data[i].id + '">' + data[i].nombre + ' ' + data[i].apellido + '</option>');
-         //   output += '<option value="' + data[i].ide + '">' + data[i].nombre + '</option>';
-       // });
-            };      
+            console.log(data);
+            $('#nombre').val(data.titulo);
            });
-   //$("#bene_id").html(output);
-   $("#soli_id").val(value);
    
    $('#Modal3').modal('show'); 
     });
@@ -167,17 +172,7 @@ $(document).on('click','.peticionModal',function(){
        });
  });
 ///////////////////fin busqueda
- $("#btnnuevo").click(function(){
-
-  $('#btnsave').val("add");
-  $("#btnsave").html("Nuevo");
-  $("#btnsave").removeClass("btn-success");
-  $("#exampleModalLabel").html("Registro Solicitante");
-  $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() +'</td><td>');
-    $('#frm').trigger('reset');
-    //$('#frmsocios')[0].reset();
-
- });
+ 
 
 ///////////editodal el boton es la clase infomodal por que id en el boton no agarraba por que repetia
 ///////////en el listado d la tabla
@@ -205,15 +200,15 @@ $(document).on('click','.infomodal',function(){
                  row +='<tr><td> Beneficiario: </td><td>' + data[i].nombreBen +' '+ data[i].apellidoBen + '</td>';
                  row +='<tr><td> DUI: </td><td>' + data[i].duiBen + '</td>';
                 row +='<tr><td> Estado: </td><td>' + data[i].estado + '</td>';
-                 row +='<tr><td> Creado en: </td><td>' + data[i].created_at + '</td>';
+                 row +='<tr><td> Fecha creacion: </td><td>' + data[i].created_at + '</td>';
+                 if(data[i].motivoCancelacion!=null)
+                  row +='<tr><td> Motivo de Cancelacion: </td><td>' + data[i].motivoCancelacion + '</td>';
+                 
+                 //row +='<tr><td> Periodo: </td><td>' + data[i].semestre + '</td>';
+                  
             
             };  
-                /*var row = '<tr><td width="45%"> Nombre: </td><td width="55%">' + data.nombre + '</td>';
-                 row +='<tr><td> Apellido: </td><td>' + data.apellido + '</td>';
-                 row +='<tr><td> DUI: </td><td>' + data.dui + '</td>';
-                 row +='<tr><td> Telefono: </td><td>' + data.telefono + '</td>';
-                 row +='<tr><td> Creado en: </td><td>' + data.created_at + '</td>';*/
-                  $("#tablainfo").append(row);            
+                   $("#tablainfo").append(row);            
             
             },
             error: function (data) {
@@ -223,26 +218,26 @@ $(document).on('click','.infomodal',function(){
    $('#myModal').modal('show'); 
     });
 
-///////////editodal el boton es la clase editmodal por que id en el boton no agarraba por que repetia
-///////////en el listado d la tabla
+///////////esto no o lleva peticiones pero estoy pensando en ponerlo para 
 $(document).on('click','.editModal',function(){
 //asi no funciona cuando retorno de ayax un boton la accion onclick 
  //$(".editModal").click(function(){
-  var form_id = $(this).val();
-    $("#form_id").val(form_id);
+  $("#noMostrar").hide();
+
+  var peticion_id = $(this).val();
+    $("#peticion_id").val(peticion_id);
     
     //Otra forma de realizar el get ajax el mismo de infomodal    
-    $.get('/solicitantes/buscar/' + form_id, function (data) {
+    $.get('/peticiones/buscar1/' + peticion_id, function (data) {
           //success data
             console.log(data);
-            $('#nombre').val(data.nombre);
-          $('#apellido').val(data.apellido);
-          $('#dui').val(data.dui);
-          $('#telefono').val(data.telefono);
+            $('#titulo').val(data.titulo);
+          $('#descripcion').val(data.descripcion);
            });
     //El boton para saber cambair de estado para guardar o modificar 
     $("#btnsave").val("update");
-    $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() + $("#form_id").val() +'</td><td>');
+
+    $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() + $("#peticion_id").val() +'</td><td>');
 
      $('#exampleModal').modal('show');
      //$("#btnsave").removClass("btn btn-primary");//.addClass("btn btn-secondary");
@@ -250,18 +245,18 @@ $(document).on('click','.editModal',function(){
      $("#btnsave").removeClass("btn-info");
      $("#btnsave").addClass("btn-success"); 
      ///titulo del modal
-     $("#exampleModalLabel").html("Modificar Solicitante");
+     $("#exampleModalLabel").html("Modificar Peticion");
       
     });
+
 $("#btnsavee").click(function (e) {
   $('#frm').submit();
 });
 
+//////en esta peticion solo modifica no hay pantallas de insercion solo de proyecto que esta arriba
+//////en btnsave2
   $("#btnsave").click(function (e) {
-    //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("messageform").value+'"</td><td>');
-  //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("nombre").value+'"</td><td>');
-      //$('#frmsocios').submit();  
-      $.ajaxSetup({
+    $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
@@ -271,23 +266,20 @@ $("#btnsavee").click(function (e) {
 
         var formData = {
           //nombre:document.getElementById("nombre").value,
-          //socio:$('#socio_id').val(),
-          nombre:$('#nombre').val(),
-          apellido:$('#apellido').val(),
-          dui:$('#dui').val(),
-          telefono:$('#telefono').val(),
+          titulo:$('#titulo').val(),
+          descripcion:$('#descripcion').val(),
            }       
 
         //used to determine the http verb to use [add=POST], [update=PUT]
         var state = $('#btnsave').val();
-        var type = "POST"; //for creating new resource
-        var form_id = $('#form_id').val();;
-        var my_url = "/solicitantes/create";
+        var type = "PUT"; //for creating new resource
+        var peticion_id = $('#peticion_id').val();;
+        var my_url = "/peticiones/update/"+peticion_id;
 
-       if (state == "update"){
+       /*if (state == "update"){
             type = "PUT"; //for updating existing resource
-            my_url = '/solicitantes/update/'+form_id;
-        }
+            my_url = '/peticiones/update/'+peticion_id;
+        }*/
 
         console.log(formData);
 
@@ -301,29 +293,15 @@ $("#btnsavee").click(function (e) {
                console.log(data);
               $('#exampleModal').modal('hide');
               $("#msjshow").show();
-              if(state=="add"){
-               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro guardado exitosamente (recargar pagina para ver cambios)");
-              }else{
-               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro editado exitosamente (recargar pagina para ver cambios)");  
-               }
+              
+               $("#msjshow").html(" <strong>Bien hecho!</strong> Registro tiulo "+data+" editado exitosamente");  
+               
 
-                //redirect('/socios');
-            if(state=="add"){
-                var row = '<tr><td>' + data.nombre + '</td>';
-                 row +='<td>' + data.apellido + '</td>';
-                 row +='<td>' + data.dui + '</td>';
-                 row +='<td>' + data.telefono + '</td>';       
-                 row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
-                 row += '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'+data.id+'">Editar</button> ';
-                 row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
-                 row +='</td></tr>';
-                //var task='<tr id="task"><td>rregre</td><td>';
-                 $("#tabla").append(row);
-               }
-
+               
                 setTimeout(function(){
                   $("#msjshow").hide();
-                //$(location).attr('href','/socios');
+                //$(location).attr('href','/peticiones');
+                window.location.reload();
                 }, 4000);
 
                 /*if (state == "add"){ //if user added a new record
@@ -341,42 +319,25 @@ $("#btnsavee").click(function (e) {
                 console.log('Error de noseq:', data);
                var errors=data.responseJSON;
                 console.log(errors);
-                if(errors.nombre!=undefined)
+               if(errors.titulo!=undefined)
                 {
-                  $('#nombrefeed').text(errors.nombre);
+                  $('#titulofeed').text(errors.titulo);
                   //$( '#nombrediv' ).removeClass();
-                  $( '#nombrediv' ).addClass("has-danger");
+                  $( '#titulodiv' ).addClass("has-danger");
                 }else{
-                  $( '#nombrediv' ).removeClass("has-danger");
-                  $( '#nombrefeed' ).text("");
+                  $( '#titulodiv' ).removeClass("has-danger");
+                  $( '#titulofeed' ).text("");
                   }
                   
-                if(errors.apellido!=undefined)
+                if(errors.descripcion!=undefined)
                 {
-                  $( '#apellidodiv' ).addClass("has-danger");
-                  $('#apellidofeed').text(errors.apellido);
+                  $( '#descripciondiv' ).addClass("has-danger");
+                  $('#descripcionfeed').text(errors.descripcion);
                 }else{
-                  $( '#apellidodiv' ).removeClass("has-danger");
-                  $( '#apellidofeed' ).text("");
+                  $( '#descripciondiv' ).removeClass("has-danger");
+                  $( '#descripcionfeed' ).text("");
                   }
-
-                if(errors.dui!=undefined)
-                {
-                 $( '#duidiv' ).addClass("has-danger");
-                 $('#duifeed').text(errors.dui);
-                }else{
-                  $( '#duidiv' ).removeClass("has-danger");
-                  $( '#duifeed' ).text("");
-                  }
-
-                if(errors.telefono!=undefined)
-                {
-                  $( '#telefonodiv' ).addClass("has-danger");
-                  $('#telefonofeed').text(errors.telefono);
-                }else{
-                  $( '#telefonodiv' ).removeClass("has-danger");
-                  $( '#telefonofeed' ).text("");
-                  }
+                
                 
             }
         });

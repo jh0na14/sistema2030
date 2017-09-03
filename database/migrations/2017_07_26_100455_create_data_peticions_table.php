@@ -18,6 +18,9 @@ class CreateDataPeticionsTable extends Migration
           $table->foreign('idbeneficiarios')->references('id')->on('beneficiarios');
           $table->integer('idsolicitantes')->unsigned();
           $table->foreign('idsolicitantes')->references('id')->on('solicitantes');
+          $table->integer('idperiodos')->unsigned();
+          $table->foreign('idperiodos')->references('id')->on('periodos');
+            
         
         });
     }
@@ -32,6 +35,7 @@ class CreateDataPeticionsTable extends Migration
         Schema::table('peticions', function (Blueprint $table) {
            $table->dropColumn('idbeneficiarios');
            $table->dropColumn('idsolicitantes');
+           $table->dropColumn('idperiodos');
        
         });
     }

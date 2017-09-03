@@ -33,6 +33,14 @@ class createPeticionRequest extends FormRequest
                   ]; 
 
                 break;
+              }case 'PUT':
+              {
+             return [
+                'titulo' => ['required','max:30'],
+                'descripcion' => ['required','max:100'],
+                 ]; 
+
+                break;
               }
             
             default:

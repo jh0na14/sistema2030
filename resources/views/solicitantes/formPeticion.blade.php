@@ -1,8 +1,11 @@
 <form id="frm" name="frmsocios" action="/socios/create" method="post">
-         <input type="hidden" id="soli_id" name="soli_id" value="0">
+  {{-- soli de solicitante por que es el id que necesito para metern en peticion sera este id
+        el foranero de la tabla peticion --}}
+         
+         <input type="hidden"  id="soli_id" name="soli_id" value="0">
 <div class="card">
   <div class="card-block">
-    <div class="row"><h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Formulario</h6></div>       
+    <div class="row"><h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;"></h6></div>       
     <div  id="titulodiv" class="form-group row @if($errors->has('nombre')) has-danger @endif" >
         <label for="example-text-input" class="col-3 col-form-label ">Titulo: *</label>
         <div class="col-9 " >
@@ -25,6 +28,7 @@
             <div id="descripcionfeed" class="form-control-feedback"></div>                   
         </div>
     </div>
+    <div id="noMostrar">{{-- esta para la hora de modificar peticion solo muestre dos coampos a modificar --}}
     <div class="form-group row">
         <label for="example-email-input" class="col-3 col-form-label ">Beneficiario:*</label>
         <div class="col-8">
@@ -41,6 +45,8 @@
        </div>
 
     </div>
+    </div>
+
 </div>
 </div>
 </form>
