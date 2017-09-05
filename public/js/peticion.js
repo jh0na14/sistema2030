@@ -28,7 +28,15 @@ $("#btnsave3").click(function (e) {
             data: formData,
             dataType: 'json',
             success: function (data) {
-                console.log(data);
+              console.log(data);
+              if(data.validar!=undefined){
+                  $('#motivofeed').text(data.validar);
+                  $( '#motivodiv' ).addClass("has-danger");                
+                }else{
+                  $( '#motivodiv' ).removeClass("has-danger");
+                  $( '#motivofeed' ).text("");
+                  $('#motivo').val("");
+                
                 $('#Modal4').modal('hide'); 
                 $("#msjshow").show();
                 $("#msjshow").html(" Registro <strong> Cancelado</strong> ");
@@ -39,6 +47,7 @@ $("#btnsave3").click(function (e) {
                   $("#msjshow").hide();
                 //$(location).attr('href','/socios');
                 }, 4000);
+                }//fin else
             },
             error: function (data) {
                 console.log('Error al dar Baja:', data);

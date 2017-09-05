@@ -183,6 +183,10 @@ class peticionesController extends Controller
     }
     
     public function darBaja(Request $request,$id){
+      if($request->input('motivoCancelacion')==""){
+       $array = array('validar' => 'el campo motivo es obligatorio', );
+       return Response::json($array);
+           }
     	$message = peticion::find($id);//all()->where('id',"=",$socio_id);
         $message->fill([
             'estado'=>'Cancelado',
