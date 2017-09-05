@@ -164,11 +164,19 @@ $(document).on('click','.proyectoModal',function(){
 ////////////////Esto para busqueda de search
  $("#search").on('keyup',function(){
     var value = $(this).val();
+    var value2=$("#periodoActual").val();
+    $("#theadrow").empty();
+        $("#theadrow").html('<tr><th style="text-align: center" class="center ">#</th>'+
+              '<th class="center " style="text-color:#000000;">Titulo</th>'+
+              '<th class="center ">Descripcion</th>'+
+              '<th class="center ">Estado</th>'+
+              '<th style="text-align: center">Accion</th>'+
+          '</tr>');
      $.ajax({
 
             type: "GET",
-            url: '/peticiones/busqueda/'+value,
-            data: {'search':value},
+            url: '/peticiones/busqueda/'+value+'/'+value2,
+            data: {search:value,semestre:value2},
             dataType: 'json',
             success: function (data) {
                 console.log(data);
@@ -181,7 +189,41 @@ $(document).on('click','.proyectoModal',function(){
        });
  });
 ///////////////////fin busqueda
- 
+$(document).on('click','.infoProyecto',function(){
+       var form_id = $(this).val();
+       $("#myModalLabel").html('Datos de Proyecto');
+        $("#tablainfo").empty();
+        $.ajax({
+
+            type: "GET",
+            url: '/peticiones/buscarinfoProyecto/'+form_id,
+            data: form_id,
+            dataType: 'json',
+            success: function (data) {
+                console.log(data);
+                
+         for (var i = 0; i < data.length; i++) {
+                 var row = '<tr><td width="25%"> Nombre Proyecto: </td><td width="55%">' + data[i].nombre + '</td>';
+                 row +='<tr><td> Descripcion: </td><td>' + data[i].descripcion + '</td>';
+                 row +='<tr><td> Tipo: </td><td>' + data[i].tipo +'</td>';
+                 row +='<tr><td> Presupuesto Estimado: </td><td>$ ' + data[i].presupuesto + '</td>';
+                 row +='<tr><td> Fecha Inicio: </td><td>'+ data[i].fechaInicio + '</td>';
+                 row +='<tr><td> fecha Fin: </td><td>' + data[i].fechaFin + '</td>';
+                // if(data[i].motivoCancelacion!=null)
+                 
+                 //row +='<tr><td> Periodo: </td><td>' + data[i].semestre + '</td>';
+                  
+            
+            };  
+                   $("#tablainfo").append(row);            
+            
+            },
+            error: function (data) {
+                console.log('Error de info boton:', data);
+            }
+       });
+   $('#myModal').modal('show'); 
+    }); 
 
 ///////////editodal el boton es la clase infomodal por que id en el boton no agarraba por que repetia
 ///////////en el listado d la tabla
@@ -190,7 +232,7 @@ $(document).on('click','.infomodal',function(){
 // $(".infomodal").click(function(){
       $("#tabla").append('<tr id="task"><td>info</td><td>');
        var form_id = $(this).val();
-       
+       $("#myModalLabel").html('Datos de Personales');
         $("#tablainfo").empty();
         $.ajax({
 
@@ -199,6 +241,7 @@ $(document).on('click','.infomodal',function(){
             data: form_id,
             dataType: 'json',
             success: function (data) {
+
                 console.log(data);
          for (var i = 0; i < data.length; i++) {
                  var row = '<tr><td width="25%"> Peticion #: </td><td width="55%">' + data[i].id + '</td>';

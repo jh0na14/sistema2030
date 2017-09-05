@@ -151,7 +151,20 @@ class peticionesController extends Controller
 
       //return response(json($array));
     }       
+  
+   public function buscarinfoProyecto($id){
+     $message =DB::table('proyectos')
+       ->join('peticions', 'proyectos.idpeticions', '=', 'peticions.id')
+          ->select('proyectos.*',
+            'peticions.descripcion'
+            )
+          //->select()
+          ->where('peticions.id',$id)
+          //->paginate(8)
+          ->get();
+    return Response::json($message);
 
+    } 
     public function buscar1($id){
       $message = peticion::find($id);
     return Response::json($message);
@@ -247,37 +260,42 @@ class peticionesController extends Controller
             return Response::json($messages);
         
     }//fin busqueda
-     public function busqueda($texto){
+     public function busqueda($texto,$semestre){
+        $idperiodo=periodo::where('semestre',$semestre)->get()->first();
         $output="";
         $messages=peticion::where('titulo','like','%'.$texto.'%')
+        ->where('idperiodos',$idperiodo->id)
         ->limit(6)
         //->orWhere('descripcion','like','%'.$texto.'%')
         ->get();
+        $contador=1;
         if($messages){
             foreach ($messages as $key => $message) {
-                if($message->estado=='Disponible')
-                {
-                    $sAc='<tr id="'.$message->id.'">
-      <td style="font-size:14px">#'.$message->id.'</td> 
-			<td>'.$message->titulo.'</td>
-			<td >'.$message->descripcion.'</td>
-			<td class="text-center">
-        <button type="button" class="btn btn-outline-primary btn-sm peticionModal" value="'.$message->id.'">Crear Proyecto</button>
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">Info</button>
-				<button type="button" class="btn btn-outline-danger btn-sm darBaja" value="'.$message->id.'">Eliminar</button>
-			</td>
+                //if($message->estado=='Disponible')
+               // {
+                   $output.='<tr id="trow'.$message->id.'">
+      <td style="font-size:14px">#'.$contador++.'</td> 
+      <td>'.$message->titulo.'</td>
+      <td style="font-size:14px">'.$message->descripcion.'</td>
+      <th class="center" style="font-size:14px">'.$message->estado.'</th>
+      <td class="text-center">';
+     // $sAc.=$sAc;
+        if($message->estado=='Disponible'){
+       $output.='<button type="button" class="btn btn-outline-primary btn-sm proyectoModal" value="'.$message->id.'">Crear Proyecto</button> ';
+        }       
+        if($message->estado=='En Progreso' || $message->estado=='Finalizado'){
+       $output.='<button type="button" class="btn btn-outline-info btn-sm infoProyecto" value="'.$message->id.'">Info Proyecto</button> ';
+        }
+        $output.='<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">Info Peticion</button>';
+        if($message->estado=="Disponible"){
+        $output.='<button type="button" class="btn btn-outline-success btn-sm editModal" value="'.$message->id.'">Editar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm darBaja" value="'.$message->id.'">Cancelar</button>';
+        }
+       $output.='</td>
         </tr>';
-                }else{
-            $sAc='<tr id="'.$message->id.'">
-      <td style="font-size:14px">#'.$message->id.'</td> 
-			<td>'.$message->titulo.'</td>
-			<td >'.$message->descripcion.'</td>
-			<td class="text-center">
-        <button type="button" class="btn btn-outline-primary btn-sm peticionModal" value="'.$message->id.'">Crear Proyecto</button>
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">Info</button>
-			</td>
-        </tr>';    }
-               $output.=$sAc;        
+               // }else{
+            
+               //$output.=$sAc;        
         }
             return Response::json($output);
         }

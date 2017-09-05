@@ -36,7 +36,7 @@
        @if($estado=='En Progreso')active @endif ">En Progreso <span class="badge badge-default badge-pill"></span>
       </a>
       <a href="/peticiones/2" id="count2" class="list-group-item list-group-item-action justify-content-between
-       @if($estado=='Finalizado')list-group-item-danger active @endif ">Finalizados<span class="badge badge-default badge-pill"></span>
+       @if($estado=='Finalizado')list-group-item-success active @endif ">Finalizados<span class="badge badge-default badge-pill"></span>
       </a>
       <a href="/peticiones/3" id="count" class="list-group-item list-group-item-action justify-content-between
        @if($estado=='Cancelado')list-group-item-danger active @endif ">Cancelados<span class="badge badge-default badge-pill"></span>
@@ -116,7 +116,7 @@
 	        
 	        </tr>--}}
 	</thead>
-	<thead >
+	<thead id="theadrow" name="theadrow">
 	        <tr>
             <th style="text-align: center" class="center ">#</th>
 	        {{--	--}}<th class="center " style="text-color:#000000;">Titulo</th>
@@ -130,21 +130,26 @@
 	           	--}}
 	           	<th style="text-align: center">Accion</th>
 	        </tr>
+
 	</thead>
 	<tbody id="tabla" name="tabla">
-		@forelse($peticiones as $peticion)
+    <div style="display:none;">{{ $contador=0 }}</div>
+    @forelse($peticiones as $peticion)
 		<tr id="trow{{ $peticion->id }}">
-      <td style="font-size:14px">#{{ $peticion->id }}</td> 
+      <td style="font-size:14px">#{{ $contador+=1 }}</td> 
 			<td>{{ $peticion->titulo }}</td>
 			<td style="font-size:14px">{{ $peticion->descripcion }}</td>
 			<td class="text-center">
         @if($peticion->estado=='Disponible')
         <button type="button" class="btn btn-outline-primary btn-sm proyectoModal" value="{{ $peticion->id }}">Crear Proyecto</button>
 				@endif
-        <button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">Info</button>
-
-        <button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $peticion->id }}">Editar</button>
+        @if($peticion->estado=='En Progreso' || $peticion->estado=='Finalizado')
+        <button type="button" class="btn btn-outline-info btn-sm infoProyecto" value="{{ $peticion->id }}">Info Proyecto</button>
+        @endif
+        <button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">Info Peticion</button>
+        
 				@if($peticion->estado=='Disponible')
+        <button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $peticion->id }}">Editar</button>
         <button type="button" class="btn btn-outline-danger btn-sm darBaja" value="{{ $peticion->id }}">Cancelar</button>
         @endif
        </td>
@@ -170,8 +175,9 @@
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                             <h5 class="modal-title" id="myModalLabel">Datos Personales</h4>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            
                         </div>
                         <div class="modal-body">
                             <div class="">
@@ -264,7 +270,7 @@
         </div>
       </div>
        <input type="hidden" class="form-control" type="text"  id="delete_id" name="delete_id">
-          
+       <input  class="form-control" type="text"  id="periodoActual" name="periodoActual" value="{{ $periodoActual }}">   
            </form>
 
         </div>
