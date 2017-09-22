@@ -26,6 +26,14 @@ Route::get('/socios/busqueda/{socio_id?}','sociosController@busqueda');
 Route::put('/socios/darBaja/{id?}','sociosController@darBaja');
 Route::put('/socios/darAlta/{id?}','sociosController@darAlta');
 
+Route::get('/sociospago','sociosPagoController@show');
+Route::get('/sociospago/{tipoSocio}','sociosPagoController@showEstado');
+Route::get('/sociospago/buscar/{socio_id?}','sociosPagoController@buscar');
+Route::get('/sociospago/busqueda/{socio_id?}','sociosPagoController@busqueda');
+
+Route::get('/pagos/{socio_id}','pagosController@show');
+Route::get('/pagos/{socio_id}/{anho}','pagosController@showParametros');
+
 Route::get('/periodos','periodosController@show');
 Route::get('/periodos/buscar/{id?}','periodosController@buscar');
 Route::post('/periodos/create','periodosController@create');
@@ -55,10 +63,18 @@ Route::put('/peticiones/update/{id?}','peticionesController@update');
 Route::get('/peticiones/busqueda/{texto?}/{semestre}','peticionesController@busqueda');
 Route::put('/peticiones/darBaja/{id?}','peticionesController@darBaja');
 Route::get('/peticiones/buscar/{id?}','peticionesController@buscar');
-Route::get('/peticiones/buscarinfoProyecto/{id?}','peticionesController@buscarinfoProyecto');
 Route::get('/peticiones/buscar1/{id?}','peticionesController@buscar1');
+Route::get('/peticiones/buscarinfoProyecto/{id?}','peticionesController@buscarinfoProyecto');
 Route::get('/peticiones/{estado?}/{semestre?}','peticionesController@showParametros');
 Route::post('/peticiones/createProyecto','peticionesController@createProyecto');
+
+Route::get('/proyectos','proyectoController@show');
+Route::get('/proyectos/{estado}','proyectoController@showEstado');
+Route::get('/proyectos/{estado?}/{semestre?}','proyectoController@showParametros');
+Route::post('/proyectos/createDonacion','proyectoController@createDonacion');
+
+Route::get('/donaciones','donacionController@show');
+Route::get('/donaciones/{estado}','donacionController@showEstado');
 
 Route::get('/patrocinador','patrocinadorController@show');
 Route::get('/patrocinador/buscar/{id?}','patrocinadorController@buscar');

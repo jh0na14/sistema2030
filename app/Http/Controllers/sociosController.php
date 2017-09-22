@@ -5,13 +5,18 @@
 
 namespace App\Http\Controllers;
 use App\socio;
+use App\sociomembresia;
+use App\membresia;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\CreateSociosRequest;
 use Illuminate\Http\Request;
+use DateTime;
 //use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\DB;
 
 class sociosController extends Controller
 {
+
     public function show(){
     	 //->where('name', 'John')->value('email');
     	//$socios=DB::table('socios')->where('tipoSocio','=',"Socio Activo");//>paginate(10);
@@ -99,11 +104,35 @@ class sociosController extends Controller
     		'cargo'=> $request->input('cargo'),
             'estado'=>'Activo',
     		]);
-		//$response = socio::create($request->all());	
+        $idsocio=socio::where('dui',$request->input('dui'))->get()->first();//->pluck('id')->get()->first();
+        $x=$request->input('fechaNac');
+        
+       // $date = DateTime::createFromFormat("Y-m-d", $x);
+        $date = new DateTime();
+        $numeroAnho=$date->format("Y");
+       $numeroMes=$date->format("n");
+        $pagos=membresia::where('año',$numeroAnho)->get();
+		foreach($pagos as $pago)
+        {
+            $var='CANCELADO';
+            //$idsocios=$idsocio->id;
+            if($pago->numMes>9){
+                $var='PENDIENTE';
+            }
+            sociomembresia::create([
+            'idmembresias'=> $pago->id,
+            'idsocios'=> $idsocio->id,
+            'fechaPago'=> $request->input('fechaNac'),
+            'estado'=>$var,
+            ]);
+           
+        }	
    		 
     	//dd($message);
     	 //$response = socio::create($request->all());	
    		 //dd($response);
+
+        return Response::json($pagos);
     	return Response::json($message);
     	
     	

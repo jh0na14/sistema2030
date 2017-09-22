@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')	
 
+<?php use App\Http\Controllers\sociosPagoController;
+	?>
 	<div class="row" style="padding-bottom:10px;">
 		
 	</div>
@@ -8,9 +10,14 @@
 	
 	<ul class="nav nav-tabs">
 		<li class="nav-item  active">
-			<a class="nav-link active" href="/pagos/pagoAnho">Socios</a>
+			<a class="nav-link active">Socios</a>
 		<li>
+		<li class="nav-item  active">
+			<a class="nav-link ">Pagos</a>
+		<li>
+	
 	</ul>
+
 	{{--<ul class="breadcrumb">
 <li class="breadcrumb-item"><a href="#">Home</a></li>
 <li class="breadcrumb-item"><a href="#">Fruit</a></li>
@@ -24,7 +31,7 @@
 <div style="clear:both; padding-bottom:35px;">
   </div>
 			{{--<div class="list-group" style="padding-bottom:25px;">
-			<a href="/pagos/index/" class="list-group-item active">Carreras</a>
+			<a href="/sociospago/index/" class="list-group-item active">Carreras</a>
 	 		<a href="/pagos/index/1092" class="list-group-item">Ingeniería de Sistemas Informáticos</a>
 	 	</div>--}}
 		<div class="list-group " class="padding-bottom:25px;">
@@ -34,13 +41,11 @@
 <a href="#" class="list-group-item list-group-item-action list-group-item-info active">These Boots Are </a>	
 --}}
 				<div>
-				<a href="/socios/1" id="count0"  class="list-group-item list-group-item-action justify-content-between
+				<a href="/sociospago/1" id="count0"  class="list-group-item list-group-item-action justify-content-between
 				 @if($tipoSocio=='Socio Activo')active @endif">Socio Activo<span class="badge badge-default badge-pill">{{$count0}}</span></a></div>
-				<a href="/socios/2" id="count" class="list-group-item justify-content-between
+				<a href="/sociospago/2" id="count" class="list-group-item justify-content-between
 				@if($tipoSocio=='Activo Mayor' ) active @endif">Activo Mayor <span class="badge badge-default badge-pill">{{$count}}</span></a>
-				<a href="/socios/3" id="count2" class="list-group-item justify-content-between
-				@if($estado=='Inactivo')active @endif">Inactivos<span class="badge badge-default badge-pill">{{$count2}}</span></a>
-				
+						
 			</div>	
 	</div>
 	
@@ -78,17 +83,14 @@
  	 	
 	</div>--}}
  		<div class="row" >
- 		<div class="col-2" style="clear:both; padding-top:15px;">
-  			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
-			Nuevo</button>	
-     	</div>
-     	<div class="col-4">
+ 		
+     	<div class="col-4 offset-2">
   			<label style="text-align:left; font-weight:bold; font-size:20px; "> </label>	
      	</div>
      	<div class="form-group row col-6">
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1"> Buscar </label>
   			<div class="col-9 offset-1 ">
-      				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
+      				<input class="form-control" placeholder="Buscar" type="text" id="search2" name="search2" autofocus>             
   				</div>
   	  
 		</div>
@@ -116,7 +118,7 @@
 	           	<th>A&ntilde;o</th>--}}
 	           	<th>Email</th>
 	           	{{--<th style="text-align: center">Tipo</th>
-	           	--}}<th class="text-center">Telefono</th>
+	           	--}}<th class="text-center">Deuda</th>
 	           	<th style="text-align: center">Estado</th>
 	        </tr>
 	</thead>
@@ -129,18 +131,12 @@
 			<td >{{ $socio->apellido }}</td>--}}
 			<td>{{ $socio->email }}</td>
 			{{--<td class="text-center">{{ $socio->tipoSocio }}</td>
-			--}}<td style="font-size:14px" class="text-center" >{{$socio->telefono}}</td>
+			--}}<td style="font-size:14px" class="text-center" >{{ sociosPagoController::verDeuda($socio->id) }}</td>
 			<td class="text-center">
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->id }}">Info</button>
-				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $socio->id }}">Editar</button>
 				@if($socio->estado=='Activo')
-				<button type="button" class="btn btn-outline-danger btn-sm darBaja" value="{{ $socio->id }}">Dar Baja</button>
+				<button type="button" class="btn btn-outline-warning btn-sm pagosAccion" value="{{ $socio->id }}" >Pagos</button>
 				@endif
-				
-				@if($socio->estado=='Inactivo')
-				<button type="button" class="btn btn-outline-primary btn-sm darAlta" value="{{ $socio->id }}">Dar Alta</button>
-				@endif
-				
+				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->id }}">Info</button>				
 			</td>
 
         </tr>
@@ -164,8 +160,9 @@
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                            
                             <h5 class="modal-title" id="myModalLabel">Datos Personales</h4>
+                            	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                         </div>
                         <div class="modal-body">
                             <div class="">
@@ -190,7 +187,7 @@
        </div>
    </div>
 {{-- //////////////FIN MODLA--}}
-<!-- Modal -->
+<!-- Modal no lo uso en esta pantalla-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg " role="document">
     <div class="modal-content">
@@ -226,6 +223,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/socios.js')}}"></script>
+  <script src="{{asset('js/sociospago.js')}}"></script>
 
 @endsection

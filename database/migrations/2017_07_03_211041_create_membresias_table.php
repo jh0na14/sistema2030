@@ -18,8 +18,7 @@ class CreateMembresiasTable extends Migration
             $table->double('monto');
             $table->string('mes');
             $table->integer('año');
-            $table->enum('estado',array('CANCELADO','PENDIENTE'));
-                               
+            $table->integer('numMes');
             $table->timestamps();
         });
     }

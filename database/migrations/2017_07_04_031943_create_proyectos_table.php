@@ -19,7 +19,7 @@ class CreateProyectosTable extends Migration
             $table->date('fechaInicio');
             $table->date('fechaFin');
             $table->enum('tipo',array('Recaudacion','Donacion'));
-            $table->enum('estado',array('Programado','Sin finalizar','Finalizado'));
+            $table->enum('estado',array('Programado','Cancelado','Finalizado'));
             $table->double('presupuesto');
             $table->integer('idrecaudacions')->unsigned()->nullable()->default(null);
             $table->foreign('idrecaudacions')->references('id')->on('recaudacions');

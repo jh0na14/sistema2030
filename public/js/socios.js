@@ -90,6 +90,8 @@ $(document).on('click','.darAlta',function(e){
  });
 ///////////////////fin busqueda
 
+
+
  $("#btnnuevo").click(function(){
 
   $('#btnsave').val("add");

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\periodo;
 use App\socio;
+use App\membresia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\createPeriodosRequest;
@@ -34,6 +35,7 @@ class periodosController extends Controller
         $x=$request->input('fechaInicio');
         
         $date = DateTime::createFromFormat("Y-m-d", $x);
+        $numeroAnho=$date->format("Y");
         $fecha=$request->input('semestre')."-".$date->format("Y");
         if(periodo::where('semestre',$fecha)->first()){
             $array = array('validar' => 'Hay un periodo ya con esos datos', );
@@ -41,13 +43,41 @@ class periodosController extends Controller
             
         }
         // return Response::json($request->input('semestre')."-".$date->format("Y"));
-       //$message= periodo::create($request->all());
+       
+        $meses = array('1' =>'Enero' ,
+            '2' =>'Febrero' ,
+            '3' =>'Marzo' ,
+            '4' =>'Abril' ,
+            '5' =>'Mayo' ,
+            '6' =>'Junio' ,
+            '7' =>'Julio' ,
+            '8' =>'Agosto' ,
+            '9' =>'Septiembre' ,
+            '10' =>'Octubre' ,
+            '11' =>'Nombiembre' ,
+            '12' =>'Diciembre' ,
+         );
+        if(membresia::where('año',$numeroAnho)->first()){
+            //no hacer nada
+        }else{
+            for ($i=1 ;$i <=12 ; $i++) { 
+                $messageMembresia=membresia::create([
+                'monto'=> 3.50,
+                'mes'=> $meses[$i],
+                'año'=> $numeroAnho,
+                'numMes'=> $i,
+                ]);
+            }//fin for
+        }//fin else
+        //$message= periodo::create($request->all());
         $message= periodo::create([
             'fechaInicio'=> $request->input('fechaInicio'),
             'fechaFin'=> $request->input('fechaFin'),
             'semestre'=> ($fecha),
             'estado'=>'Iniciado',
             ]); 
+
+        
        return Response::json($message);
     	
     	

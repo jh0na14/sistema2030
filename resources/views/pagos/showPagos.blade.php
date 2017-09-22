@@ -5,14 +5,9 @@
 
 	<ul class="nav nav-tabs">
 		<li class="nav-item ">
-			<a class="nav-link" href="/beneficiarios">Beneficiarios</a>
+			<a class="nav-link active" href="/beneficiarios">Pagos</a>
 		<li>
-	    <li class="nav-item ">
-			<a class="nav-link  " href="/solicitantes">Solicitantes</a>
-		<li>
-    <li class="nav-item ">
-      <a class="nav-link active" href="/peticiones">Peticiones</a>
-    <li>
+	   
 
 	</ul>
 
@@ -22,54 +17,23 @@
 <div style="clear:both; padding-bottom:15px;">
   </div>
      
-    <div class="list-group " class="padding-bottom:25px;">
-
-  {{--   <li href="/pagos/index/" class="list-group-item list-group-item-action list-group-item-info active">Estado</li>
-      
- <a href="#" class="list-group-item list-group-item-action list-group-item-info active">These Boots Are </a> 
---}}
-      <a href="/peticiones" id="count" class="list-group-item list-group-item-action justify-content-between
-        @if($estado=='Disponible')active  @endif">Disponibles <span class="badge badge-default badge-pill"></span>
-      </a>
-      <a href="/peticiones/1" id="count" class="list-group-item list-group-item-action justify-content-between
-       @if($estado=='En Progreso')active @endif ">En Progreso <span class="badge badge-default badge-pill"></span>
-      </a>
-      <a href="/peticiones/2" id="count2" class="list-group-item list-group-item-action justify-content-between
-       @if($estado=='Finalizado')list-group-item-success active @endif ">Finalizados<span class="badge badge-default badge-pill"></span>
-      </a>
-      <a href="/peticiones/3" id="count" class="list-group-item list-group-item-action justify-content-between
-       @if($estado=='Cancelado')list-group-item-danger active @endif ">Cancelados<span class="badge badge-default badge-pill"></span>
-      </a>
-        
-      </div> 
-      
+         
       <div style="clear:both; padding-bottom:15px;">
       </div>
       
       <div class="list-group " class="padding-bottom:25px;">
 
-    <li class="list-group-item list-group-item-action list-group-item-info active">Semestre</li>
+    <li class="list-group-item list-group-item-action list-group-item-info active">Periodo</li>
        
    {{--   <a href="#" class="list-group-item list-group-item-action list-group-item-info active">These Boots Are </a> 
 --}}
-        @forelse($periodos as $periodo)
+        @forelse($anhos as $anho)
         <div style="display:none;">
-            @if($estado=='Disponible'){{ $x=1 }}@endif
-            @if($estado=='En Progreso'){{ $x=2 }}@endif
-            @if($estado=='Finalizado'){{ $x=3 }} @endif 
-            $h={{ $periodo->id }}
+            $h={{ $anho->año }}
         </div>
-        {{--  Para que no se vea en el navegador Sin%20Fnalizar --}}
-        @if($estado=='En Progreso')
-       <a href="/peticiones/EnProgreso/{{ $periodo->semestre }}" class="list-group-item list-group-item-action justify-content-between"><span class="badge badge-default badge-pill"></span>
-      {{ $periodo->semestre }}
+       <a href="/pagos/{{ $idsocio }}/{{ $anho->año }}" class="list-group-item list-group-item-action justify-content-between"><span class="badge badge-default badge-pill"></span>
+      {{ $anho->año }}
       </a>
-      @else
-      <a href="/peticiones/{{ $estado }}/{{ $periodo->semestre }}" class="list-group-item list-group-item-action justify-content-between"><span class="badge badge-default badge-pill"></span>
-      {{ $periodo->semestre }}
-      </a>
-      @endif
-      
         @empty
         <p>No hay mensajes destacados</p>
         @endforelse       
@@ -80,7 +44,7 @@
 
  	<div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Peticiones a Club Activo 20-30 <strong class="text-danger">PERIODO {{ $periodoActual }}</strong></h6>
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Pagos de {{ $nombreSocio }} <strong class="text-danger">            DEUDA: {{ $deuda }} </strong></h6>
         
 
  		<div class="row" >
@@ -89,84 +53,72 @@
 			Nuevo</button>	
      	</div>
      	<div class="col-4">
-  			<label style="text-align:left; font-weight:bold; font-size:20px; ">Beneficiarios de Club Activo 20-30 </label>	
+  			<label style="text-align:left; font-weight:bold; font-size:20px; ">Donaciones de Club Activo 20-30 </label>	
      	</div>--}}
       <div class="col-6">
-        <label style="text-align:left; font-size:18px; ">Se pueden realizar proyectos para luego calendarizarlos</label>  
+        <label style="text-align:left; font-size:18px; "></label>  
       </div>
-     	<div class="form-group row col-6 ">
- 	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
+     	{{--<div class="form-group row col-6 ">
+ 	        <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
   			<div class="col-9 offset-1 ">
       				<input class="form-control" placeholder="Buscar" type="text" id="search" name="search" autofocus>             
   				</div>
   	  
-		</div>
+		</div>no lleva buscador este de donaciones por ser pocos --}}
   	  </div>
 <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
         <strong>Well done!</strong> You successfully read this important alert message.
     </div>
- 	<table class="table {{--table-bordered--}}  table-hover table-sm " align="center">
-	<thead >
-	 {{-- <tr>
-	            <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"> DE CLUB ACTIVO 20-30</th>
-	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
-	            	
-	            </th>
-	        
-	        </tr>--}}
-	</thead>
-	<thead id="theadrow" name="theadrow">
-	        <tr>
-            <th style="text-align: center" class="center ">#</th>
-	        {{--	--}}<th class="center " style="text-color:#000000;">Titulo</th>
-	           	<th class="center ">Descripcion</th>
-	            {{--<th class="center ">Estado</th>
-	           	
-	           	
-	           	<th>A&ntilde;o</th>--}}
-	          
-	           	{{--<th style="text-align: center">Tipo</th>
-	           	--}}
-	           	<th style="text-align: center">Accion</th>
-	        </tr>
 
-	</thead>
-	<tbody id="tabla" name="tabla">
+<table class="table table-bordered  table-hover table-sm " align="center">
+  <thead id="theadrow" name="theadrow">{{-- no lo ocupo el id este por el momento --}}
+          <tr>
+            <th class="center " style="text-color:#000000;">Fecha</th>
+            <th class="center" >Meses</th>
+            <th class="center " style="text-color:#000000;">Monto</th>
+            
+            
+            <th class="center">Año</th>
+            {{--@if($tipo=='Realizada')   @endif --}}       
+            <th style="text-align: center">Estado</th>
+           
+            <th style="text-align: center">Accion</th>
+          </tr>
+  </thead>
+  <tbody id="tabla" name="tabla">
     <div style="display:none;">{{ $contador=0 }}</div>
-    @forelse($peticiones as $peticion)
-		<tr id="trow{{ $peticion->id }}">
-      <td style="font-size:14px">#{{ $peticion->id }}</td> 
-			<td>{{ $peticion->titulo }}</td>
-			<td style="font-size:14px">{{ $peticion->descripcion }}</td>
-			<td class="text-center">
-        @if($peticion->estado=='Disponible')
-        <button type="button" class="btn btn-outline-primary btn-sm proyectoModal" value="{{ $peticion->id }}">Crear Proyecto</button>
-				@endif
-        @if($peticion->estado=='En Progreso' || $peticion->estado=='Finalizado')
-        <button type="button" class="btn btn-outline-info btn-sm infoProyecto" value="{{ $peticion->id }}">Info Proyecto</button>
-        @endif
-        <button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">Info Peticion</button>
-        
-				@if($peticion->estado=='Disponible')
-        <button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $peticion->id }}">Editar</button>
-        <button type="button" class="btn btn-outline-danger btn-sm darBaja" value="{{ $peticion->id }}">Cancelar</button>
-        @endif
+    @forelse($pagos as $pago)
+    <tr id="trow{{ $pago->id }}">
+      <td class="text-center" >{{ $pago->fechaPago }}</td>
+      <td style="font-size:14px">Cutoa mes {{ $pago->mes }}</td>
+      <td class="text-right">$ {{ $pago->monto }}</td> 
+      
+      
+      <td class="text-center">{{ $pago->año }}</td>
+
+      <td class="text-center @if($pago->estado=='CANCELADO') text-success @else text-danger @endif "  style="font-size:13px">{{ $pago->estado }}</td>
+      <td class="text-center">
+       @if($pago->estado=='PENDIENTE')
+        <button style="font-size:12px" type="button" class="btn btn-outline-primary btn-sm infomodal" value="{{ $pago->idsocios }}">Hacer Pago</button>
+       @else
+        <button style="font-size:12px" type="button" class="btn btn-outline-secondary btn-sm infomodal" value="{{ $pago->idsocios }}">Hacer Recibo</button>
+      @endif
        </td>
 
         </tr>
-		@empty
-    	<p>No hay mensajes destacados</p>
-  		@endforelse
-		        
-		</tbody>
+    @empty
+      <p>No hay mensajes destacados</p>
+      @endforelse
+            
+    </tbody>
 
 
-	</table>
-{{--@if(count($solicitantes))@endif--}}
+  </table>
+{{--@if(count($solicitantes))@endif
   <div class="mt-2 mx-auto">
-  {{ $peticiones->links('
+  {{ $donaciones->links('
   pagination::bootstrap-4') }}
-  </div>
+  </div>--}}
 
 
 {{-- //////////////////////////MODAL FICHA--}}
@@ -214,7 +166,7 @@
       </div>
       <div class="modal-body">
         <div class="">
-            @include('solicitantes.formPeticion')
+            @include('proyectos.formDonacion')
         </div>
       </div>
       <div class="modal-footer">
@@ -269,7 +221,7 @@
         </div>
       </div>
        <input type="hidden" class="form-control" type="text"  id="delete_id" name="delete_id">
-       <input  class="form-control" type="text"  id="periodoActual" name="periodoActual" value="{{ $periodoActual }}">   
+       <input  class="form-control" type="text"  id="periodoActual" name="periodoActual" value="">   
            </form>
 
         </div>
@@ -292,6 +244,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/peticion.js')}}"></script>
+  <script src="{{asset('js/donaciones.js')}}"></script>
 
 @endsection

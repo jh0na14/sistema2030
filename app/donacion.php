@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class donacion extends Model
 {
     //
+    protected $guarded=[];
 }

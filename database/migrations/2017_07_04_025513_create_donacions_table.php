@@ -24,6 +24,8 @@ class CreateDonacionsTable extends Migration
             $table->foreign('idpeticions')->references('id')->on('peticions');
             $table->integer('idpatrocinadors')->unsigned()->nullable()->default(null);
             $table->foreign('idpatrocinadors')->references('id')->on('patrocinadors');
+            $table->integer('idperiodos')->unsigned();
+            $table->foreign('idperiodos')->references('id')->on('periodos');
             
             
             $table->timestamps();

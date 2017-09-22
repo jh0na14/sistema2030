@@ -20,6 +20,7 @@ class CreateSociomembresiasTable extends Migration
             $table->integer('idsocios')->unsigned();
             $table->foreign('idsocios')->references('id')->on('socios');
             $table->date('fechaPago');
+            $table->enum('estado',array('CANCELADO','PENDIENTE'));
            $table->timestamps();
         });
     }
