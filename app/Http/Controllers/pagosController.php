@@ -43,15 +43,50 @@ class pagosController extends Controller
         return  '$ '.number_format($sum, 2);
     }
 
+    public static function addSocioPagos($socio_id){
+       $numeroAnho=membresia::get(['año'])->last(); 
+      // return Response::json($numeroAnho);
+      // $numeroAnho->año. 
+       if(DB::table('sociomembresias')
+         ->join('membresias', 'sociomembresias.idmembresias', '=', 'membresias.id')
+          ->select('sociomembresias.id',
+            'membresias.monto',
+            'membresias.año',
+            'membresias.mes'
+            )
+          ->where('sociomembresias.idsocios',$socio_id)
+          ->where('membresias.año' ,$numeroAnho->año)
+          ->get()->first()){//si hay un dato en ese año no hacer nada
+
+       }else{
+         $pagos=membresia::where('año',$numeroAnho->año)->get();
+          foreach($pagos as $pago)
+          {
+            $var='PENDIENTE';
+            
+            sociomembresia::create([
+            'idmembresias'=> $pago->id,
+            'idsocios'=> $socio_id,
+            'fechaPago'=> '2017-07-29',
+            'estado'=>$var,
+            ]);
+          }//fin foreach 
+       }//fin else
+       
+
+    }//fin funciotion addSociopago
+
     public function show($socio_id){  
+       pagosController::addSocioPagos($socio_id);
       $message = socio::find($socio_id);
        $numeroAnho=membresia::get(['año'])->last();  
-       //return Response::json($numeroAnho->año);
+       //return Response::json($numeroAnho);
        $pagos=DB::table('sociomembresias')
          ->join('membresias', 'sociomembresias.idmembresias', '=', 'membresias.id')
           ->select('sociomembresias.*',
             'membresias.monto',
             'membresias.año',
+            'membresias.numMes',
             'membresias.mes'
             )
           //->select()
@@ -87,6 +122,7 @@ class pagosController extends Controller
           ->select('sociomembresias.*',
             'membresias.monto',
             'membresias.año',
+            'membresias.numMes',
             'membresias.mes'
             )
           //->select()

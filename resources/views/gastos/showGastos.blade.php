@@ -4,25 +4,50 @@
 	</div>
 
 	<ul class="nav nav-tabs">
-    <li class="nav-item ">
-      <a class="nav-link " href="/sociospago">Socios</a>
+     <li class="nav-item ">
+      <a href="/controlGastos/Membresia" class="nav-link @if($tipo=='Membresia')active  @endif">
+        Membresias </a>
     <li>
-		<li class="nav-item ">
-			<a class="nav-link active">Pagos</a>
-		<li>
-	   
+    <li class="nav-item ">
+      <a href="/controlGastos/Campaña"  class="nav-link  @if($tipo=='Campaña')active @endif ">
+        Campañas<span class="badge badge-default badge-pill"></span>
+      </a>
+    <li>
+       <li class="nav-item ">
+      <a href="/controlGastos/Verdugo"  class="nav-link  @if($tipo=='Verdugo')list-group-item-success active @endif">
+        Verdugo<span class="badge badge-default badge-pill"></span>
+      </a>
+    <li>
+	
 
 	</ul>
 
   <div style="clear:both; padding-bottom:15px;">
   </div>
 <div style="width:12%; float:left; padding-right:0px;" id="menu-vertical-pagos">
-<div style="clear:both; padding-bottom:15px;">
+<div style="clear:both; padding-bottom:35px;">
   </div>
      
-         
+   {{--  <div class="list-group " class="padding-bottom:25px;">
+
+    <li href="/pagos/index/" class="list-group-item list-group-item-action list-group-item-info active">Estado</li>
+      
+ <a href="#" class="list-group-item list-group-item-action list-group-item-info active">Tipo</a> 
+
+      <a href="/controlGastos/Membresia" id="count" class="list-group-item list-group-item-action justify-content-between
+        @if($tipo=='Membresia')active  @endif">Membresias <span class="badge badge-default badge-pill"></span>
+      </a>
+      <a href="/controlGastos/Campaña" id="count" class="list-group-item list-group-item-action justify-content-between
+       @if($tipo=='Campaña')active @endif ">Campañas<span class="badge badge-default badge-pill"></span>
+      </a>
+      <a href="/controlGastos/Verdugo" id="count2" class="list-group-item list-group-item-action justify-content-between
+       @if($tipo=='Verdugo')list-group-item-success active @endif">Verdugo<span class="badge badge-default badge-pill"></span>
+      </a>
+    
+      </div> 
+      
       <div style="clear:both; padding-bottom:15px;">
-      </div>
+      </div>--}}
       
       <div class="list-group " class="padding-bottom:25px;">
 
@@ -30,13 +55,17 @@
        
    {{--   <a href="#" class="list-group-item list-group-item-action list-group-item-info active">These Boots Are </a> 
 --}}
-        @forelse($anhos as $anho)
+        @forelse($periodos as $periodo)
         <div style="display:none;">
-            $h={{ $anho->año }}
+           
+            $h={{ $periodo->id }}
         </div>
-       <a href="/pagos/{{ $idsocio }}/{{ $anho->año }}" class="list-group-item list-group-item-action justify-content-between"><span class="badge badge-default badge-pill"></span>
-      {{ $anho->año }}
+        {{--  Para que no se vea en el navegador Sin%20Fnalizar --}}
+        
+      <a href="/controlGastos/{{ $tipo }}/{{ $periodo->semestre }}" class="list-group-item list-group-item-action justify-content-between"><span class="badge badge-default badge-pill"></span>
+      {{ $periodo->semestre }}
       </a>
+           
         @empty
         <p>No hay mensajes destacados</p>
         @endforelse       
@@ -47,61 +76,92 @@
 
  	<div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Pagos de {{ $nombreSocio }} <strong class="text-danger">            DEUDA: {{ $deuda }} </strong></h6>
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Ingresos de <strong>{{ $tipo }}</strong> <strong class="text-danger">PERIODO {{ $periodoActual }}</strong></h6>
         
 
- 		<br>
+ 		<div class="row" >
+ 		
+      <div class="col-6">
+        <label style="text-align:left; font-size:18px; "></label>  
+      </div>
+     	<div class="form-group row col-6 ">
+ 	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
+  			<div class="col-9 offset-1 ">
+          @if($tipo=='Membresia')
+      				<input class="form-control" placeholder="Busqueda {{ $tipo }}" type="text" id="searchM" name="search" autofocus>             
+  				@endif
+          @if($tipo=='Campaña')
+              <input class="form-control" placeholder="Busqueda {{ $tipo }}" type="text" id="searchC" name="search" autofocus>             
+          @endif
+          @if($tipo=='Verdugo')
+              <input class="form-control" placeholder="Busqueda {{ $tipo }}" type="text" id="searchV" name="search" autofocus>             
+          @endif
+          </div>
+  	  
+		</div>
+  	  </div>
 <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
         <strong>Well done!</strong> You successfully read this important alert message.
     </div>
+ 	<table class="table {{--table-bordered--}}  table-hover table-sm " align="center">
+	<thead >
+	 {{-- <tr>
+	            <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"> DE CLUB ACTIVO 20-30</th>
+	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
+	            	
+	            </th>
+	        
+	        </tr>--}}
+	</thead>
+	<thead id="theadrow" name="theadrow">
+	        <tr>
+            <th style="text-align: center" class="center ">#</th>
+	            <th class="center " style="text-color:#000000;">Fecha</th>
+	           	<th class="center ">Concepto</th>        
+	           	<th style="text-align: center">Ingreso</th>
+	           	<th style="text-align: center">Egreso</th>
+              <th style="text-align: center">Saldo</th>
+	        </tr>
 
-<table class="table table-bordered  table-hover table-sm " align="center">
-  <thead id="theadrow" name="theadrow">{{-- no lo ocupo el id este por el momento --}}
-          <tr>
-            <th class="center " style="text-color:#000000;">Fecha Pago</th>
-            <th class="center" >Meses</th>
-            <th class="center " style="text-color:#000000;">Monto</th>
-            
-            
-            <th class="center">Año</th>
-            {{--@if($tipo=='Realizada')   @endif --}}       
-            <th style="text-align: center">Estado</th>
-           
-            <th style="text-align: center">Accion</th>
-          </tr>
-  </thead>
-  <tbody id="tabla" name="tabla">
+	</thead>
+	<tbody id="tabla" name="tabla">
     <div style="display:none;">{{ $contador=0 }}</div>
-    @forelse($pagos as $pago)
-    <tr id="trow{{ $pago->id }}">
-      <td class="text-center" >--{{-- $pago->fechaPago --}}</td>
-      <td style="font-size:14px">Cúota {{ $pago->numMes }},  mes {{ $pago->mes }}</td>
-      <td class="text-center">$ {{ $pago->monto }}</td> 
-      <td class="text-center">{{ $pago->año }}</td>
-
-      <td class="text-center @if($pago->estado=='CANCELADO') text-secondary @else text-danger @endif "  style="font-size:13px">{{ $pago->estado }}</td>
-      <td class="text-center">
-       @if($pago->estado=='PENDIENTE')
-        <button style="font-size:12px" type="button" class="btn btn-outline-primary btn-sm pagoAccion" value="{{ $pago->idsocios }}">Hacer Pago</button>
-       @else
-        <button style="font-size:12px" type="button" class="btn btn-outline-secondary btn-sm infomodal" value="{{ $pago->idsocios }}">Hacer Recibo</button>
-      @endif
-       </td>
+    @forelse($tablas as $tabla)
+		<tr id="trow{{ $tabla->id }}">
+      <td style="font-size:14px">#{{ $tabla->fecha }}</td> 
+			<td>{{ $tabla->concepto }}</td>
+			<td style="font-size:14px">{{ $tabla->ingreso }}</td>
+      <td style="font-size:14px">{{ $tabla->egreso }}</td>
+      <td style="font-size:14px">{{ $tabla->saldo }}</td>
+		{{--<td class="text-center">
+        @if($tabla->estado=='Disponible')
+        <button type="button" class="btn btn-outline-primary btn-sm proyectoModal" value="{{ $peticion->id }}">Crear Proyecto</button>
+				@endif
+        @if($tabla->estado=='En Progreso' || $peticion->estado=='Finalizado')
+        <button type="button" class="btn btn-outline-info btn-sm infoProyecto" value="{{ $peticion->id }}">Info Proyecto</button>
+        @endif
+        <button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $peticion->id }}">Info Peticion</button>
+        
+				@if($tabla->estado=='Disponible')
+        <button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $peticion->id }}">Editar</button>
+        <button type="button" class="btn btn-outline-danger btn-sm darBaja" value="{{ $peticion->id }}">Cancelar</button>
+        @endif
+       </td>--}}
 
         </tr>
-    @empty
-      <p>No hay mensajes destacados</p>
-      @endforelse
-            
-    </tbody>
+		@empty
+    	<p>No hay datos</p>
+  		@endforelse
+		        
+		</tbody>
 
 
-  </table>
-{{--@if(count($solicitantes))@endif
+	</table>
+{{--@if(count($solicitantes))@endif--}}
   <div class="mt-2 mx-auto">
-  {{ $donaciones->links('
+  {{ $tablas->links('
   pagination::bootstrap-4') }}
-  </div>--}}
+  </div>
 
 
 {{-- //////////////////////////MODAL FICHA--}}
@@ -149,7 +209,7 @@
       </div>
       <div class="modal-body">
         <div class="">
-            @include('proyectos.formDonacion')
+            @include('solicitantes.formPeticion')
         </div>
       </div>
       <div class="modal-footer">
@@ -204,7 +264,7 @@
         </div>
       </div>
        <input type="hidden" class="form-control" type="text"  id="delete_id" name="delete_id">
-       <input  class="form-control" type="text"  id="periodoActual" name="periodoActual" value="">   
+       <input  class="form-control" type="text"  id="periodoActual" name="periodoActual" value="{{ $periodoActual }}">   
            </form>
 
         </div>
@@ -227,6 +287,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/donaciones.js')}}"></script>
+  <script src="{{asset('js/peticion.js')}}"></script>
 
 @endsection

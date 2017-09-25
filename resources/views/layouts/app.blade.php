@@ -85,10 +85,30 @@
           Proyectos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="/peticiones">Crear Proyectos de donacion</a>
           <a class="dropdown-item" href="#">Crear Proyectos de recaudacion</a>
-          <a class="dropdown-item" href="#">Proyectos realizados</a>
+          <a class="dropdown-item" href="/proyectos/2">Ver Proyectos</a>
           <a class="dropdown-item" href="/periodos">Periodos</a>
+        </div>
+      </li>
+    
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Tesoreria
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="/sociospago">Membresias</a>
+           <a class="dropdown-item" href="/sociospago">Pagos a Asociacion</a>
+           <a class="dropdown-item" href="/verdugo">Verdugo</a>
+           <a class="dropdown-item" href="/controlGastos">Gastos e Ingresos</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Donaciones
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+           <a class="dropdown-item" href="/donaciones">Donaciones realizadas y recibidas</a>
+           <a class="dropdown-item" href="/patrocinador">Patrocinadores</a>
         </div>
       </li>
     </ul>

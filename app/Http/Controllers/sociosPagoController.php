@@ -43,6 +43,7 @@ class sociosPagoController extends Controller
           }
         return  '$ '.number_format($sum, 2);
     }
+
     public function show(){
     	 //->where('name', 'John')->value('email');
     	//$socios=DB::table('socios')->where('tipoSocio','=',"Socio Activo");//>paginate(10);
@@ -79,7 +80,7 @@ class sociosPagoController extends Controller
     	      $count2=socio::where('estado','Inactivo')->count();//count($socios); 
     	}
     	if($tipoSocio==2){///ES aactivo Mayor
-            $estado='Activo';
+            $estado='Activo';//ver esto
     		$socios=socio::where('tipoSocio','=',"Activo Mayor")
             ->where('estado','Activo')->paginate(9);
     	    

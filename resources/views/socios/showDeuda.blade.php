@@ -8,7 +8,7 @@
 	</div>
     
 	
-	<ul class="nav nav-tabs">
+	{{----}}<ul class="nav nav-tabs">
 		<li class="nav-item  active">
 			<a class="nav-link active">Socios</a>
 		<li>
@@ -88,15 +88,15 @@
   			<label style="text-align:left; font-weight:bold; font-size:20px; "> </label>	
      	</div>
      	<div class="form-group row col-6">
- 	 <label for="example-text-input"  class="col-1 col-form-label offset-1"> Buscar </label>
+ 	 <label for="example-text-input"  class="col-1 col-form-label offset-1" style="font-size:14px"> Buscar </label>
   			<div class="col-9 offset-1 ">
-      				<input class="form-control" placeholder="Buscar" type="text" id="search2" name="search2" autofocus>             
+      				<input style="font-size:14px" class="form-control" placeholder="Buscar" type="text" id="search2" name="search2" autofocus>             
   				</div>
   	  
 		</div>
   	  </div>
 
- 	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
+ 	<table style="display:none;" class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
 	        <tr>
 	  {{--          <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"><label >{{strtoupper($tipoSocio)}}</label> DE CLUB ACTIVO 20-30</th>
@@ -148,11 +148,65 @@
 
 
 	</table>
-{{--@if(count($socios))@endif--}}
+{{--@if(count($socios))@endif
   <div class="mt-2 mx-auto">
   {{ $socios->links('
   pagination::bootstrap-4') }}
-  </div>
+  </div>--}}
+ 
+ {{-- borrar aqui es una pantalla mas con ui and ux --}}
+  <table   class="table {{--table-bordered--}} table-hover table-sm  " align="center">
+	<thead >
+	        <tr>
+	  {{--          <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"><label >{{strtoupper($tipoSocio)}}</label> DE CLUB ACTIVO 20-30</th>
+	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
+	            	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
+					  Launch demo modal
+					</button>	
+	            </th>
+	      --}}  
+	        </tr>
+	</thead>
+	<thead >
+	        <tr >
+	           	
+	            <th colspan="2" style="text-align: center">Nombre</th>
+	           	<th>Email</th>
+	           	{{--<th style="text-align: center">Tipo</th>
+	           	--}}<th class="text-center">Deuda</th>
+	           	<th style="text-align: center">Estado</th>
+	        </tr> 
+	</thead>
+	<tbody id="tabla" name="tabla">
+		@forelse($socios as $socio)
+		<tr id="trow{{$socio->id}}">
+			<td><img class="rounded-circle" src="http://www.carrerasolutions.com/wp-content/uploads/2016/04/male_avatar_profile_picture_WB.jpg" height="38" width="38"></td>
+{{-- style="display:none;" --}}<td style="padding:0px; font-size:15px;"><strong>{{ $socio->apodo }}</strong>
+				<br><small style="font-size:15px">{{ $socio->nombre }} {{ $socio->apellido }}</small><br></td>
+				<td style="padding-top:10px;">	<small style="font-size:15px">{{ $socio->email }}</small></td>
+				<td style="font-size:14px; padding-top:10px;" class="text-center" >{{ sociosPagoController::verDeuda($socio->id) }}</td>
+			{{--<td><div class="form-group row">
+ 			<div class="col-11 offset-1 ">
+      				<input class="form-control" placeholder="Buscar" type="text" id="search2" name="search2" autofocus>             
+  				</div>
+  	  
+		</div></td>--}}
+			<td style="padding-top:10px" class="text-center">
+				@if($socio->estado=='Activo')
+				<button type="button" class="btn btn-outline-warning btn-sm pagosAccion" value="{{ $socio->id }}" >Pagos</button>
+				@endif
+				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $socio->id }}">Info</button>				
+			</td>
+
+        </tr>
+		@empty
+    	<p>No hay mensajes destacados</p>
+  		@endforelse
+		        
+		</tbody>
+
+
+	</table>{{-- borrar aaca --}}
 
 
 {{-- //////////////////////////MODAL FICHA--}}

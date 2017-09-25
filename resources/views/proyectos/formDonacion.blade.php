@@ -28,6 +28,7 @@
        
         </div>
     </div>
+     <div id="noMostrar">{{-- esta para la hora de inngresar en patrocinadores no va este campo --}}
     <div class="form-group row">
         <label for="example-email-input" class="col-3 col-form-label ">Categoria: *</label>
         <div class="col-9">
@@ -37,7 +38,7 @@
             </select> 
        </div>
     </div>
- 
+ </div>{{-- fin div que se quita --}}
 
     
 
