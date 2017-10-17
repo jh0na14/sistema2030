@@ -69,6 +69,13 @@ Route::put('/verdugo/update/{id?}','verdugoController@update');
 Route::get('/verdugo/busqueda/{texto?}','verdugoController@busqueda');
 Route::get('/verdugo/bus/socios','verdugoController@busquedaSelect');
 
+Route::get('/pagoasoc','pagoAsocController@show');
+Route::get('/pagoasoc/buscar/{id?}','pagoAsocController@buscar');
+Route::post('/pagoasoc/create','pagoAsocController@create');
+Route::put('/pagoasoc/update/{id?}','pagoAsocController@update');
+Route::get('/pagoasoc/busqueda/{texto?}','pagoAsocController@busqueda');
+Route::get('/pagoasoc/bus/socios','pagoAsocController@busquedaSelect');
+
 
 //Route::get('/socios/1','sociosController@show2');
 /*

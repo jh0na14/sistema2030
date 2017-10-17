@@ -21,7 +21,7 @@ $(document).ready(function(){
      $.ajax({
 
             type: "GET",
-            url: '/verdugo/busqueda/'+value,
+            url: '/pagoasoc/busqueda/'+value,
             data: {'search':value},
             dataType: 'json',
             success: function (data) {
@@ -38,7 +38,7 @@ $(document).ready(function(){
  $("#btnnuevo").click(function(){
   var output = "";
    //Otra forma de realizar el get ajax el mismo de infomodal    
-    $.getJSON('/verdugo/bus/socios', function (data) {
+    $.getJSON('/pagoasoc', function (data) {
           //success data
             console.log(data);
              
@@ -56,7 +56,7 @@ $(document).ready(function(){
   $('#btnsave').val("add");
   $("#btnsave").html("Nuevo");
   $("#btnsave").removeClass("btn-success");
-  $("#exampleModalLabel").html("Registro Verdugo");
+  $("#exampleModalLabel").html("Registro Pago Asociacion");
   $("#tabla").append('<tr id="task"><td>'+ $("#btnsave").val() +'</td><td>');
     $('#frm').trigger('reset');
     //$('#frmsocios')[0].reset();
@@ -75,15 +75,15 @@ $(document).on('click','.infomodal',function(){
         $.ajax({
 
             type: "GET",
-            url: '/verdugo/buscar/'+form_id,
+            url: '/pagoasoc/buscar/'+form_id,
             data: form_id,
             dataType: 'json',
             success: function (data) {
                 console.log(data);
         
-                var row = '<tr><td width="45%"> Nombre: </td><td width="55%">' + data.fechaPago + '</td>';
-                row +='<tr><td> Monto Recaudado: </td><td>' + data.montoRecaudado + '</td>';                                row +='<tr><td> Apellido: </td><td>' + data.montoRecaudado + '</td>';
-                row +='<tr><td> Monto Rifa: </td><td>' + data.montoRifa + '</td>';
+                var row = '<tr><td width="45%"> Monto: </td><td width="55%">' + data.monto + '</td>';
+                row +='<tr><td> Fecha: </td><td>' + data.fecha + '</td>';                                row +='<tr><td> Apellido: </td><td>' + data.montoRecaudado + '</td>';
+                row +='<tr><td> idPeriodo: </td><td>' + data.idPeriodo + '</td>';
 
                 $("#tablainfo").append(row);            
             
@@ -104,13 +104,12 @@ $(document).on('click','.editModal',function(){
     $("#form_id").val(form_id);
     
     //Otra forma de realizar el get ajax el mismo de infomodal    
-    $.get('/verdugo/buscar/' + form_id, function (data) {
+    $.get('/pagoasoc/buscar/' + form_id, function (data) {
           //success data
             console.log(data);
-            $('#idsocios').val(data.socioid2);
-            $('#fechaPago').val(data.fechaPago);
-          $('#montoRecaudado').val(data.montoRecaudado);
-          $('#montoRifa').val(data.montoRifa); 
+            $('#monto').val(data.monto);
+          $('#fecha').val(data.fecha);
+          $('#idPeriodo').val(data.idPeriodo); 
            
            });
     //El boton para saber cambair de estado para guardar o modificar 
@@ -123,7 +122,7 @@ $(document).on('click','.editModal',function(){
      $("#btnsave").removeClass("btn-info");
      $("#btnsave").addClass("btn-success"); 
      ///titulo del modal
-     $("#exampleModalLabel").html("Modificar Verdugo");
+     $("#exampleModalLabel").html("Modificar Pagos Asociacion");
       
     });
 $("#btnsavee").click(function (e) {
@@ -146,21 +145,20 @@ $("#btnsavee").click(function (e) {
           //nombre:document.getElementById("nombre").value,
           //socio:$('#socio_id').val(),
           
-          fechaPago:$('#fechaPago').val(),
-          montoRecaudado:$('#montoRecaudado').val(),
-          montoRifa:$('#montoRifa').val(),
-          idsocios:$('#socioid2').val(),
+          monto:$('#monto').val(),
+          fecha:$('#fecha').val(),
+          idPeriodo:$('#idPeriodo').val(),
            }       
 
         //used to determine the http verb to use [add=POST], [update=PUT]
         var state = $('#btnsave').val();
         var type = "POST"; //for creating new resource
         var form_id = $('#form_id').val();;
-        var my_url = "/verdugo/create";
+        var my_url = "/pagoasoc/create";
 
        if (state == "update"){
             type = "PUT"; //for updating existing resource
-            my_url = '/verdugo/update/'+form_id;
+            my_url = '/pagoasoc/update/'+form_id;
         }
 
         console.log(formData);
@@ -183,9 +181,9 @@ $("#btnsavee").click(function (e) {
 
                 //redirect('/socios');
             if(state=="add"){
-                var row = '<tr><td>' + data.fechaPago + '</td>';
-                 row +='<td>' + data.montoRecaudado + '</td>';
-                 row +='<td>' + data.montoRifa + '</td>';
+                var row = '<tr><td>' + data.monto + '</td>';
+                 row +='<td>' + data.fecha + '</td>';
+                 row +='<td>' + data.idPeriodo + '</td>';
                  row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
                  row += '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'+data.id+'">Editar</button> ';
                  row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
@@ -212,32 +210,32 @@ $("#btnsavee").click(function (e) {
                 console.log('Error de noseq:', data);
                var errors=data.responseJSON;
                 console.log(errors);
-                if(errors.fechaPago!=undefined)
+                if(errors.monto!=undefined)
                 {
-                  $('#fechaPagofeed').text(errors.fechaPago);
+                  $('#montofeed').text(errors.monto);
                   //$( '#fechaPagodiv' ).removeClass();
-                  $( '#fechaPagodiv' ).addClass("has-danger");
+                  $( '#montodiv' ).addClass("has-danger");
                 }else{
-                  $( '#fechaPagodiv' ).removeClass("has-danger");
-                  $( '#fechaPagofeed' ).text("");
+                  $( '#montodiv' ).removeClass("has-danger");
+                  $( '#montofeed' ).text("");
                   }
                   
-                if(errors.montoRecaudado!=undefined)
+                if(errors.fecha!=undefined)
                 {
-                  $( '#montoRecaudadodiv' ).addClass("has-danger");
-                  $('#montoRecaudadofeed').text(errors.montoRecaudado);
+                  $( '#fechadiv' ).addClass("has-danger");
+                  $('#fechafeed').text(errors.fecha);
                 }else{
-                  $( '#montoRecaudadodiv' ).removeClass("has-danger");
-                  $( '#montoRecaudadofeed' ).text("");
+                  $( '#fechadiv' ).removeClass("has-danger");
+                  $( '#fechafeed' ).text("");
                   }
 
-                  if(errors.montoRifa!=undefined)
+                  if(errors.idPeriodo!=undefined)
                 {
-                  $( '#montoRifadiv' ).addClass("has-danger");
-                  $('#montoRifafeed').text(errors.montoRifa);
+                  $( '#idPeriododiv' ).addClass("has-danger");
+                  $('#idPeriodofeed').text(errors.idPeriodo);
                 }else{
-                  $( '#montoRifadiv' ).removeClass("has-danger");
-                  $( '#montoRifafeed' ).text("");
+                  $( '#idPeriododiv' ).removeClass("has-danger");
+                  $( '#idPeriodofeed' ).text("");
                   }
                 
             }

@@ -3,14 +3,12 @@
 	<div class="row" style="padding-bottom:10px;">
 		
 	</div>
-    
+    s
 	
 	<ul class="nav nav-tabs">
-		<li class="nav-item ">
-			<a class="nav-link" href="/beneficiarios">Beneficiarios</a>
-		<li>
+		
 	    <li class="nav-item ">
-			<a class="nav-link active " href="/solicitantes">Solicitantes</a>
+			<a class="nav-link active " href="/pagoasoc">Pago Asociacion</a>
 		<li>
 
 	</ul>
@@ -26,13 +24,13 @@
 
  	<div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Verdugos de Club Activo 20-30</h6>
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Pagos Hacia la Asociacion Nacional de Club Activo 20-30</h6>
          
 
 
   	 {{--<div class="row" >
 		<div class="col-4 offset-4">
-			<label for="example-text-input" style="text-align:left; font-weight:bold; font-size:20px; " ><i>Verdugos de Club Activo 20-30</i></label>
+			<label for="example-text-input" style="text-align:left; font-weight:bold; font-size:20px; " ><i>Pagos hacia la Asociacion Nacional de Club Activo 20-30</i></label>
      	</div>
  	 	
 	</div>--}}
@@ -43,7 +41,7 @@
 			Nuevo</button>	
      	</div>
      	{{--<div class="col-4">
-  			<label style="text-align:left; font-weight:bold; font-size:20px; ">Verdugos de Club Activo 20-30 </label>	
+  			<label style="text-align:left; font-weight:bold; font-size:20px; ">Pagos hacia la Asociacion Nacional de Club Activo 20-30 </label>	
      	</div>--}}
      	<div class="form-group row col-6">
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
@@ -66,10 +64,9 @@
 	</thead>
 	<thead >
 	        <tr>
-          <th style="text-align: center" style="text-color:#000000;">Socio Verdugo</th>
-	        	<th style="text-align: center" style="text-color:#000000;">Fecha Reunion </th>
-	           	<th class="center ">Monto Recaudado</th>
-	            <th class="center ">Monto Rifa</th>
+          <th style="text-align: center" style="text-color:#000000;">ID Periodo</th>
+	        	<th style="text-align: center" style="text-color:#000000;">Monto </th>
+	           	<th class="center ">Fecha de Abono</th>
 	           {{--	
 	           	
 	           	<th>A&ntilde;o</th>--}}
@@ -77,16 +74,15 @@
 	        </tr>
 	</thead>
 	<tbody id="tabla" name="tabla">
-		@forelse($verdugos as $verdugo)
-		<tr id="{{ $verdugo->id }}">
-			<td>{{ $verdugo->nombre }}</td>
-      <td>{{ $verdugo->fechaPago }}</td>
-			<td >{{ $verdugo->montoRecaudado }}</td>
-			<td>{{ $verdugo->montoRifa }}</td>
+		@forelse($pagoasoc as $pagoasoc)
+		<tr id="{{ $pagoasoc->id }}">
+			<td>{{ $pagoasoc->idPeriodo }}</td>
+      <td>{{ $pagoasoc->monto }}</td>
+			<td >{{ $pagoasoc->fecha }}</td>
 			<td class="text-center">
-        <button type="button" class="btn btn-outline-primary btn-sm peticionModal" value="{{ $verdugo->id }}">Crear </button>
-				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $verdugo->id }}">Info</button>
-				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $verdugo->id }}">Editar</button>
+        <button type="button" class="btn btn-outline-primary btn-sm peticionModal" value="{{ $pagoasoc->id }}">Crear </button>
+				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $pagoasoc->id }}">Info</button>
+				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $pagoasoc->id }}">Editar</button>
 			</td>
 
         </tr>
@@ -106,14 +102,14 @@
   pagination::bootstrap-4') }}
   </div>
 
-
+////////aqui me quede
 {{-- //////////////////////////MODAL FICHA--}}
 <div class="modal fade" id="myModal" name="myModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                            <h5 class="modal-title" id="myModalLabel">Datos Verdugo</h4>
+                            <h5 class="modal-title" id="myModalLabel">Datos de Pago</h4>
                         </div>
                         <div class="modal-body">
                             <div class="">
@@ -153,11 +149,11 @@
       </div>
       <div class="modal-body">
         <div class="">
-            @include('verdugos.formVerdu')
+            @include('pagoasociasion.formPagoAsoc')
         </div>
         </div>
       <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close verdu</button>
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close pagos Aso.</button>
         <button type="button" class="btn btn-primary" id="btnsave" value="Anhadir">Save changes</button>
       </div>
     </div>
@@ -176,7 +172,7 @@
       </div>
       <div class="modal-body">
         <div class="">
-            @include('verdugos.formVerdu')
+            @include('pagoasociasion.formPagoAsoc')
         </div>
       </div>
       <div class="modal-footer">
@@ -198,6 +194,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/verdugo.js')}}"></script>
+  <script src="{{asset('js/pagoAsoc.js')}}"></script>
 
 @endsection
