@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\sociomembresia;
 use App\membresia;
 use App\socio;
+use App\tmembresia;
+use App\periodo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
@@ -142,6 +144,75 @@ class pagosController extends Controller
             ]);  
      
          }
+
+    public function pagar($id,Request $request){
+      $date = new DateTime();
+        $message = sociomembresia::find($id);//all()->where('id',"=",$socio_id);
+        $message->fill([
+            'estado'=>'CANCELADO',
+            'fechaPago'=>$date,
+            ]);
+        if($message->save()){
+          $pagos=DB::table('sociomembresias')
+          ->join('membresias', 'sociomembresias.idmembresias', '=', 'membresias.id')
+          ->select('sociomembresias.*',
+            'membresias.monto',
+            'membresias.año',
+            'membresias.numMes',
+            'membresias.mes'
+            )
+          //->select()
+          ->where('sociomembresias.id',$id)
+           //->paginate(8)
+          ->get();
+
+            return Response::json($pagos);
+           }
+        //return Response::json('Socio '.$socios->nombre.' '.'Cambio a Inactivo');
+    }    
+/////////////////Esi igl a ver Deuda pero esta funciona con ayax///////////////////
+    public function deudaActual($idsocios){
+       $sum=0.00;
+        $date = new DateTime();
+        $numeroAnho=$date->format("Y");
+        $numeroMes=$date->format("n");
+         $messages=DB::table('sociomembresias')
+         ->join('membresias', 'sociomembresias.idmembresias', '=', 'membresias.id')
+          ->select('sociomembresias.*',
+            'membresias.monto'
+            )
+          //->select()
+          ->where('sociomembresias.idsocios',$idsocios)
+          ->where('sociomembresias.estado','PENDIENTE')
+          ->where('membresias.año','<=' ,$numeroAnho)
+          ->where('membresias.numMes','<=',$numeroMes)
+          //->paginate(8)
+          ->get();
+          foreach ($messages as $message  ) {
+             $sum=$sum+$message->monto;
+          }
+          //return Response::json($message);
+          if($sum==0){
+           return Response::json('SOLVENTE');
+          }
+       return Response::json('$ '.number_format($sum, 2));
+
+    }  
+
+    public function createTMembresia(Request $request){
+       $date = new DateTime();
+        $periodo=periodo::where('estado','Iniciado')->get()->first();
+      $message= tmembresia::create([
+            'fecha'=> $date,
+            'concepto'=> $request->input('concepto'),
+            'ingreso'=> $request->input('ingreso'),
+            'egreso'=> 0.00,
+            'saldo'=>0.00,
+            'idsocios'=> 44,
+            'idperiodos'=>$periodo->id ,
+            ]);
+       return Response::json($message);
+    }
 
     public function createProyecto(createProyectosRequest $request){
         //dd($request->all());

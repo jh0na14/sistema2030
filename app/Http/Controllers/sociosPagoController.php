@@ -51,7 +51,7 @@ class sociosPagoController extends Controller
         $estado='Activo';
         $tipoSocio="Socio Activo";
     	$socios=socio::where('tipoSocio','=',"Socio Activo")
-        ->where('estado','Activo')->paginate(9);
+        ->where('estado','Activo')->paginate(10);
 		//count0($socios);/////no se por que no agarra paginate si pongo all()
     	$count0=count(socio::all()->where('tipoSocio','=',"Socio Activo")->where('estado','Activo'));
     	$count=socio::where('tipoSocio','=','Activo Mayor')->where('estado','Activo')->count();//count($socios);
@@ -119,7 +119,7 @@ class sociosPagoController extends Controller
                 if($message->estado=='Activo')
                 {
                     $sAc='<td class="text-center">'.
-    '<button type="button" class="btn btn-outline-warning btn-sm " value="'.$message->id.'">Pagos</button>  '.                
+    '<button type="button" class="btn btn-outline-warning btn-sm pagosAccion " value="'.$message->id.'">Pagos</button>  '.                
     '<button type="button" class="btn btn-outline-info btn-sm infomodal" value="'.$message->id.'">'.
     'Info</button> '.
      '</tr>';

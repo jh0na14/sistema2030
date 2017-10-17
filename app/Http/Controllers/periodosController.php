@@ -54,7 +54,7 @@ class periodosController extends Controller
             '8' =>'Agosto' ,
             '9' =>'Septiembre' ,
             '10' =>'Octubre' ,
-            '11' =>'Nombiembre' ,
+            '11' =>'Noviembre' ,
             '12' =>'Diciembre' ,
          );
         if(membresia::where('año',$numeroAnho)->first()){

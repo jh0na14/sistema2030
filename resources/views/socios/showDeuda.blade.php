@@ -96,7 +96,7 @@
 		</div>
   	  </div>
 
- 	<table style="display:none;" class="table {{--table-bordered--}} table-hover table-sm  " align="center">
+ 	<table  class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
 	        <tr>
 	  {{--          <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"><label >{{strtoupper($tipoSocio)}}</label> DE CLUB ACTIVO 20-30</th>
@@ -148,32 +148,21 @@
 
 
 	</table>
-{{--@if(count($socios))@endif
+{{--@if(count($socios))@endif--}}
   <div class="mt-2 mx-auto">
   {{ $socios->links('
   pagination::bootstrap-4') }}
-  </div>--}}
+  </div>
  
  {{-- borrar aqui es una pantalla mas con ui and ux --}}
-  <table   class="table {{--table-bordered--}} table-hover table-sm  " align="center">
+  <!--<table   class="table table-bordered table-hover table-sm  " align="center">
 	<thead >
-	        <tr>
-	  {{--          <th colspan="4" style="text-align:center; font-weight:bold; letter-spacing:5px;"><label >{{strtoupper($tipoSocio)}}</label> DE CLUB ACTIVO 20-30</th>
-	            <th colspan="2" style="text-align:center; font-weight:bold; letter-spacing:5px;">
-	            	<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
-					  Launch demo modal
-					</button>	
-	            </th>
-	      --}}  
-	        </tr>
 	</thead>
 	<thead >
-	        <tr >
-	           	
+	        <tr >  	
 	            <th colspan="2" style="text-align: center">Nombre</th>
 	           	<th>Email</th>
-	           	{{--<th style="text-align: center">Tipo</th>
-	           	--}}<th class="text-center">Deuda</th>
+	           	<th class="text-center">Deuda</th>
 	           	<th style="text-align: center">Estado</th>
 	        </tr> 
 	</thead>
@@ -181,16 +170,16 @@
 		@forelse($socios as $socio)
 		<tr id="trow{{$socio->id}}">
 			<td><img class="rounded-circle" src="http://www.carrerasolutions.com/wp-content/uploads/2016/04/male_avatar_profile_picture_WB.jpg" height="38" width="38"></td>
-{{-- style="display:none;" --}}<td style="padding:0px; font-size:15px;"><strong>{{ $socio->apodo }}</strong>
-				<br><small style="font-size:15px">{{ $socio->nombre }} {{ $socio->apellido }}</small><br></td>
+            <td style="padding:0px; font-size:14px;"><strong>{{ $socio->apodo }}</strong>
+				<br><small style="font-size:14px">{{ $socio->nombre }} {{ $socio->apellido }}</small><br></td>
 				<td style="padding-top:10px;">	<small style="font-size:15px">{{ $socio->email }}</small></td>
 				<td style="font-size:14px; padding-top:10px;" class="text-center" >{{ sociosPagoController::verDeuda($socio->id) }}</td>
-			{{--<td><div class="form-group row">
+			<td><div class="form-group row">
  			<div class="col-11 offset-1 ">
       				<input class="form-control" placeholder="Buscar" type="text" id="search2" name="search2" autofocus>             
   				</div>
   	  
-		</div></td>--}}
+		</div></td>
 			<td style="padding-top:10px" class="text-center">
 				@if($socio->estado=='Activo')
 				<button type="button" class="btn btn-outline-warning btn-sm pagosAccion" value="{{ $socio->id }}" >Pagos</button>
@@ -206,7 +195,7 @@
 		</tbody>
 
 
-	</table>{{-- borrar aaca --}}
+	</table>--> {{-- borrar aaca --}}
 
 
 {{-- //////////////////////////MODAL FICHA--}}

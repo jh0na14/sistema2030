@@ -1,5 +1,7 @@
 @extends('layouts.app')
 @section('content')	
+<?php use App\Http\Controllers\sociosPagoController;
+  ?>
 	<div class="row" style="padding-bottom:10px;">
 	</div>
 
@@ -16,7 +18,7 @@
 
   <div style="clear:both; padding-bottom:15px;">
   </div>
-<div style="width:12%; float:left; padding-right:0px;" id="menu-vertical-pagos">
+<div style="width:14%; float:left; padding-right:0px;" id="menu-vertical-pagos">
 <div style="clear:both; padding-bottom:15px;">
   </div>
      
@@ -43,28 +45,30 @@
       </div>  
   </div>
 		
- 	<div style="width:87%; float:right;">
+ 	<div style="width:85%; float:right;">
 
  	<div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Pagos de {{ $nombreSocio }} <strong class="text-danger">            DEUDA: {{ $deuda }} </strong></h6>
+  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Pagos de {{ $nombreSocio }} <strong  align="right" id="deudaTotal" class="text-danger">DEUDA: {{ $deuda }}</strong> </h6>
         
 
- 		<br>
+ 		
 <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
         <strong>Well done!</strong> You successfully read this important alert message.
     </div>
-
+  <div style="padding-top:10px" ></div>
+<input type="hidden"  id="idvar" name="idvar" type="number"  >
 <table class="table table-bordered  table-hover table-sm " align="center">
   <thead id="theadrow" name="theadrow">{{-- no lo ocupo el id este por el momento --}}
           <tr>
-            <th class="center " style="text-color:#000000;">Fecha Pago</th>
             <th class="center" >Meses</th>
             <th class="center " style="text-color:#000000;">Monto</th>
             
             
             <th class="center">Año</th>
-            {{--@if($tipo=='Realizada')   @endif --}}       
+            {{--@if($tipo=='Realizada')   @endif --}}
+             <th class="center " style="text-color:#000000;">Fecha Pago</th>
+                  
             <th style="text-align: center">Estado</th>
            
             <th style="text-align: center">Accion</th>
@@ -74,15 +78,15 @@
     <div style="display:none;">{{ $contador=0 }}</div>
     @forelse($pagos as $pago)
     <tr id="trow{{ $pago->id }}">
-      <td class="text-center" >--{{-- $pago->fechaPago --}}</td>
       <td style="font-size:14px">Cúota {{ $pago->numMes }},  mes {{ $pago->mes }}</td>
-      <td class="text-center">$ {{ $pago->monto }}</td> 
+      <td class="text-center"> {{ $pago->monto }}</td> 
       <td class="text-center">{{ $pago->año }}</td>
-
+      <td class="text-center" >{{ $pago->fechaPago }}</td>
+      
       <td class="text-center @if($pago->estado=='CANCELADO') text-secondary @else text-danger @endif "  style="font-size:13px">{{ $pago->estado }}</td>
       <td class="text-center">
        @if($pago->estado=='PENDIENTE')
-        <button style="font-size:12px" type="button" class="btn btn-outline-primary btn-sm pagoAccion" value="{{ $pago->idsocios }}">Hacer Pago</button>
+        <button style="font-size:12px" type="button" class="btn btn-outline-primary btn-sm pagoAccion" value="{{ $pago->id }}">Hacer Pago</button>
        @else
         <button style="font-size:12px" type="button" class="btn btn-outline-secondary btn-sm infomodal" value="{{ $pago->idsocios }}">Hacer Recibo</button>
       @endif
@@ -141,20 +145,26 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog {{--modal-lg--}} " role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      <div class="modal-header bg-info">
+       {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
-        </button>
+        </button>--}}
       </div>
+
       <div class="modal-body">
         <div class="">
-            @include('proyectos.formDonacion')
+          <br><br>
+           <div class="text-center">
+            <strong style="font-size:18px"  >Esta seguro de realizar el pago?</strong>
+
+            </div>       
+            <br>
         </div>
       </div>
       <div class="modal-footer">
-       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="btnsave" value="Anhadir">Guardar</button>
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" id="btnsave" value="Anhadir">Si</button>
       </div>
     </div>
   </div>
@@ -227,6 +237,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/donaciones.js')}}"></script>
+  <script src="{{asset('js/pagos.js')}}"></script>
 
 @endsection

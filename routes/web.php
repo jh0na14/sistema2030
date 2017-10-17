@@ -33,6 +33,9 @@ Route::get('/sociospago/busqueda/{socio_id?}','sociosPagoController@busqueda');
 
 Route::get('/pagos/{socio_id}','pagosController@show');
 Route::get('/pagos/{socio_id}/{anho}','pagosController@showParametros');
+Route::put('/pagos/pagar/{id?}','pagosController@pagar');
+Route::put('/pagos/deudaActual/{idsocios}','pagosController@deudaActual');
+Route::post('/pagos/createTMembresia','pagosController@createTMembresia');
 
 Route::get('/periodos','periodosController@show');
 Route::get('/periodos/buscar/{id?}','periodosController@buscar');
