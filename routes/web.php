@@ -93,6 +93,7 @@ Route::put('/verdugo/update/{id?}','verdugoController@update');
 Route::get('/verdugo/busqueda/{texto?}','verdugoController@busqueda');
 Route::get('/verdugo/bus/socios','verdugoController@busquedaSelect');
 
+
 Route::get('/controlGastos','gastosController@show');
 Route::get('/controlGastos/{tipo}','gastosController@showEstado');
 Route::get('/controlGastos/{tipo?}/{semestre?}','gastosController@showParametros');
