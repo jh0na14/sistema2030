@@ -56,6 +56,8 @@
 			<td>{{ $patrocinador->nombre }}</td>
 			<td >{{ $patrocinador->descripcion }}</td>
 			<td class="text-center">
+        <button type="button" class="btn btn-primary btn-sm" data-toggle="infomodal" data-target="#exampleModal" id="btnnuevo">
+      Nueva Donación</button>
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $patrocinador->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $patrocinador->id }}">Editar</button>
 			</td>

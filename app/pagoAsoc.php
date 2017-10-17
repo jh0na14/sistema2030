@@ -4,8 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class pagoasociasion extends Model
+class pagoAsoc extends Model
 {
     //
-    protected $guarded=[];
+     protected $guarded=[];
 }

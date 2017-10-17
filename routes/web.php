@@ -97,6 +97,14 @@ Route::get('/controlGastos','gastosController@show');
 Route::get('/controlGastos/{tipo}','gastosController@showEstado');
 Route::get('/controlGastos/{tipo?}/{semestre?}','gastosController@showParametros');
 
+Route::get('/pagoasoc','pagoAsocController@show');
+Route::get('/pagoasoc/buscar/{id?}','pagoAsocController@buscar');
+Route::post('/pagoasoc/create','pagoAsocController@create');
+Route::put('/pagoasoc/update/{id?}','pagoAsocController@update');
+Route::get('/pagoasoc/busqueda/{texto?}','pagoAsocController@busqueda');
+Route::get('/pagoasoc/bus/socios','pagoAsocController@busquedaSelect');
+
+
 //Route::get('/socios/1','sociosController@show2');
 /*
 Route::post('/socios/create',function(Request $request){
