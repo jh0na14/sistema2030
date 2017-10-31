@@ -105,6 +105,17 @@ Route::put('/pagoasoc/update/{id?}','pagoAsocController@update');
 Route::get('/pagoasoc/busqueda/{texto?}','pagoAsocController@busqueda');
 Route::get('/pagoasoc/bus/socios','pagoAsocController@busquedaSelect');
 
+Route::get('/agenda','agendaController@show');
+Route::post('/agenda/create','agendaController@create');
+Route::post('/agenda/createPunto','agendaController@createPunto');
+Route::post('/agenda/createSubPunto','agendaController@createSubPunto');
+Route::get('/agenda/tablaPuntos/{idagendas?}','agendaController@tablaPuntos');
+//Route::get('/agenda/tablaSubPuntos/{idpuntos?}','agendaController@tablaSubPuntos');
+Route::put('/agenda/updatePuntos/{id?}','agendaController@updatePuntos');
+Route::put('/agenda/deletePuntos/{id?}','agendaController@deletePuntos');
+
+//Route::put('/agenda/updatePuntos/{id?}/{i?}','agendaController@updateSubPuntos');
+
 
 //Route::get('/socios/1','sociosController@show2');
 /*

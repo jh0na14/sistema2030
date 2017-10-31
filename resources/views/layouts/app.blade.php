@@ -80,12 +80,16 @@
       <li class="nav-item active">
         <a class="nav-link" href="#"></a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/pagoasoc">Pago Asociacion</a>
+       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Agenda
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="/agenda">Creacion de Agendas</a>
+          <a class="dropdown-item" href="/proyectos/2">Creacion de Actas</a>
+          </div>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/verdugo">Verdugo</a>
-      </li>
+      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Proyectos
