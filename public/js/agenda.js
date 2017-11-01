@@ -4,6 +4,7 @@ $(document).ready(function(){
   //$("#fechaNac").mask('xxxx-xxxx');
   
    });   
+
 ////////////////Esto para busqueda
  $("#search").on('keyup',function(){
     var value = $(this).val();
@@ -24,6 +25,17 @@ $(document).ready(function(){
        });
  });
 ///////////////////fin busqueda
+
+
+$(document).on('click','.acta',function(){
+//asi no funciona cuando retorno de ayax un boton la accion onclick
+// $(".pagosAccion").click(function(){
+       var val = $(this).val();     
+     $(location).attr('href','/acta/'+val);
+     
+    });
+
+
  $("#btnnuevo").click(function(){
 
   $('#btnsave').val("add");
@@ -140,7 +152,7 @@ $("#addPunto").click(function (e) {
             dataType: 'json',
             success: function (data) {
                console.log(data);
-               $('#exampleModal').modal('hide');
+               //$('#exampleModal').modal('hide');
               $("#msjshow2").show();
               if(state=="add"){
                $("#msjshow2").html(data+" <strong>Bien hecho!</strong> Punto guardado exitosamente");
@@ -193,18 +205,20 @@ $("#btnPuntos").click(function(){
              row +='<button type="button" class="btn btn-outline-info btn-sm dosAccion" value="' + data[i][j].id + '">2</button>';
              row +='</td>';
              row +='<td style="font-weight:bold;">' +k + ' &nbsp&nbsp' + data[i][j].nombre + '</td>';
-             row +='<td>';
+            // row +='<td>';
             
             }
              if(data[i][j].nivel==2){
              row +='<td class="text-center">';
              row +='</td>';
              row +='<td style="font-weight:bold;">&nbsp&nbsp&nbsp' +k + '.' +l + ' &nbsp&nbsp' + data[i][j].nombre + '</td>';
-             row +='<td>';
+             //row +='<td>';
             }
              //row +='</td>';
-             //row +='<td style="font-weight:bold;">' + data[i][j].nivel + '</td>';
+             //row +='<td style="font-weight:bold;"> <input  class="form-control" placeholder="Nombre" type="text" id="et' + data[i][j].id+ '" name="et' + data[i][j].id+ '" autofocus></td>';
              ///row +='<td>';
+              row +='<td>';
+            
              row +='</button> ';
              // row +='<img class="rounded-circle" src="{{asset(icons/boton-borrar.png)}}" height="10" width="10">';
              row +='<button type="button" class="btn btn-outline-success btn-sm editPunto" data-nombre="' + data[i][j].nombre + '" data-unoDos="' + data[i][j].nivel + '" value="' + data[i][j].id + '">Editar';
@@ -214,7 +228,7 @@ $("#btnPuntos").click(function(){
              row +='<button type="button" class="btn btn-outline-danger btn-sm eliminarPunto" data-nombre="' + data[i][j].nombre + '" data-unoDos="' + data[i][j].nivel + '" value="' + data[i][j].id + '">x';
              row +='</button> ';
               }else{
-              row +='<button type="button" class="btn btn-outline-secondary btn-sm eliminarPunto" data-nombre="' + data[i][j].nombre + '" data-unoDos="' + data[i][j].nivel + '" value="' + data[i][j].id + '">x';
+              row +='<button type="button" class="btn btn-outline-secondary btn-sm eliminarPunto" data-nombre="' + data[i][j].nombre + '" data-unoDos="' + data[i][j].nivel + '" value="' + data[i][j].id + '" disabled>x';
                }
            // row +='<button type="button" class="btn btn-outline-secondary btn-sm abajo" value=""> ';
            // row +='<img class="rounded-circle" src="{{asset(icons/boton-abajo.png)}}" height="10" width="10">';

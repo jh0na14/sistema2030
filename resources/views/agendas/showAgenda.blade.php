@@ -85,8 +85,10 @@
       @endif
 			<td class="text-center">
 				<button type="button" class="btn btn-outline-info btn-sm puntosModal" data-numAgenda="{{ $agenda->numAgenda }}" value="{{ $agenda->id }}">Puntos</button>
-				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $agenda->id }}">Acta</button>
-			</td>
+				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $agenda->id }}">Editar</button>
+			  <button type="button" class="btn btn-outline-success btn-sm acta" href="/acta/{{ $agenda->id }}" value="{{ $agenda->id }}">Acta</button>
+      
+      </td>
 
         </tr>
 		@empty
@@ -121,7 +123,7 @@
   <div class="card">
    <div class="card-block">
     <h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;"><div id="divnumAgenda" name="divnumAgenda">Agenda #1000</div></h6>
-         <div style="display: none;"><input type="text" id="etnumAgenda" name="etnumAgenda"> agenda <br>
+         <div style="display: none;"{{----}}><input type="text" id="etnumAgenda" name="etnumAgenda"> agenda <br>
          <input type="text" id="unoDos" name="unoDos" value="1">1 o 2<br>
          <input type="text" id="ids" name="ids" value="1">ids de puntos y sub al modificar<br>
          <input type="text" id="idpuntos" name="idpuntos" value="1">id de puntos de talbla sub<br>

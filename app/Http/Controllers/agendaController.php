@@ -8,7 +8,7 @@ use App\socio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\createVerdugoRequest;
+//use App\Http\Requests\createVerdugoRequest;
 
 class agendaController extends Controller
 {

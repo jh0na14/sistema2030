@@ -113,9 +113,11 @@ Route::get('/agenda/tablaPuntos/{idagendas?}','agendaController@tablaPuntos');
 //Route::get('/agenda/tablaSubPuntos/{idpuntos?}','agendaController@tablaSubPuntos');
 Route::put('/agenda/updatePuntos/{id?}','agendaController@updatePuntos');
 Route::put('/agenda/deletePuntos/{id?}','agendaController@deletePuntos');
-
 //Route::put('/agenda/updatePuntos/{id?}/{i?}','agendaController@updateSubPuntos');
 
+Route::get('/acta/{idagendas?}','actaController@show');
+Route::get('/acta/tablaPuntos/{idagendas?}','actaController@tablaPuntos');
+Route::put('/acta/updatePuntos/{id?}','actaController@updatePuntos');
 
 //Route::get('/socios/1','sociosController@show2');
 /*
