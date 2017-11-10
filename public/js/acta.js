@@ -40,11 +40,11 @@ $(document).ready(function(){
              if(data[i][j].descripcion==null){
              // row +='<td style=" padding-top:12px; padding-bottom:12px;">' + data[i][j].descripcion + '</td>'; 
            
-             row +='<td style="font-weight:bold;"><div id="divetx' + data[i][j].id+ '"><textarea onkeyup="auto_grow(this)" class="form-control" rows="2" placeholder="Escriba una descripcion" type="text" id="etx' + data[i][j].id+ '" name="etx' + data[i][j].id+ '" ></textarea></div></td>';
+             row +='<td style="font-weight:bold;"><div id="divetn' + data[i][j].nivel+ 'x' + data[i][j].id+ '"><textarea onkeyup="auto_grow(this)" class="form-control" rows="2" placeholder="..." type="text" id="etn' + data[i][j].nivel+ 'x' + data[i][j].id+ '" name="etn' + data[i][j].nivel+ 'x' + data[i][j].id+ '" ></textarea></div></td>';
              }else{
               //row +='<td style=" padding-top:12px; padding-bottom:12px;">' + data[i][j].descripcion + '</td>'; 
           
-              row +='<td style="font-weight:bold;"><div id="divetx' + data[i][j].id+ '"><textarea onkeyup="auto_grow(this)" class="form-control" rows="2" placeholder="Escriba una descripcion" type="text" id="etx' + data[i][j].id+ '" name="etx' + data[i][j].id+ '" >' + data[i][j].descripcion+ '</textarea></div></td>';
+              row +='<td style="font-weight:bold;"><div id="divetn' + data[i][j].nivel+ 'x' + data[i][j].id+ '"><textarea onkeyup="auto_grow(this)" class="form-control" rows="2" placeholder="..." type="text" id="etn' + data[i][j].nivel+ 'x' + data[i][j].id+ '" name="etn' + data[i][j].nivel+ 'x' + data[i][j].id+ '" >' + data[i][j].descripcion+ '</textarea></div></td>';
              }
               row +='<td style="font-weight:bold; padding-top:12px;">';
             
@@ -90,14 +90,14 @@ $(document).on('click','.editPunto',function(){
   // $('#etPuntos').prop("disabled",false);
    $('#etPuntos').focus();  
    $('#addPunto').html("Modificar");  
-  
+ var unoDos =$(this).attr('data-unoDos');
+   $('#unoDos').val(unoDos);
+ 
    $('#ids').val(value);
    $('#addPunto').val("edit");
-  $('#etPuntos').val($('#etx'+value).val()); 
-  $('#nombreTextArea').val('etx'+value); 
+  $('#etPuntos').val($('#etn'+$('#unoDos').val()+'x'+value).val()); 
+  $('#nombreTextArea').val('etn'+$('#unoDos').val()+'x'+value); 
   
-var unoDos =$(this).attr('data-unoDos');
-   $('#unoDos').val(unoDos);
 
 
 $("#addPunto").click();
@@ -143,7 +143,7 @@ $("#addPunto").click(function (e) {
               if(state=="edit"){
                $("#msjshow2").html(" <strong>Punto guardado exitosamente");  
                }
-               $('#'+'divetx'+$('#ids').val()).addClass("has-success"); 
+               $('#'+'divetn'+nivel+'x'+$('#ids').val()).addClass("has-success"); 
   
 
            
