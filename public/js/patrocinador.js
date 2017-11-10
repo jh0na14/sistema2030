@@ -35,6 +35,123 @@ $(document).ready(function(){
     //$('#frmsocios')[0].reset();
 
  });
+$(document).on('click','.btndona',function(){
+ $('#btnsaveDona').val("add");
+  $("#btnsaveDona").html("Nuevo");
+  $("#btnsaveDona").removeClass("btn-success");
+  $("#exampleModalLabel1").html("Registro Patrocinador");
+  $("#tabla").append('<tr id="task"><td>kjhkj</td><td>');
+    //$('#frm').trigger('reset');
+
+   $('#ModalDona').modal('show'); 
+
+   $('#noMostrar').hide(); 
+    //$('#frmsocios')[0].reset();
+
+ });
+//////////guardar modal donaciones dentro de patrocinador 
+  $("#btnsave").click(function (e) {
+    //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("messageform").value+'"</td><td>');
+  //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("nombre").value+'"</td><td>');
+      //$('#frmsocios').submit();  
+      $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        })
+
+        e.preventDefault(); 
+
+        var formData = {
+          //nombre:document.getElementById("nombre").value,
+          id:$('#proyecto_id').val(),
+          monto:$('#monto').val(),
+          descripcion:$('#descripcion').val(),
+          fecha:$('#fecha').val(),
+           }       
+
+        //used to determine the http verb to use [add=POST], [update=PUT]
+        var state = $('#btnsaveDona').val();
+        var type = "POST"; //for creating new resource
+        var form_id = $('#form_id').val();;
+        var my_url = "/patrocinador/create";
+
+       if (state == "update"){
+            type = "PUT"; //for updating existing resource
+            my_url = '/patrocinador/update/'+form_id;
+        }
+
+        console.log(formData);
+
+        $.ajax({
+
+            type: type,
+            url: my_url,
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+               console.log(data);
+
+                //redirect('/socios');
+            if(state=="add"){
+                var row = '<tr><td>' + data.proyecto_id + '</td>';
+                row = '<tr><td>' + data.monto + '</td>';
+                 row +='<td>' + data.descripcion + '</td>';
+                 row = '<tr><td>' + data.fecha + '</td>';
+                 row += '<td class="text-center"><button type="button" class="btn btn-outline-info btn-sm infomodal" value="'+data.id+'">Info</button>  ';
+                 row += '<button type="button" class="btn btn-outline-success btn-sm editModal" value="'+data.id+'">Editar</button> ';
+                 row +='<button type="button" class="btn btn-outline-danger btn-sm" value="'+data.id+'">Eliminar</button>';
+                 row +='</td></tr>';
+                //var task='<tr id="task"><td>rregre</td><td>';
+                 $("#tabla").append(row);
+               }
+                /*if (state == "add"){ //if user added a new record
+                    $('#tasks-list').append(task);
+                }else{ //if user updated an existing record
+
+                    $("#task" + task_id).replaceWith( task );
+                }*/
+
+               // $('#frmsocios').trigger("reset");
+
+               // $('#exampleModal').modal('hide')
+            },
+            error: function (data) {
+                console.log('Error de noseq:', data);
+               var errors=data.responseJSON;
+                console.log(errors);
+                if(errors.monto!=undefined)
+                {
+                  $('#montofeed').text(errors.monto);
+                  //$( '#montodiv' ).removeClass();
+                  $( '#montodiv' ).addClass("has-danger");
+                }else{
+                  $( '#montodiv' ).removeClass("has-danger");
+                  $( '#montofeed' ).text("");
+                  }
+                  
+                if(errors.descripcion!=undefined)
+                {
+                  $( '#descripciondiv' ).addClass("has-danger");
+                  $('#descripcionfeed').text(errors.descripcion);
+                }else{
+                  $( '#descripciondiv' ).removeClass("has-danger");
+                  $( '#descripcionfeed' ).text("");
+                  }
+                  if(errors.fecha!=undefined)
+                {
+                  $( '#fechadiv' ).addClass("has-danger");
+                  $('#fechafeed').text(errors.fecha);
+                }else{
+                  $( '#fechadiv' ).removeClass("has-danger");
+                  $( '#fechafeed' ).text("");
+                  }
+                
+            }
+        });
+    });
+///////final guardar donacion dentro de patrocinador///////
+/////////////////////////////////////////////////////////////////
 
 ///////////editodal el boton es la clase infomodal por que id en el boton no agarraba por que repetia
 ///////////en el listado d la tabla
