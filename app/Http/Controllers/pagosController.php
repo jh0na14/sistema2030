@@ -208,7 +208,7 @@ class pagosController extends Controller
             'ingreso'=> $request->input('ingreso'),
             'egreso'=> 0.00,
             'saldo'=>0.00,
-            'idsocios'=> 44,
+            'idsocios'=> 4,
             'idperiodos'=>$periodo->id ,
             ]);
        return Response::json($message);

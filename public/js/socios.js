@@ -1,7 +1,7 @@
 
 $(document).ready(function(){
    $('#telefono').mask('9999-9999');
-
+ 
    $('#dui').mask('99999999-9');
   //$("#tabla").append('<tr id="task"><td>rregre</td><td>');
   //$("#fechaNac").mask('xxxx-xxxx');

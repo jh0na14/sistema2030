@@ -69,13 +69,13 @@
       <div class="form-group row col-6 has-success">
        <label for="example-text-input"  class="col-3 col-form-label offset-1">Hora Inicio:</label>
         <div class="col-8">
-              <input class="form-control" placeholder="--:--" type="text" id="horaInicio" name="horaInicio" value="{{ $agenda->horaInicio }}">             
+              <input class="form-control" placeholder="--:--" type="time" id="horaInicio" name="horaInicio" value="{{ $agenda->horaInicio }}">             
           </div>
       </div>
       <div class="form-group row col-6">
        <label for="example-text-input"  class="col-3 col-form-label offset-1">Hora Fin:</label>
         <div class="col-8">
-              <input class="form-control" placeholder="--:--" type="text" id="horaFin" name="horaFin" value="{{ $agenda->horaFin }}">             
+              <input class="form-control" placeholder="--:--" type="time" id="horaFin" name="horaFin" value="{{ $agenda->horaFin }}">             
           </div>
       </div>
   </div>
