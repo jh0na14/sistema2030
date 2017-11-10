@@ -56,7 +56,7 @@
 			<td>{{ $patrocinador->nombre }}</td>
 			<td >{{ $patrocinador->descripcion }}</td>
 			<td class="text-center">
-        <button type="button" class="btn btn-primary btn-sm" data-toggle="infomodal" data-target="#exampleModal" id="btnnuevo">
+        <button type="button" class="btn btn-primary btn-sm btndona"  value="{{ $patrocinador->id }}">
       Nueva Donación</button>
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $patrocinador->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $patrocinador->id }}">Editar</button>
@@ -130,6 +130,30 @@
   </div>
 </div>	
 {{-- /////////////////////FIN--}}
+{{-- /////////////////////modal donacionaciones--}}
+<!-- Modal -->
+<div class="modal fade" id="ModalDona" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog {{--modal-lg--}} " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel1">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+            @include('proyectos.formDonacion')
+        </div>
+      </div>
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="btnsaveDona" value="Anhadir">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 	
   </div>{{--fin cards--}}
   </div>{{--fin cards--}}

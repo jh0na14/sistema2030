@@ -59,7 +59,7 @@
      <div id="telefonodiv" class="form-group col-6">
         <label for="example-number-input" class="col-12 col-form-label ">Telefono: *</label>
         <div class="col-12">
-            <input class="form-control" type="number" value="1234-4656" id="telefono" name="telefono">
+            <input class="form-control" type="text" value="1234-4656" id="telefono" name="telefono">
             <div id="telefonofeed" class="form-control-feedback"></div>               
         </div>
     </div>
