@@ -178,6 +178,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //Class para PDF visto en un video de internet https://www.youtube.com/watch?v=fUOZX_yPmdk
+        Barryvdh\DomPDF\serviceProvider::class,
     ],
 
     /*
@@ -226,7 +228,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'PDF'  =>Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

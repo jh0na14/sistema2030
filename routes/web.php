@@ -84,6 +84,7 @@ Route::get('/patrocinador/buscar/{id?}','patrocinadorController@buscar');
 Route::post('/patrocinador/create','patrocinadorController@create');
 Route::put('/patrocinador/update/{id?}','patrocinadorController@update');
 Route::get('/patrocinador/busqueda/{texto?}','patrocinadorController@busqueda');
+Route::post('/patrocinador/createDonacion','patrocinadorController@createDonacion');
 
 
 Route::get('/verdugo','verdugoController@show');
@@ -118,6 +119,9 @@ Route::put('/agenda/deletePuntos/{id?}','agendaController@deletePuntos');
 Route::get('/acta/{idagendas?}','actaController@show');
 Route::get('/acta/tablaPuntos/{idagendas?}','actaController@tablaPuntos');
 Route::put('/acta/updatePuntos/{id?}','actaController@updatePuntos');
+
+Route::get('/PDF/ejemplo','PDFController@ejemploPDF');
+
 
 //Route::get('/socios/1','sociosController@show2');
 /*

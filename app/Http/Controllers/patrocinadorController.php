@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 use App\patrocinador;
+use App\donacion;
+use App\periodo;
+
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\createPatrocinadorRequest;
+use App\Http\Requests\createDonacionRequest;
 
 //cmd php artisan make:controller beneficiariosController
 class patrocinadorController extends Controller
@@ -66,5 +70,37 @@ class patrocinadorController extends Controller
     	
     }
 
+ public function createDonacion(createDonacionRequest $request){
+        //dd($request->all());
+       //return Response::json($request);
+        
+        $periodo=periodo::where('estado','Iniciado')->get()->first();
+        //$message2 = proyecto::find($request->input('proyecto_id'));
+
+       
+       $message= donacion::create([
+            'monto'=> $request->input('monto'),
+            'descripcion'=> $request->input('descripcion'),
+            'fecha'=> $request->input('fecha'),
+            'tipo'=> 'Recibida',
+            'categoria'=>'Total',
+            'idpatrocinadors'=> $request->input('idpatrocinadors'),
+            'idperiodos'=>$periodo->id,
+            ]);
+             //return Response::json($message);
+       /* $message2->fill([
+            'estado'=>'Finalizado',
+            ]);
+        $message2->save();
+        $message3 = peticion::find($message2->idpeticions);
+        $message3->fill([
+            'estado'=>'Finalizado',
+            ]);
+        $message3->save();
+        */
+        return Response::json($message);
+        //return redirect('/socios')->with('mensaje','Registro Guardado');
+
+    }//fin cereateDonacion
     //
 }

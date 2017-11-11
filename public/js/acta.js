@@ -127,6 +127,9 @@ $("#addPunto").click(function (e) {
         var formData = {
             nivel:nivel,
             descripcion:$('#etPuntos').val(),
+            horaInicio:$('#horaInicio').val(),
+            horaFin:$('#horaFin').val(),
+            idAgenda:$('#idAgenda').val(),
             //idpuntos:$('#idpuntos').val(),
             } 
             type = "PUT"; //for updating existing resource
