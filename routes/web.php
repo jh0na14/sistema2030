@@ -120,6 +120,9 @@ Route::get('/acta/{idagendas?}','actaController@show');
 Route::get('/acta/tablaPuntos/{idagendas?}','actaController@tablaPuntos');
 Route::put('/acta/updatePuntos/{id?}','actaController@updatePuntos');
 
+Route::get('/PDF/ejemplo','PDFController@ejemploPDF');
+
+
 //Route::get('/socios/1','sociosController@show2');
 /*
 Route::post('/socios/create',function(Request $request){
