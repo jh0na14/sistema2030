@@ -4,6 +4,8 @@ function auto_grow(element) {
 }
 
 $(document).ready(function(){
+     //$('#horaini').mask('99:99');
+
   $('#content').on('change keyup keydown paste cut', 'textarea', function () {
         $(this).height(0).height(this.scrollHeight);
     }).find('textarea').change();

@@ -1,5 +1,7 @@
 
 $(document).ready(function(){
+    // $('#monto').mask('$9999.99');
+
   //$("#tabla").append('<tr id="task"><td>rregre</td><td>');
   //$("#fechaNac").mask('xxxx-xxxx');
   
