@@ -35,6 +35,9 @@
       
     </div>
       </div>
+      <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
+        <strong>Well done!</strong> You successfully read this important alert message.
+    </div>
  	<table class="table {{--table-bordered--}} table-hover table-sm  " align="center">
 	<thead >
 	        
@@ -57,7 +60,7 @@
 			<td >{{ $patrocinador->descripcion }}</td>
 			<td class="text-center">
         <button type="button" class="btn btn-primary btn-sm btndona"  value="{{ $patrocinador->id }}">
-      Nueva Donación</button>
+      Donación</button>
 				<button type="button" class="btn btn-outline-info btn-sm infomodal" value="{{ $patrocinador->id }}">Info</button>
 				<button type="button" class="btn btn-outline-success btn-sm editModal" value="{{ $patrocinador->id }}">Editar</button>
 			</td>

@@ -84,7 +84,12 @@ class actaController extends Controller
         $message->fill([
             'descripcion'=>$request->input('descripcion'),
             ]);
-        if($message->save())
+        $message2=agenda::find($request->input('idAgenda'));
+        $message2->fill([
+            'horaInicio'=>$request->input('horaInicio'),
+            'horaFin'=>$request->input('horaFin'),
+            ]);
+        if($message->save() && $message2->save())
             return Response::json('Se actualizo el punto');
             else
                 return Response::json('No pudo actualizar el punto');

@@ -25,7 +25,6 @@ $(document).ready(function(){
  });
 ///////////////////fin busqueda
  $("#btnnuevo").click(function(){
-
   $('#btnsave').val("add");
   $("#btnsave").html("Nuevo");
   $("#btnsave").removeClass("btn-success");
@@ -36,6 +35,9 @@ $(document).ready(function(){
 
  });
 $(document).on('click','.btndona',function(){
+   var value = $(this).val();
+  $("#proyecto_id").val(value);
+ 
  $('#btnsaveDona').val("add");
   $("#btnsaveDona").html("Nuevo");
   $("#btnsaveDona").removeClass("btn-success");
@@ -50,7 +52,7 @@ $(document).on('click','.btndona',function(){
 
  });
 //////////guardar modal donaciones dentro de patrocinador 
-  $("#btnsave").click(function (e) {
+  $("#btnsaveDona").click(function (e) {
     //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("messageform").value+'"</td><td>');
   //$("#tabla").append('<tr id="task"><td>"'+document.getElementById("nombre").value+'"</td><td>');
       //$('#frmsocios').submit();  
@@ -64,7 +66,7 @@ $(document).on('click','.btndona',function(){
 
         var formData = {
           //nombre:document.getElementById("nombre").value,
-          id:$('#proyecto_id').val(),
+          idpatrocinadors:$('#proyecto_id').val(),
           monto:$('#monto').val(),
           descripcion:$('#descripcion').val(),
           fecha:$('#fecha').val(),
@@ -73,13 +75,13 @@ $(document).on('click','.btndona',function(){
         //used to determine the http verb to use [add=POST], [update=PUT]
         var state = $('#btnsaveDona').val();
         var type = "POST"; //for creating new resource
-        var form_id = $('#form_id').val();;
-        var my_url = "/patrocinador/create";
+        //var form_id = $('#form_id').val();;
+        var my_url = "/patrocinador/createDonacion";
 
-       if (state == "update"){
-            type = "PUT"; //for updating existing resource
-            my_url = '/patrocinador/update/'+form_id;
-        }
+       //if (state == "update"){
+         //   type = "PUT"; //for updating existing resource
+           // my_url = '/patrocinador/update/'+form_id;
+        //}
 
         console.log(formData);
 
@@ -91,10 +93,19 @@ $(document).on('click','.btndona',function(){
             dataType: 'json',
             success: function (data) {
                console.log(data);
-
+               $('#ModalDona').modal('hide'); 
+               $("#msjshow").show();
+              
+               $("#msjshow").html(" <strong>Bien hecho!</strong>Donacion recibida exitosamente");  
+                          
+                setTimeout(function(){
+                  $("#msjshow").hide();
+                $(location).attr('href','/donaciones/Recibidas');
+               // window.location.reload();
+                }, 4000);
                 //redirect('/socios');
-            if(state=="add"){
-                var row = '<tr><td>' + data.proyecto_id + '</td>';
+            /*if(state=="add"){
+                var row = '<tr><td>' + data.id + '</td>';
                 row = '<tr><td>' + data.monto + '</td>';
                  row +='<td>' + data.descripcion + '</td>';
                  row = '<tr><td>' + data.fecha + '</td>';
@@ -105,7 +116,7 @@ $(document).on('click','.btndona',function(){
                 //var task='<tr id="task"><td>rregre</td><td>';
                  $("#tabla").append(row);
                }
-                /*if (state == "add"){ //if user added a new record
+                *//*if (state == "add"){ //if user added a new record
                     $('#tasks-list').append(task);
                 }else{ //if user updated an existing record
 
@@ -196,7 +207,7 @@ $(document).on('click','.editModal',function(){
           //success data
             console.log(data);
             $('#nombre').val(data.nombre);
-          $('#descripcion').val(data.descripcion);
+          $('#descripcionPatro').val(data.descripcion);
            });
     //El boton para saber cambair de estado para guardar o modificar 
     $("#btnsave").val("update");
@@ -231,13 +242,13 @@ $("#btnsavee").click(function (e) {
           //nombre:document.getElementById("nombre").value,
           //socio:$('#socio_id').val(),
           nombre:$('#nombre').val(),
-          descripcion:$('#descripcion').val(),
+          descripcion:$('#descripcionPatro').val(),
            }       
 
         //used to determine the http verb to use [add=POST], [update=PUT]
         var state = $('#btnsave').val();
         var type = "POST"; //for creating new resource
-        var form_id = $('#form_id').val();;
+        var form_id = $('#form_id').val();
         var my_url = "/patrocinador/create";
 
        if (state == "update"){
@@ -255,7 +266,7 @@ $("#btnsavee").click(function (e) {
             dataType: 'json',
             success: function (data) {
                console.log(data);
-
+                $('#exampleModal').modal('hide'); 
                 //redirect('/socios');
             if(state=="add"){
                 var row = '<tr><td>' + data.nombre + '</td>';
@@ -294,11 +305,11 @@ $("#btnsavee").click(function (e) {
                   
                 if(errors.descripcion!=undefined)
                 {
-                  $( '#descripciondiv' ).addClass("has-danger");
-                  $('#descripcionfeed').text(errors.descripcion);
+                  $( '#descripcionPatrodiv' ).addClass("has-danger");
+                  $('#descripcionPatrofeed').text(errors.descripcion);
                 }else{
-                  $( '#descripciondiv' ).removeClass("has-danger");
-                  $( '#descripcionfeed' ).text("");
+                  $( '#descripcionPatrodiv' ).removeClass("has-danger");
+                  $( '#descripcionPatrofeed' ).text("");
                   }
                 
             }

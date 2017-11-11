@@ -19,11 +19,11 @@
             @endif --}}
         </div>
     </div> 
-    <div id="descripciondiv" class="form-group row">
+    <div id="descripcionPatrodiv" class="form-group row">
         <label for="example-number-input" class="col-1 col-form-label offset-1">Descripcion</label>
         <div class="col-8 offset-1">
-            <textarea class="form-control" type="text" id="descripcion" name="descripcion" value="mi casa" rows="2"></textarea>
-            <div id="descripcionfeed" class="form-control-feedback"></div>                   
+            <textarea class="form-control" type="text" id="descripcionPatro" name="descripcionPatro" value="mi casa" rows="2"></textarea>
+            <div id="descripcionPatrofeed" class="form-control-feedback"></div>                   
         </div>
     </div>
   </div>

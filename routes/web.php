@@ -84,6 +84,7 @@ Route::get('/patrocinador/buscar/{id?}','patrocinadorController@buscar');
 Route::post('/patrocinador/create','patrocinadorController@create');
 Route::put('/patrocinador/update/{id?}','patrocinadorController@update');
 Route::get('/patrocinador/busqueda/{texto?}','patrocinadorController@busqueda');
+Route::post('/patrocinador/createDonacion','patrocinadorController@createDonacion');
 
 
 Route::get('/verdugo','verdugoController@show');
