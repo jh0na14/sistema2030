@@ -10,6 +10,10 @@ $(document).ready(function(){
     //$('.modal').modal('show');  
      //$("#msjshow").show();
    });   
+$(document).on('click','.imprimir',function(e){
+  //$(location).attr('href','/PDF/ejemplo');
+  window.open('/socios/PDF/TotalSocios','_blank');
+});
 
 $(document).on('click','.darBaja',function(e){
    var value = $(this).val();

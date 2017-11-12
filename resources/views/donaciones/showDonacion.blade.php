@@ -60,9 +60,14 @@
  	 <div class="card-block">
   	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Donaciones @if($tipo=='Realizada') Realizadas @endif
     @if($tipo=='Recibida') Recibidas @endif de Club Activo 20-30 <strong class="text-danger">PERIODO {{ $periodoActual }}</strong></h6>
-        
-
- 		<div class="row" >
+    <div align="right" style="padding-bottom:5px;">
+    <button type="button" align="center" class="btn btn-outline-info btn-sm imprimir" value=""
+       data-toggle="tooltip" data-placement="top" data-tipo="{{ $tipo }}" data-periodo="{{ $periodoActual }}" title="Imprimir">
+             <img class="" src="{{asset('icons/impresora.png')}}" height="17" width="17">
+         
+         </button>      
+    </div>
+ 		{{--<div class="row" >--}}
  		{{--<div class="col-6" style="clear:both; padding-top:15px;">
   			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
 			Nuevo</button>	
@@ -70,9 +75,9 @@
      	<div class="col-4">
   			<label style="text-align:left; font-weight:bold; font-size:20px; ">Donaciones de Club Activo 20-30 </label>	
      	</div>--}}
-      <div class="col-6">
+      {{--<div class="col-6">
         <label style="text-align:left; font-size:18px; "></label>  
-      </div>
+      </div>--}}
      	{{--<div class="form-group row col-6 ">
  	        <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
   			<div class="col-9 offset-1 ">
@@ -80,7 +85,8 @@
   				</div>
   	  
 		</div>no lleva buscador este de donaciones por ser pocos --}}
-  	  </div>
+  	 {{-- </div>--}}
+
 <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
         <strong>Well done!</strong> You successfully read this important alert message.
     </div>

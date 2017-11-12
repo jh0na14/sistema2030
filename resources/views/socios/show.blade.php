@@ -81,9 +81,14 @@
  		<div class="col-2" style="clear:both; padding-top:15px;">
   			<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" id="btnnuevo">
 			Nuevo</button>	
+			<button type="button"  class="btn btn-outline-info btn-sm imprimir" value=""
+			 data-toggle="tooltip" data-placement="top" title="Imprimir">
+       			 <img class="" src="{{asset('icons/impresora.png')}}" height="17" width="17">
+    		 
+    		 </button>	
      	</div>
-     	<div class="col-4">
-  			<label style="text-align:left; font-weight:bold; font-size:20px; "> </label>	
+     	<div class="col-4" style="clear:both; padding-top:15px;">
+     		
      	</div>
      	<div class="form-group row col-6">
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1"> Buscar </label>

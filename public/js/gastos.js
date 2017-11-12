@@ -18,3 +18,9 @@
        });
  });
 ///////////////////fin busqueda
+$(document).on('click','.imprimir',function(e){
+  var tipo =$(this).attr('data-tipo');
+  var periodo =$(this).attr('data-periodo');
+  //$(location).attr('href','/PDF/ejemplo');
+  window.open('/controlGastosIngresos/'+tipo+'/'+periodo+'','_blank');
+});
