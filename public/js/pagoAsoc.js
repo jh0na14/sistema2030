@@ -146,7 +146,7 @@ $("#btnsavee").click(function (e) {
           //socio:$('#socio_id').val(),
           
           monto:$('#monto').val(),
-          fecha:$('#fecha').val(),
+          //fecha:$('#fecha').val(),
           idPeriodo:$('#idPeriodo').val(),
            }       
 

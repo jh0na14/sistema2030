@@ -21,8 +21,8 @@ class pagoAsocController extends Controller
     	 //return Response::json($verdugo);
         //$verdugo=verdugo::latest()->paginate(10);  
        // return Response::json($verdugo);
-           return view('pagoasociasion.showPagoAsoc',[
-            'pagoasociasion'=> $pagoasoc,
+           return view('pagoAsociacion.showPagoAsoc',[
+            'pagoasoc'=> $pagoasoc,
             ]);
            
     }
