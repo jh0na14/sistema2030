@@ -5,6 +5,7 @@
 
 namespace App\Http\Controllers;
 use App\socio;
+use PDF;
 use App\sociomembresia;
 use App\membresia;
 use Illuminate\Support\Facades\Response;
@@ -259,6 +260,12 @@ class sociosController extends Controller
                 return Response::json('No pudo cambiar');
         //return Response::json('Socio '.$socios->nombre.' '.'Cambio a Inactivo');
     }
-
-
+    public function sociosPDF(){
+        $socios=socio::where('estado','Activo')->get();
+        $pdf=PDF::loadVIew('pdf.sociosPDF',[
+            'socios'=> $socios,
+            ]);
+        //return $pdf->download('ejemplo.pdf');
+        return $pdf->stream('sociosPDF.pdf');
+    }
 }

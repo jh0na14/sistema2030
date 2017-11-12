@@ -67,8 +67,8 @@
 
         <nav class="navbar navbar-toggleable-md {{--navbar-light bg-faded--}} navbar-inverse bg-danger" >
   <a class="navbar-brand" href="#">
-    {{--<img src="resources\assets\image\logopp.png" width="30" height="30" class="" alt="">
-    --}}<img src="{{ asset('image/logopp.png') }}" width="35" height="35" class="" alt="">
+  {{-- <img src="..\public\image\logopp.png" width="30" height="30" class="" alt="">
+     --}}<img src="{{ asset('image/logopp.png') }}" width="35" height="35" class="" alt="">
     <span >Club Activo 20-30</span>
   </a>
       <ul class="navbar-nav">

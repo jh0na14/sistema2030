@@ -18,7 +18,8 @@ class PDFController extends Controller
     	->join('socios','verdugos.idsocios','=','socios.id')
     	->select('verdugos.*','socios.nombre','socios.apellido')->get();
     	//->paginate(10);
-    	
+    	 //return Response::json($verdugo);
+
     	$pdf=PDF::loadVIew('pdf.ejemplo',[
             'verdugos'=> $verdugo,
             ]);

@@ -9,7 +9,7 @@ use App\proyecto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 use App\Http\Requests\createPeticionRequest;
 use App\Http\Requests\createProyectosRequest;
 
@@ -278,4 +278,35 @@ class gastosController extends Controller
             return Response::json($messages);
         
     }//fin busqueda funcion
+
+
+    public function gastosPDF($tipo,$semestre){
+       if($tipo=='Membresia'){
+        $idperiodo=periodo::where('semestre',$semestre)->get()->first();
+        $tablas=tmembresia::where('idperiodos',$idperiodo->id)->latest()->get();
+     
+           }else if($tipo=='Campaña'){
+          $idperiodo=periodo::where('semestre',$semestre)->get()->first();
+          $tablas=trecaudacion::where('idperiodos',$idperiodo->id)->latest()->get();
+      
+           }else if($tipo=='Verdugo'){
+         $idperiodo=periodo::where('semestre',$semestre)->get()->first();
+         $tablas=tverdugo::where('idperiodos',$idperiodo->id)->latest()->get();
+     
+           }
+        $pdf=PDF::loadVIew('pdf.controlGastosPDF',[
+           'tablas'=> $tablas,
+            'tipo'=>$tipo,
+            'periodo'=>$idperiodo->semestre,
+            ]);
+        //return $pdf->download('ejemplo.pdf');
+        return $pdf->stream('controlGastosPDF.pdf');
+    
+          /* return view('gastos.showGastos',[
+            'tablas'=> $tablas,
+            'tipo'=>$tipo,
+            'periodoActual'=>$idperiodo->semestre,
+            ]);
+          */
+    }//fin gastosPDF
 }

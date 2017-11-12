@@ -1,6 +1,12 @@
 $(document).ready(function(){
  
    }); 
+$(document).on('click','.imprimir',function(e){
+  var tipo =$(this).attr('data-tipo');
+  var periodo =$(this).attr('data-periodo');
+  //$(location).attr('href','/PDF/ejemplo');
+  window.open('/donaciones/'+tipo+'/'+periodo+'','_blank');
+});
 
 $(document).on('click','.infomodal',function(){
 //asi no funciona cuando retorno de ayax un boton la accion onclick

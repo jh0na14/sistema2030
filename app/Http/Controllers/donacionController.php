@@ -5,7 +5,7 @@ use App\donacion;
 use App\peticion;
 use App\periodo;
 use App\proyecto;
-
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
@@ -119,7 +119,40 @@ class donacionController extends Controller
             ]);  
          }//fin sowParametro
 
+         public function donacionesPDF($tipo,$periodo){
+        if($tipo=='Recibida'){
+        $idperiodo=periodo::where('semestre',$periodo)->get()->first();//->pluck('id')->get()->first();
+        $donacion =DB::table('donacions')
+          ->join('patrocinadors', 'donacions.idpatrocinadors', '=', 'patrocinadors.id')
+          ->select('donacions.*',
+            'patrocinadors.nombre'
+            )
+          ->where('donacions.tipo','Recibida')
+          ->where('donacions.idperiodos',$idperiodo->id)
+          ->get();
+       /* $proyecto=proyecto::where('estado','Cancelado')
+        ->where('idperiodos',$idperiodo->id)->paginate(8);
+         */
+           }
+        if($tipo=='Realizada'){   
+        $idperiodo=periodo::where('semestre',$periodo)->get()->first();//->pluck('id')->get()->first();
+        $donacion=donacion::where('idperiodos',$idperiodo->id)
+        ->where('tipo',$tipo)->get();
+        // return Response::json($donacion);
 
+        
+        }
+        $pdf=PDF::loadVIew('pdf.donacionesPDF',[
+            'donaciones'=> $donacion,
+            'tipo'=> $tipo,
+            'periodo'=> $periodo,
+            ]);
+        //return $pdf->download('ejemplo.pdf');
+        return $pdf->stream('donacionesPDF.pdf');
+    
+      
+
+         }
 
 
     

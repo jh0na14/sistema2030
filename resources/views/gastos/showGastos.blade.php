@@ -81,10 +81,11 @@
 
  		<div class="row" >
  		
-      <div class="col-6">
-        <label style="text-align:left; font-size:18px; "></label>  
+      <div class="col-4">
+        <label style="text-align:left; font-size:18px; "></label> 
+
       </div>
-     	<div class="form-group row col-6 ">
+     	<div class="form-group row col-7 ">
  	 <label for="example-text-input"  class="col-1 col-form-label offset-1">Buscar</label>
   			<div class="col-9 offset-1 ">
           @if($tipo=='Membresia')
@@ -99,6 +100,15 @@
           </div>
   	  
 		</div>
+ <div class="col-1">
+    <div align="right" style="padding-bottom:5px;">
+    <button type="button" align="center" class="btn btn-outline-info btn-sm imprimir" value=""
+       data-toggle="tooltip" data-placement="top" data-tipo="{{ $tipo }}" data-periodo="{{ $periodoActual }}" title="Imprimir">
+             <img class="" src="{{asset('icons/impresora.png')}}" height="17" width="17">
+         
+         </button>      
+    </div>
+         </div>
   	  </div>
 <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
         <strong>Well done!</strong> You successfully read this important alert message.
@@ -287,6 +297,6 @@
 @endsection
 
 @section('script')
-  <script src="{{asset('js/peticion.js')}}"></script>
+  <script src="{{asset('js/gastos.js')}}"></script>
 
 @endsection

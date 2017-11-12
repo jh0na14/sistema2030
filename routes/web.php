@@ -25,6 +25,7 @@ Route::get('/socios/buscar/{socio_id?}','sociosController@buscar');
 Route::get('/socios/busqueda/{socio_id?}','sociosController@busqueda');
 Route::put('/socios/darBaja/{id?}','sociosController@darBaja');
 Route::put('/socios/darAlta/{id?}','sociosController@darAlta');
+Route::get('/socios/PDF/TotalSocios','sociosController@sociosPDF');
 
 Route::get('/sociospago','sociosPagoController@show');
 Route::get('/sociospago/{tipoSocio}','sociosPagoController@showEstado');
@@ -78,6 +79,7 @@ Route::post('/proyectos/createDonacion','proyectoController@createDonacion');
 
 Route::get('/donaciones','donacionController@show');
 Route::get('/donaciones/{estado}','donacionController@showEstado');
+Route::get('/donaciones/{tipo}/{periodo}','donacionController@donacionesPDF');
 
 Route::get('/patrocinador','patrocinadorController@show');
 Route::get('/patrocinador/buscar/{id?}','patrocinadorController@buscar');
@@ -94,10 +96,10 @@ Route::put('/verdugo/update/{id?}','verdugoController@update');
 Route::get('/verdugo/busqueda/{texto?}','verdugoController@busqueda');
 Route::get('/verdugo/bus/socios','verdugoController@busquedaSelect');
 
-
 Route::get('/controlGastos','gastosController@show');
 Route::get('/controlGastos/{tipo}','gastosController@showEstado');
 Route::get('/controlGastos/{tipo?}/{semestre?}','gastosController@showParametros');
+Route::get('/controlGastosIngresos/{tipo}/{semestre}','gastosController@gastosPDF');
 
 Route::get('/pagoasoc','pagoAsocController@show');
 Route::get('/pagoasoc/buscar/{id?}','pagoAsocController@buscar');
