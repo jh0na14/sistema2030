@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\socio;
 use App\sociomembresia;
 use App\membresia;
+use PDF;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\CreateSociosRequest;
 use Illuminate\Http\Request;
@@ -261,4 +262,3 @@ class sociosController extends Controller
     }
 
 
-}

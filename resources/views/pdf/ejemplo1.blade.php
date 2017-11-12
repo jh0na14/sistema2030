@@ -5,7 +5,8 @@
 <title> reporte</title>
 </head>
 <body>
-<h1>pdh salio :D</h1>
+<img scr="../public/image/logopp.png " >
+<h1>pdF salio :D</h1>
 <table>
 	<tr>
 		<td>id</td>

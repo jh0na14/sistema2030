@@ -30,4 +30,15 @@ class PDFController extends Controller
     	//return $pdf->stream('showVerdu.pdf');
     	return $pdf->stream('ejemplo.pdf');
     }
+
+    public function ejemplo1PDF(){
+        $socios=DB::table('socios')
+        ->join('socios','socios.id')
+        ->select('socios.*', 'socios.nombre','socios.apellido')->get();
+        //paginate(10);
+        $pdf=PDF::loadView('pdf.ejemplo1',[
+            'socios'=>$socios,
+            ]};
+            return $pdf->stream('ejemplo1.pdf');
+    }
 }
