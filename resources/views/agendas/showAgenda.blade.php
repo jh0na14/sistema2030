@@ -123,7 +123,7 @@
   <div class="card">
    <div class="card-block">
     <h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;"><div id="divnumAgenda" name="divnumAgenda">Agenda #1000</div></h6>
-         <div style="display: none;"{{----}}><input type="text" id="etnumAgenda" name="etnumAgenda"> agenda <br>
+         <div {{--style="display: none;"--}}><input type="text" id="etnumAgenda" name="etnumAgenda"> agenda <br>
          <input type="text" id="unoDos" name="unoDos" value="1">1 o 2<br>
          <input type="text" id="ids" name="ids" value="1">ids de puntos y sub al modificar<br>
          <input type="text" id="idpuntos" name="idpuntos" value="1">id de puntos de talbla sub<br>
@@ -146,7 +146,7 @@
       </div>
       <div class="form-group row col-10">
    <label for="example-text-input"  class="col-2 col-form-label offset-1"></label>
-        <div class="col-8">
+        <div class="col-7">
               <input  class="form-control" placeholder="Nombre" type="text" id="etPuntos" name="etPuntos" autofocus disabled>             
           </div>
         <div class="col-1">
@@ -155,15 +155,31 @@
         Añadir      
       </button>
           </div>
-      
+          
     </div>
+     <div class="col-1">
+    <div align="right" style="padding-bottom:5px;">
+    <button type="button" align="center" class="btn btn-outline-info imprimir" value=""
+       data-toggle="tooltip" data-placement="top" title="Imprimir">
+             <img class="" src="{{asset('icons/impresora.png')}}" height="18" width="18">
+         
+         </button>      
+    </div>
+         </div>
+      
       </div>
 
   <table class="table {{--table-bordered--}}  table-hover table-sm  " align="center">
   <thead >
    <tr>
               <th colspan="3" style="text-align:center; font-weight:bold; letter-spacing:5px;">Puntos</th>
-              
+            {{--  <th><div align="right" style="padding-top:0px;">
+    <button type="button" align="center" class="btn btn-outline-info btn-sm imprimir" value=""
+       data-toggle="tooltip" data-placement="top" title="Imprimir">
+             <img class="" src="{{asset('icons/impresora.png')}}" height="17" width="17">
+         
+         </button>      
+    </div></th>--}}
           </tr>
   </thead>
   <thead >

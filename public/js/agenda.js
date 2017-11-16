@@ -5,6 +5,13 @@ $(document).ready(function(){
   
    });   
 
+$(document).on('click','.imprimir',function(e){
+  //var tipo =$(this).attr('data-tipo');
+  //var periodo =$(this).attr('data-periodo');
+  //$(location).attr('href','/PDF/ejemplo');
+  window.open('/agendaPDF/'+$("#etnumAgenda").val(),'_blank');
+});
+
 ////////////////Esto para busqueda
  $("#search").on('keyup',function(){
     var value = $(this).val();

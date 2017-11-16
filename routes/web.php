@@ -32,6 +32,7 @@ Route::get('/sociospago/{tipoSocio}','sociosPagoController@showEstado');
 Route::get('/sociospago/buscar/{socio_id?}','sociosPagoController@buscar');
 Route::get('/sociospago/busqueda/{socio_id?}','sociosPagoController@busqueda');
 
+Route::get('/pagosPDF/{anho}/{socio_id}','pagosController@showPDF');
 Route::get('/pagos/{socio_id}','pagosController@show');
 Route::get('/pagos/{socio_id}/{anho}','pagosController@showParametros');
 Route::put('/pagos/pagar/{id?}','pagosController@pagar');
@@ -114,8 +115,11 @@ Route::post('/agenda/createPunto','agendaController@createPunto');
 Route::post('/agenda/createSubPunto','agendaController@createSubPunto');
 Route::get('/agenda/tablaPuntos/{idagendas?}','agendaController@tablaPuntos');
 //Route::get('/agenda/tablaSubPuntos/{idpuntos?}','agendaController@tablaSubPuntos');
+
 Route::put('/agenda/updatePuntos/{id?}','agendaController@updatePuntos');
 Route::put('/agenda/deletePuntos/{id?}','agendaController@deletePuntos');
+Route::get('/agendaPDF/{idagendas}','agendaController@showPDF');
+
 //Route::put('/agenda/updatePuntos/{id?}/{i?}','agendaController@updateSubPuntos');
 
 Route::get('/acta/{idagendas?}','actaController@show');

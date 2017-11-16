@@ -8,6 +8,7 @@ use App\socio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
+use PDF;  
 //use App\Http\Requests\createVerdugoRequest;
 
 class agendaController extends Controller
@@ -194,7 +195,60 @@ class agendaController extends Controller
           return Response::json($message);
     }*/
 	
-	
+	public function showPDF($idagendas){   
+      $messagex =DB::table('puntos')
+         //->join('puntos', 'subpuntos.idpuntos', '=', 'puntos.id')
+          ->select('puntos.*'
+           // 'subpuntos.nombre as nombre2',
+            //'subpuntos.nivel as nivel2',
+            //'subpuntos.id as id2'
+            )
+          //->select()
+          ->where('puntos.idagendas',$idagendas)
+          //->paginate(8)
+          ->get();
+          $message=punto::where('idagendas',$idagendas)->get();
+          $array = array();
+          $i=0;
+          $j=0;
+    foreach($message as $x)
+    {
+        $j=0;
+        $array[$i][$j]=[
+        'id'=>$x->id,
+        'nombre'=>$x->nombre,
+        'descripcion'=>$x->descripcion,
+        'nivel'=>$x->nivel
+        ]; 
+        $message2 =subpunto::where('idpuntos',$x->id)->get();
+          $j=1;
+        foreach ($message2 as $y) {
+            $array[$i][$j]=[
+        'id'=>$y->id,
+        'nombre'=>$y->nombre,
+        'descripcion'=>$y->descripcion,
+        'nivel'=>$y->nivel
+        ]; 
+        $j++;
+        }
+       $i++;
+
+    }
+
+    $Agenda=agenda::find($idagendas);
+    // return Response::json($Agenda->id);
+        $pdf=PDF::loadVIew('pdf.agendaPDF',[
+            'numAgenda'=> $Agenda->numAgenda,
+            'horaInicio'=> $Agenda->horaInicio,
+            'horaFin'=> $Agenda->horaFin,
+            'fecha'=> $Agenda->fecha,
+            'array'=> $array,
+            'idagendas'=> $idagendas,
+            ]);
+        //return $pdf->download('ejemplo.pdf');
+        return $pdf->stream('agendaPDF.pdf');
+    
+    }
 
 
 }

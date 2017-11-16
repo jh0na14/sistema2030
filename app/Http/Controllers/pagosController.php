@@ -6,6 +6,7 @@ use App\membresia;
 use App\socio;
 use App\tmembresia;
 use App\periodo;
+use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
@@ -110,10 +111,12 @@ class pagosController extends Controller
         //return Response::json($periodo);
            return view('pagos.showPagos',[
             'nombreSocio'=>$message->nombre,
+            'apellidoSocio'=>$message->apellido,
             'idsocio'=>$socio_id,
             'pagos'=> $pagos,
             'anhos'=>$anhos,
             'deuda'=>$deuda,
+            'anhoActual'=>$numeroAnho->año,
             ]);
     }
     public function showParametros($socio_id,$anho){ 
@@ -137,10 +140,12 @@ class pagosController extends Controller
         $deuda=PagosController::verDeuda($socio_id);
            return view('pagos.showPagos',[
             'nombreSocio'=>$message->nombre,
+            'apellidoSocio'=>$message->apellido,
             'idsocio'=>$socio_id,
             'pagos'=> $pagos,
             'anhos'=>$anhos,
             'deuda'=>$deuda,
+            'anhoActual'=>$anho,  
             ]);  
      
          }
@@ -208,7 +213,7 @@ class pagosController extends Controller
             'ingreso'=> $request->input('ingreso'),
             'egreso'=> 0.00,
             'saldo'=>0.00,
-            'idsocios'=> 4,
+            'idsocios'=> 44,
             'idperiodos'=>$periodo->id ,
             ]);
        return Response::json($message);
@@ -256,7 +261,49 @@ class pagosController extends Controller
       //return response(json($array));
     }       
   
-  
+  public function showPDF($anho,$socio_id){  
+      // pagosController::addSocioPagos($socio_id);
+      $message = socio::find($socio_id);
+       $numeroAnho=membresia::get(['año'])->last();  
+       //return Response::json($anho);
+       $pagos=DB::table('sociomembresias')
+         ->join('membresias', 'sociomembresias.idmembresias', '=', 'membresias.id')
+          ->select('sociomembresias.*',
+            'membresias.monto',
+            'membresias.año',
+            'membresias.numMes',
+            'membresias.mes'
+            )
+          //->select()
+          ->where('sociomembresias.idsocios',$socio_id)
+          ->where('membresias.año' ,$anho)
+          //->paginate(8)
+          ->get();
+          //return Response::json($pagos);
+        $anhos=membresia::distinct()->latest()->get(['año']);  
+        $deuda=PagosController::verDeuda($socio_id);
+          /* return view('pdf.membresiaSocio',[
+            'nombreSocio'=>$message->nombre,
+            'apellidoSocio'=>$message->apellido,
+            'idsocio'=>$socio_id,
+            'pagos'=> $pagos,
+            'anhos'=>$anhos,
+            'deuda'=>$deuda,
+            'anhoActual'=>$anho,
+            ]);
+*/
+         $pdf=PDF::loadVIew('pdf.membresiaSocioPDF',[
+            'nombre'=>$message->nombre,
+            'apellido'=>$message->apellido,
+            'idsocio'=>$socio_id,
+            'pagos'=> $pagos,
+            'anhos'=>$anhos,
+            'deuda'=>$deuda,
+            'anhoActual'=>$anho,
+            ]);
+        //return $pdf->download('ejemplo.pdf');
+        return $pdf->stream('membresiaSocioPDF.pdf');  
+    }
   
     
    

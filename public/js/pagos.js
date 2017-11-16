@@ -1,6 +1,25 @@
 $(document).ready(function(){
  
    }); 
+
+$(document).on('click','.imprimir',function(e){
+  var nombre =$(this).attr('data-nombre');
+  var anho =$(this).attr('data-anhoActual');
+  var idsocios= $("#deudaSocio").val();
+  //$(location).attr('href','/PDF/ejemplo');
+  //window.open('/hola/'+nombre+'/'+anho+'/'+deuda+'','_blank');
+  window.open('/pagosPDF/'+anho+'/'+idsocios,'_blank');
+  
+   /*var formData = {
+          nombre:data[i].fechaPago,
+          apellido:'pago '+ data[i].numMes +' '+ data[i].mes +' año '+data[i].año,
+          ingreso:data[i].monto,
+           } 
+   */
+   
+});
+
+
 $(document).on('click','.pagoAccion',function(e){
   var value = $(this).val();
    $('#exampleModal').modal('show'); 
@@ -95,6 +114,8 @@ $(document).on('click','.infomodal',function(){
                     console.log(data);
 
                       $("#deudaTotal").html('DEUDA: '+data);
+                      $("#deuda").val(data);
+                      
                     //setTimeout(function(){
                      // $("#msjshow").hide();
                     //$(location).attr('href','/socios');

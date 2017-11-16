@@ -39,6 +39,7 @@
        <a href="/pagos/{{ $idsocio }}/{{ $anho->año }}" class="list-group-item list-group-item-action justify-content-between"><span class="badge badge-default badge-pill"></span>
       {{ $anho->año }}
       </a>
+{{ $anhoActual }}
         @empty
         <p>No hay mensajes destacados</p>
         @endforelse       
@@ -49,14 +50,35 @@
 
  	<div class="card">
  	 <div class="card-block">
-  	<h6 class="card-subtitle mb-2 text-muted" style="font-weight:bold;">Listado de Pagos de {{ $nombreSocio }} <strong  align="right" id="deudaTotal" class="text-danger">DEUDA: {{ $deuda }}</strong> </h6>
-        
-
+     <div class="row" >
+    
+      <div class="col-8">
+      <h6 class="card-subtitle mb-0 text-muted" style="font-weight:bold;">Listado de Pagos de {{ $nombreSocio }} {{ $apellidoSocio }} <strong  align="right" id="deudaTotal" class="text-danger">DEUDA: {{ $deuda }}</strong> </h6>
+      <input type="text" id="deudaSocio" name"deudaSocio" value="{{ $idsocio }}">
+      </div>
+      <div class="form-group row col-2 ">
+   <label for="example-text-input"  class="col-1 col-form-label offset-1"></label>
+        <div class="col-9 offset-1 ">
+          
+          </div>
+      
+    </div>
+ <div class="col-2" align="right" style="padding-bottom:2px;">
+    
+    <button type="button" align="center" class="btn btn-outline-info btn-sm imprimir" value=""
+       data-toggle="tooltip" data-placement="top" data-nombre="{{ $nombreSocio }} {{ $apellidoSocio }}"
+       data-anhoActual="{{ $anhoActual }}" title="Imprimir">
+             <img class="" src="{{asset('icons/impresora.png')}}" height="17" width="17">
+         
+         </button>      
+    
+         
+      </div>
  		
 <div id="msjshow" style="display: none;" class="alert alert-success" role="alert">
         <strong>Well done!</strong> You successfully read this important alert message.
     </div>
-  <div style="padding-top:10px" ></div>
+  <div style="padding-top:3px" ></div>
 <input type="hidden"  id="idvar" name="idvar" type="number"  >
 <table class="table table-bordered  table-hover table-sm " align="center">
   <thead id="theadrow" name="theadrow">{{-- no lo ocupo el id este por el momento --}}
