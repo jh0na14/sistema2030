@@ -5,7 +5,7 @@ use App\donacion;
 use App\peticion;
 use App\periodo;
 use App\proyecto;
-use PDF;
+//use PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;

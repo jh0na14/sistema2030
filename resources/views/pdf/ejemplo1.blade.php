@@ -6,6 +6,11 @@
 <title> reporte</title>
 </head>
 <body>
+<<<<<<< HEAD:resources/views/pdf/ejemplo1.blade.php
+<img scr="../public/image/logopp.png " >
+<h1>pdF salio :D</h1>
+<table>
+=======
 <table align="center" width="100%">
 	<tr>
 	<th width="10%;" align="center"><img src="..\public\image\logopp.png" width="75" height="75" class="" alt=""></th>
@@ -23,6 +28,7 @@
 <div style="width:100%; float:left; padding-right:0px;" >
 
 <table class="table-bordered" align="center" width="100%">
+>>>>>>> 3f5b652666add02bc7d9d27d82c852fab6f14376:resources/views/pdf/ejemplo.blade.php
 	<tr>
 		<th style="text-align: center; width:10%;" >id</th>
 		<th style="text-align: center; width:40%;" >Monto Recaudado</th>

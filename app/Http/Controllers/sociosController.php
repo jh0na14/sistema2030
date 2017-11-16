@@ -8,6 +8,7 @@ use App\socio;
 use PDF;
 use App\sociomembresia;
 use App\membresia;
+use PDF;
 use Illuminate\Support\Facades\Response;
 use App\Http\Requests\CreateSociosRequest;
 use Illuminate\Http\Request;
@@ -260,6 +261,7 @@ class sociosController extends Controller
                 return Response::json('No pudo cambiar');
         //return Response::json('Socio '.$socios->nombre.' '.'Cambio a Inactivo');
     }
+
     public function sociosPDF(){
         $socios=socio::where('estado','Activo')->get();
         $pdf=PDF::loadVIew('pdf.sociosPDF',[
