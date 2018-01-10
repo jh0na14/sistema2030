@@ -54,7 +54,7 @@
     
       <div class="col-8">
       <h6 class="card-subtitle mb-0 text-muted" style="font-weight:bold;">Listado de Pagos de {{ $nombreSocio }} {{ $apellidoSocio }} <strong  align="right" id="deudaTotal" class="text-danger">DEUDA: {{ $deuda }}</strong> </h6>
-      <input type="text" id="deudaSocio" name"deudaSocio" value="{{ $idsocio }}">
+      <input type="hidden" type="text" id="deudaSocio" name"deudaSocio" value="{{ $idsocio }}">
       </div>
       <div class="form-group row col-2 ">
    <label for="example-text-input"  class="col-1 col-form-label offset-1"></label>
